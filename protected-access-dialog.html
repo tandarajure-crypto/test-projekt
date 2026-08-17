@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; object-src 'none'; frame-src 'none'; img-src 'none'; media-src 'none'; font-src 'none'; style-src 'none'; script-src 'none'; connect-src 'none'; form-action 'none'; upgrade-insecure-requests; block-all-mixed-content;">
+<title>Predlošci dijaloga za zaštićene obiteljske podatke</title>
+</head>
+<body>
+<template id="protected-access-dialog-hr">
+  <dialog class="protected-access-dialog" aria-labelledby="protected-access-title-hr" aria-describedby="protected-access-description-hr">
+    <div class="protected-access-dialog__panel">
+      <button class="protected-access-dialog__close-icon" type="button" data-protected-access-close aria-label="Zatvori dijalog">×</button>
+
+      <div class="protected-access-dialog__heading">
+        <span class="protected-access-dialog__lock" aria-hidden="true">🔒</span>
+        <h2 id="protected-access-title-hr">Zaštićeni obiteljski podaci</h2>
+      </div>
+
+      <div class="protected-access-dialog__content" id="protected-access-description-hr">
+        <p>Podaci vjerojatno živih članova obitelji te osoba rođenih nakon 1930. godine za koje nije unesena ili potvrđena smrt nisu javno dostupni radi zaštite privatnosti i sprječavanja moguće zlouporabe osobnih podataka. Podaci potvrđeno preminulih osoba ostaju javno dostupni.</p>
+
+        <p>Pristup mogu zatražiti članovi obitelji i druge osobe koje mogu dokazati opravdanu povezanost s obitelji Tandara.</p>
+
+        <p>Zahtjev za pristup potrebno je poslati putem stranice <strong>Kontakt i suradnja</strong>. U poruci treba navesti:</p>
+
+        <ul>
+          <li>ime i prezime</li>
+          <li>kojoj grani obitelji pripadate</li>
+          <li>svoj odnos prema osobi ili obiteljskoj grani čije podatke želite pregledati</li>
+          <li>razlog zbog kojeg tražite pristup</li>
+          <li>način na koji možete potvrditi svoj identitet i obiteljsku povezanost.</li>
+        </ul>
+
+        <p>Identitet i obiteljska povezanost mogu se potvrditi osobnim susretom s administratorom arhiva, potvrdom poznatog člana obitelji ili uvidom u važeći osobni dokument i druge odgovarajuće dokaze.</p>
+
+        <p class="protected-access-dialog__warning"><strong>Nemojte slati presliku osobnog dokumenta putem obične e-pošte bez prethodnog dogovora s administratorom.</strong> U pravilu je dovoljan uvid u dokument, bez njegova trajnog pohranjivanja.</p>
+
+        <p>Nakon provjere zahtjeva autor i administrator arhiva odlučuje o odobravanju pristupa. Odobrenom korisniku omogućuje se osobni pristup privatnom arhivu putem passkey autentifikacije.</p>
+
+        <p>Odobreni pristup namijenjen je isključivo korisniku kojemu je dodijeljen. Uređaj ili korisnički račun na kojem je registriran passkey ne smije se ustupati drugim osobama radi pristupa, a zaštićeni podaci ne smiju se kopirati, javno objavljivati, prosljeđivati niti koristiti u druge svrhe.</p>
+
+        <p>Administrator zadržava pravo odbiti zahtjev, ograničiti opseg pristupa ili ukinuti ranije odobren pristup radi zaštite privatnosti članova obitelji.</p>
+      </div>
+
+      <div class="protected-access-dialog__actions">
+        <button class="protected-access-dialog__button protected-access-dialog__button--secondary" type="button" data-protected-access-close>Zatvori</button>
+        <a class="protected-access-dialog__button protected-access-dialog__button--primary" href="kontakti.html#kontakt-obrazac">Pošalji zahtjev za pristup</a>
+      </div>
+    </div>
+  </dialog>
+</template>
+
+<template id="protected-access-dialog-en">
+  <dialog class="protected-access-dialog" aria-labelledby="protected-access-title-en" aria-describedby="protected-access-description-en">
+    <div class="protected-access-dialog__panel">
+      <button class="protected-access-dialog__close-icon" type="button" data-protected-access-close aria-label="Close dialog">×</button>
+
+      <div class="protected-access-dialog__heading">
+        <span class="protected-access-dialog__lock" aria-hidden="true">🔒</span>
+        <h2 id="protected-access-title-en">Protected Family Information</h2>
+      </div>
+
+      <div class="protected-access-dialog__content" id="protected-access-description-en">
+        <p>Information about likely living family members and people born after 1930 whose death has not been entered or confirmed is not publicly available in order to protect privacy and prevent possible misuse of personal information. Information about confirmed deceased persons remains publicly available.</p>
+
+        <p>Access may be requested by family members and other persons who can demonstrate a legitimate connection with the Tandara family.</p>
+
+        <p>An access request must be submitted through the <strong>Contact and Collaboration</strong> page. The message should include:</p>
+
+        <ul>
+          <li>your full name</li>
+          <li>the family branch to which you belong</li>
+          <li>your relationship to the person or family branch whose information you wish to view</li>
+          <li>the reason for requesting access</li>
+          <li>the method by which you can confirm your identity and family connection.</li>
+        </ul>
+
+        <p>Identity and family connection may be confirmed through an in-person meeting with the archive administrator, confirmation by a known family member, or inspection of a valid identity document and other appropriate evidence.</p>
+
+        <p class="protected-access-dialog__warning"><strong>Do not send a copy of an identity document by ordinary email unless this has first been agreed with the administrator.</strong> Inspection of the document, without permanent storage of a copy, will normally be sufficient.</p>
+
+        <p>After reviewing the request, the author and archive administrator will decide whether access should be granted. An approved user will receive personal access to the private archive through passkey authentication.</p>
+
+        <p>Approved access is intended solely for the user to whom it was granted. The device or user account on which the passkey is registered must not be made available to another person for access, and protected information must not be copied, published, forwarded or used for any other purpose.</p>
+
+        <p>The administrator reserves the right to reject a request, restrict the scope of access or revoke previously granted access in order to protect the privacy of family members.</p>
+      </div>
+
+      <div class="protected-access-dialog__actions">
+        <button class="protected-access-dialog__button protected-access-dialog__button--secondary" type="button" data-protected-access-close>Close</button>
+        <a class="protected-access-dialog__button protected-access-dialog__button--primary" href="contacts.html#kontakt-obrazac">Request access</a>
+      </div>
+    </div>
+  </dialog>
+</template>
+</body>
+</html>

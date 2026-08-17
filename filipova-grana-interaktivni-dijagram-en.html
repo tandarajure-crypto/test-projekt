@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Complete clickable interactive family tree of Filip’s Livno branch of the Tandara family.">
+<link rel="canonical" href="https://tandarajure-crypto.github.io/Tandara/filipova-grana-interaktivni-dijagram-en.html">
+<meta property="og:url" content="https://tandarajure-crypto.github.io/Tandara/filipova-grana-interaktivni-dijagram-en.html">
+<meta property="og:title" content="Filip’s Branch – Interactive Genealogical Diagram">
+<meta property="og:description" content="Complete clickable interactive family tree of Filip’s Livno branch of the Tandara family.">
+<meta property="og:image" content="https://tandarajure-crypto.github.io/Tandara/family-tree-en.png">
+<meta property="og:type" content="website">
+<link rel="alternate" hreflang="hr" href="https://tandarajure-crypto.github.io/Tandara/filipova-grana-interaktivni-dijagram.html">
+<link rel="alternate" hreflang="en" href="https://tandarajure-crypto.github.io/Tandara/filipova-grana-interaktivni-dijagram-en.html">
+<link rel="alternate" hreflang="x-default" href="https://tandarajure-crypto.github.io/Tandara/filipova-grana-interaktivni-dijagram.html">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'sha256-genmG/qFlx4AQGURMCPc4LFHhRx1FcgKtDfmRua+aV0='; style-src-elem 'self' 'sha256-genmG/qFlx4AQGURMCPc4LFHhRx1FcgKtDfmRua+aV0='; style-src-attr 'unsafe-hashes' 'sha256-+pzw8A81bqgs+klLPI5/CiCBM2LSYCC10l7bhdLrhRc=' 'sha256-5+0ERooZeJ2DwksPTUalywdILFHsBc2NB8vaX7fQP58=' 'sha256-EDvhiqz4BtA7Zn5Rfsa8mIvE+vt07Thi2VzcVis5grY='; script-src 'self'; script-src-attr 'none'; connect-src 'self'; frame-src 'none'; form-action 'none'; upgrade-insecure-requests; block-all-mixed-content;">
+<title>Filip’s Branch – Interactive Genealogical Diagram</title>
+<link rel="stylesheet" href="assets/css/common/filip-diagram.css?v=1">
+<link href="./mobile-subpages-fullscreen.css?v=2" rel="stylesheet"/>
+</head>
+<!-- OPERATIVNI FILIPOV DIJAGRAM -->
+<body class="mobile-subpage-full">
+<nav class="mobile-box-topbar" aria-label="Mobilna navigacija">
+  <a class="mobile-box-home" href="index-en.html">🏠 Home</a>
+  <div class="mobile-box-flags" aria-label="Odabir jezika">
+    <a href="filipova-grana-interaktivni-dijagram.html" aria-label="Hrvatski"><img src="flag-hr.png" alt="HR"/></a>
+    <a href="filipova-grana-interaktivni-dijagram-en.html" aria-label="English"><img src="flag-uk.png" alt="EN"/></a>
+  </div>
+</nav>
+
+<header>
+  <div class="header-top">
+    <div class="title-wrap">
+      <h1>Filip’s Branch</h1>
+      <div class="subtitle"><strong>53</strong> numbered people · <strong>9</strong> displayed generations · click a person to open the full record</div>
+    </div>
+    <nav class="header-actions" aria-label="Main navigation and display">
+      <a class="diagram-home-button" href="index-en.html" target="_top" title="Home" aria-label="Home"><span class="diagram-home-circle"><svg class="diagram-home-svg" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5L12 3l9 7.5"></path><path d="M5 10v10h14V10"></path><path d="M10 20v-6h4v6"></path></svg></span></a>
+      <a class="back-link" href="filipovagrana-en.html#filip-diagram" target="_top">← Filip’s Branch</a>
+      <a class="header-btn lang-icon" href="filipova-grana-interaktivni-dijagram.html" lang="hr" hreflang="hr" aria-label="Hrvatska verzija" title="Hrvatska verzija"><img src="flag-hr.png" alt="HR"></a>
+      <a class="header-btn lang-icon active" href="filipova-grana-interaktivni-dijagram-en.html" lang="en" hreflang="en" aria-current="page" aria-label="English version" title="English version"><img src="flag-uk.png" alt="EN"></a>
+      <button id="printDiagram" type="button" aria-label="Print diagram" title="Print diagram"><img class="print-icon" src="Print.png" alt=""></button>
+    </nav>
+  </div>
+  <div class="header-tools"><div class="toolbar-scroll"><div class="toolbar">
+    <button class="primary" id="expandAll" type="button">Expand all</button>
+    <button id="collapse" type="button">Collapse</button>
+    <button id="threeLevels" type="button">To 3 generations</button>
+    <button id="fit" type="button">Fit</button>
+    <button id="zoomIn" type="button" aria-label="Zoom in">＋</button>
+    <button id="zoomOut" type="button" aria-label="Zoom out">−</button>
+    <div class="search-wrap"><input id="search" type="search" placeholder="Name, code, nickname or place…" aria-label="Search people in Filip’s branch"><button id="findBtn" type="button">Find</button></div>
+  </div></div></div>
+</header>
+<div id="workspace">
+  <svg id="treeSvg" role="img" aria-label="Interactive family tree of Filip’s branch">
+    <g id="viewport">
+      <g id="links"></g>
+      <g id="nodes"></g>
+    </g>
+    <text id="treeLoading" x="50%" y="50%" text-anchor="middle"
+      font-family="Arial,Helvetica,sans-serif" font-size="18" fill="#68736d">Loading the family tree…</text>
+  </svg>
+  <aside id="details" aria-live="polite">
+    <button id="closeDetails" type="button" aria-label="Close">×</button>
+    <h2 id="detailTitle"></h2>
+    <div class="detail-meta"><span class="detail-chip" id="detailCode"></span><span class="detail-chip" id="detailSection"></span></div>
+    <p id="detailText"></p>
+    <a id="detailPage" href="#" target="_top">Open the related page</a>
+  </aside>
+  <div class="legend">
+    <span><i class="swatch" style="background:#174f39;border-color:#0d3425"></i>Filip Tandara</span>
+    <span><i class="swatch" style="background:#e8f2fb;border-color:#4d82aa"></i>Filip’s sons</span>
+    <span><i class="swatch" style="background:#fff1df;border-color:#bb8144"></i>Descendants</span>
+  </div>
+  <div class="help">Mouse wheel: zoom · drag: move · click a box: details and branching</div>
+  <div class="status" id="status" aria-live="polite"></div>
+</div>
+<script src="filipova-grana-interaktivni-dijagram-en.js"></script>
+
+</body>
+</html>

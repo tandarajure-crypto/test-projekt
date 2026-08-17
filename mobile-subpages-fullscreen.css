@@ -1,0 +1,136 @@
+/*
+  Mobilni prikaz osam glavnih podstranica.
+  Pravila djeluju samo do 900 px i ne mijenjaju PC/laptop prikaz.
+*/
+.mobile-box-topbar{
+  display:none;
+}
+
+@media (max-width:900px){
+  body.mobile-subpage-full{
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+  }
+
+  body.mobile-subpage-full .mobile-box-topbar{
+    display:flex !important;
+    position:sticky;
+    top:0;
+    z-index:9999;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    width:100%;
+    box-sizing:border-box;
+    padding:10px 14px;
+    background:rgba(255,255,255,.96);
+    border-bottom:1px solid rgba(0,0,0,.12);
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    backdrop-filter:blur(6px);
+  }
+
+  body.mobile-subpage-full .mobile-box-home{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:38px;
+    padding:0 12px;
+    border-radius:999px;
+    text-decoration:none;
+    font-weight:700;
+    color:#fff;
+    background:#5a3b1f;
+    font-size:15px;
+    line-height:1;
+    white-space:nowrap;
+  }
+
+  body.mobile-subpage-full .mobile-box-flags{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+  }
+
+  body.mobile-subpage-full .mobile-box-flags a{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:44px;
+    min-height:38px;
+    border-radius:10px;
+    background:#fff;
+    border:1px solid rgba(0,0,0,.12);
+  }
+
+  body.mobile-subpage-full .mobile-box-flags img{
+    display:block;
+    width:30px;
+    max-width:30px;
+    height:auto;
+  }
+
+  body.mobile-subpage-full .layout{
+    display:block !important;
+    width:100% !important;
+    max-width:100% !important;
+    margin:0 !important;
+    padding:0 !important;
+  }
+
+  body.mobile-subpage-full .left-menu{
+    display:none !important;
+  }
+
+  body.mobile-subpage-full .content-page{
+    display:block !important;
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    margin:0 !important;
+    padding:12px !important;
+    box-sizing:border-box !important;
+  }
+
+  body.mobile-subpage-full .content-card{
+    width:100% !important;
+    max-width:none !important;
+    min-width:0 !important;
+    margin:0 !important;
+    padding:26px 20px !important;
+    box-sizing:border-box !important;
+  }
+
+  body.mobile-subpage-full .content-card img,
+  body.mobile-subpage-full .content-card video,
+  body.mobile-subpage-full .content-card iframe,
+  body.mobile-subpage-full .content-card table{
+    max-width:100% !important;
+  }
+}
+
+@media (max-width:480px){
+  body.mobile-subpage-full .mobile-box-topbar{
+    padding:8px 10px;
+  }
+
+  body.mobile-subpage-full .mobile-box-home{
+    min-height:36px;
+    padding:0 10px;
+    font-size:14px;
+  }
+
+  body.mobile-subpage-full .mobile-box-flags a{
+    min-width:40px;
+    min-height:36px;
+  }
+
+  body.mobile-subpage-full .content-page{
+    padding:7px !important;
+  }
+
+  body.mobile-subpage-full .content-card{
+    padding:22px 15px !important;
+    border-radius:10px !important;
+  }
+}

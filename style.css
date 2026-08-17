@@ -1,0 +1,1325 @@
+body{
+    margin:0;
+    font-family:Georgia, serif;
+    background:#e7c191;
+}
+
+/* LAYOUT */
+.layout{
+    max-width:1920px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:300px 1fr;
+    gap:20px;
+    padding:4px;
+    box-sizing:border-box;
+}
+
+/* LEFT MENU */
+.left-menu{
+    width:300px;
+    background:#e7d3b0;
+    border-right:4px solid #7a7a7a;
+    padding:14px 0 20px 0;
+    box-sizing:border-box;
+    color:#4a3b2a;
+    display:flex;
+    flex-direction:column;
+
+    position:sticky;
+    top:0;
+    height:100vh;
+    overflow-y:auto;
+}
+
+/* RESET */
+.left-menu h2,
+.left-menu ul,
+.left-menu li{
+    margin:0;
+    padding:0;
+}
+
+/* HOME */
+.home-button{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-bottom:8px;
+    text-decoration:none;
+}
+
+.home-circle{
+    width:66px;
+    height:66px;
+    background:#c9a46d;
+    border-radius:50%;
+    border:2px solid transparent;
+    box-shadow:0 0 4px rgba(0,0,0,.30);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:all .15s ease;
+}
+
+.home-button:hover .home-circle{
+    border-color:#d4af37;
+    background:#d3b07a;
+}
+
+.home-svg{
+    width:28px;
+    height:28px;
+}
+
+/* LANGUAGE */
+.lang-switch{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    margin-bottom:16px;
+}
+
+.lang-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:transparent;
+    padding:2px;
+    border:2px solid transparent;
+    border-radius:4px;
+    text-decoration:none;
+    box-shadow:none;
+    transition:all .15s ease;
+}
+
+.lang-btn:hover{
+    border-color:#d4af37;
+    background:rgba(212,175,55,.12);
+}
+
+.flag-btn img{
+    display:block;
+    width:30px;
+    height:20px;
+    object-fit:cover;
+    border-radius:3px;
+}
+
+/* NASLOV */
+.left-menu > h2:not(.visitor-title){
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+    margin:-6px 0 14px 0;
+    color:#3b2f22;
+}
+
+/* MENU */
+.heritage-menu{
+    list-style:none;
+    padding:0 20px;
+    margin:0;
+}
+
+.heritage-menu li{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:7px 0;
+    border-bottom:1px solid rgba(0,0,0,.08);
+    border-left:2px solid transparent;
+    transition:all .15s ease;
+}
+
+.heritage-menu li:hover{
+    border-left:2px solid #d4af37;
+    background:rgba(212,175,55,.10);
+    padding-left:6px;
+}
+
+.heritage-menu a{
+    text-decoration:none;
+    color:#4a3b2a;
+    font-size:17px;
+    font-weight:400;
+    line-height:1.2;
+}
+
+.heritage-menu a:hover{
+    color:#7a5e3a;
+}
+
+/* POSJETITELJI */
+
+/* AUTHOR PHOTO */
+.author-photo{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:10px 0 12px 0;
+    padding:0;
+}
+
+.author-photo img{
+    width:190px !important;
+    max-width:190px !important;
+    height:auto !important;
+    display:block;
+    border:3px solid #b99867;
+    border-radius:12px;
+    box-shadow:0 3px 8px rgba(0,0,0,0.25);
+    transition:all .15s ease;
+}
+
+.author-photo img:hover{
+    border-color:#d4af37;
+    box-shadow:0 0 10px rgba(212,175,55,.45);
+}
+/* FLAG */
+
+.flagbox{
+    position:relative;
+    margin:4px 0 0 20px;
+    padding:0;
+    width:calc(100% - 20px);
+    box-sizing:border-box;
+    text-align:left;
+}
+.flagbox{
+    position:relative;
+}
+.flagbox a{
+    display:block;
+    width:100%;
+}
+
+.flagbox img{
+    display:block;
+    width:100%;
+    max-width:none;
+    height:auto;
+    border:0;
+}
+/* RIGHT SIDE - KORIGIRANO: slika se sada ravna po visini ekrana */
+.right-image{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    padding:0;
+    overflow:hidden;
+}
+
+.image-wrapper{
+    position:relative;
+    display:inline-block;
+    height:100vh;
+}
+
+.bg{
+    height:100vh;
+    width:auto;
+    max-width:none;
+    display:block;
+    border:0;
+
+    transform:scaleX(0.92);
+    transform-origin:center;
+}
+
+/* ==========================================================
+   HOTSPOTS
+========================================================== */
+.hs{
+    position:absolute;
+    cursor:pointer;
+    box-sizing:border-box;
+}
+
+/* ----------------------------------------------------------
+   4 GLAVNE GRANE
+---------------------------------------------------------- */
+.hs-jurina,
+.hs-petrova,
+.hs-antina,
+.hs-matina{
+    background:transparent;
+    border:2px solid transparent;
+    border-radius:4px;
+    transition:all .15s ease;
+}
+
+.hs-jurina:hover,
+.hs-petrova:hover,
+.hs-antina:hover,
+.hs-matina:hover{
+    border:2px solid #d4af37;
+    background:rgba(212,175,55,.12);
+}
+
+/* KOORDINATE 4 GRANE */
+
+.hs-jurina,
+.hs-petrova{
+    top:31.75%;
+    width:18%;
+    height:10.15%;
+}
+
+.hs-antina,
+.hs-matina{
+    top:48.10%;
+    width:18%;
+    height:10.15%;
+}
+
+.hs-jurina,
+.hs-antina{
+    left:12.48%;
+}
+
+.hs-petrova,
+.hs-matina{
+    left:36.08%;
+}
+/* ==========================================================
+   IVAN + 4 NOVE GRANE
+========================================================== */
+
+.hs-ivanov,
+.hs-jurin,
+.hs-petrov,
+.hs-antin,
+.hs-matin{
+
+    position:absolute;
+    cursor:pointer;
+
+    border:2px solid transparent;
+    background:transparent;
+
+    border-radius:4px;
+    box-sizing:border-box;
+    transition:all .15s ease;
+}
+
+.hs-ivanov:hover,
+.hs-jurin:hover,
+.hs-petrov:hover,
+.hs-antin:hover,
+.hs-matin:hover{
+
+    border:2px solid #d4af37;
+    background:rgba(212,175,55,.12);
+}
+/* KOORDINATE NOVIH OKVIRA */
+
+/* Ivan Tandara */
+
+.hs-ivanov{
+    left:60.9%;      /* bilo 61.3%  ← još 3 mm ulijevo */
+    top:44%;
+    width:11.7%;
+    height:9.6%;
+}
+
+/* Jure */
+
+.hs-jurin{
+    left:71%;      /* bilo 72.2%  ← još 7 mm ulijevo */
+    top:3.0%;
+    width:10.2%;
+    height:9%;
+}
+
+/* Petar */
+
+.hs-petrov{
+    left:71.2%;      /* bilo 72.2% */
+    top:26.7%;
+    width:10.2%;
+    height:9%;
+}
+
+/* Ante */
+
+.hs-antin{
+    left:71.2%;      /* bilo 72.2% */
+    top:59.4%;
+    width:10.2%;
+    height:9%;
+}
+
+/* Mate */
+
+.hs-matin{
+    left:71.2%;      /* bilo 72.2% */
+    top:82.2%;
+    width:10.2%;
+    height:9%;
+}
+/* ----------------------------------------------------------
+   DESNI DIJAGRAM - ZAVRŠNA VERZIJA
+---------------------------------------------------------- */
+.hs-box1,
+.hs-box2,
+.hs-box3,
+.hs-box4,
+.hs-box5,
+.hs-box6,
+.hs-box7,
+.hs-box8{
+    position:absolute;
+    left:83.3%;
+    width:11.0%;
+    border:2px solid transparent;
+    background:transparent;
+    box-sizing:border-box;
+    border-radius:4px;
+    transition:all .15s ease;
+}
+
+.hs-box1:hover,
+.hs-box2:hover,
+.hs-box3:hover,
+.hs-box4:hover,
+.hs-box5:hover,
+.hs-box6:hover,
+.hs-box7:hover,
+.hs-box8:hover{
+    border:2px solid #d4af37;
+    background:rgba(212,175,55,.12);
+}
+
+/* VERTIKALNI POLOŽAJI */
+
+.hs-box1{
+    top:2.80%;
+    height:9.65%;
+}
+
+.hs-box2{
+    top:15.30%;
+    height:9.01%;
+}
+
+.hs-box3{
+    top:28%;
+    height:8.88%;
+}
+
+.hs-box4{
+    top:39.0%;
+    height:9.4%;
+}
+
+.hs-box5{
+    top:51.72%;
+    height:8.63%;
+}
+
+.hs-box6{
+    top:63.36%;
+    height:8.8%;
+}
+
+.hs-box7{
+    top:75.83%;
+    height:8.49%;
+}
+
+.hs-box8{
+    top:87.65%;
+    height:8.89%;
+}
+
+/* ======================================================
+   CONTENT PAGES
+====================================================== */
+.content-page{
+    flex:1;
+    padding:36px 42px;
+    box-sizing:border-box;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+}
+
+.content-card{
+    width:100%;
+    max-width:1050px;
+    background:#f3dfbd;
+    border:1px solid rgba(80,60,35,0.25);
+    border-radius:14px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.18);
+    padding:42px 54px;
+    box-sizing:border-box;
+    color:#3b2f22;
+}
+
+.content-card h1{
+    margin:0 0 34px 0;
+    text-align:center;
+    font-size:34px;
+    font-weight:bold;
+    color:#3b2f22;
+}
+
+.content-card section{
+    margin-bottom:34px;
+    padding-bottom:26px;
+    border-bottom:1px solid rgba(0,0,0,0.12);
+}
+
+.content-card section:last-child{
+    border-bottom:none;
+    margin-bottom:0;
+    padding-bottom:0;
+}
+
+.content-card h2{
+    margin:0 0 14px 0;
+    font-size:23px;
+    color:#4a3b2a;
+}
+
+.content-card p{
+    margin:0 0 14px 0;
+    font-size:18px;
+    line-height:1.65;
+    text-align:justify;
+}
+
+.content-card ul{
+    margin:8px 0 18px 28px;
+    padding:0;
+}
+
+.content-card li{
+    font-size:18px;
+    line-height:1.55;
+    margin-bottom:6px;
+}
+
+/* ==========================================
+   ZAJEDNIČKI HOVER ZA SVE KLIKABILNO
+========================================== */
+
+.home-button,
+.lang-btn,
+.heritage-menu a,
+.author-photo img,
+.flagbox a{
+    transition:all .15s ease;
+}
+
+.flagbox a:hover{
+    display:inline-block;
+    outline:2px solid #d4af37;
+    outline-offset:3px;
+    border-radius:6px;
+}
+/* ======================================================
+   STRANICE GRANA - DESNI SADRŽAJ UZ STALNI LIJEVI SIDEBAR
+====================================================== */
+
+.branch-content{
+    flex:1;
+    padding:36px 42px;
+    box-sizing:border-box;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+}
+
+.branch-card{
+    width:100%;
+    max-width:1200px;
+    background:#f3dfbd;
+    border:1px solid rgba(80,60,35,0.25);
+    border-radius:14px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.18);
+    padding:36px 48px;
+    box-sizing:border-box;
+    color:#3b2f22;
+    text-align:center;
+}
+
+.branch-card h1{
+    font-size:34px;
+    margin:20px 0 16px 0;
+}
+
+.branch-card h3{
+    font-size:22px;
+margin:28px 0 10px 0;
+}
+
+.branch-text-block{
+    max-width:760px;
+    margin:0 auto;
+    text-align:left;
+}
+
+.branch-text-block p{
+    font-size:18px;
+    line-height:1.65;
+    text-align:justify;
+    margin:0 0 16px 0;
+}
+
+.branch-flag{
+    display:block;
+    margin:36px auto 28px auto;
+    max-width:120px;
+    height:auto;
+}
+
+.branch-tree-image{
+    width:100%;
+    height:auto;
+    display:block;
+    margin-top:38px;
+    border-radius:10px;
+}
+
+.hs-livanjske {
+    position: absolute;
+    top: 68%;
+    left: 45%;
+    width: 8%;
+    height: 5.2%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(248, 232, 190, 0.92);
+    border: 2px solid #7a5a2f;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.28);
+
+    font-family: Georgia, serif;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.05;
+    text-align: center;
+    color: #3b2a1a;
+
+    cursor: pointer;
+    z-index: 20;
+}
+
+.hs-livanjske:hover {
+    background: #d4af37;
+    color: white;
+    transform: scale(1.04);
+}
+
+/* ======================================================
+   CONTACT FORM - Digitalni arhiv roda Tandara
+====================================================== */
+
+.form-success-message{
+    display:none;
+    margin:22px 0 0 0;
+    padding:16px 20px;
+    border:1px solid rgba(55,120,55,0.35);
+    border-radius:10px;
+    background:rgba(230,248,230,0.75);
+    color:#244f24;
+    font-size:18px;
+    font-weight:bold;
+    line-height:1.45;
+}
+
+.archive-contact-form{
+    margin-top:24px;
+    padding:28px;
+    background:rgba(255,255,255,0.28);
+    border:1px solid rgba(80,60,35,0.25);
+    border-radius:12px;
+}
+
+.archive-contact-form .form-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.archive-contact-form label{
+    display:block;
+    margin:0 0 8px 0;
+    font-size:17px;
+    font-weight:bold;
+    color:#3b2f22;
+}
+
+.archive-contact-form input,
+.archive-contact-form select,
+.archive-contact-form textarea{
+    width:100%;
+    box-sizing:border-box;
+    padding:12px 14px;
+    margin-bottom:18px;
+    border:1px solid rgba(80,60,35,0.35);
+    border-radius:8px;
+    background:#fffaf0;
+    font-family:Georgia, 'Times New Roman', serif;
+    font-size:17px;
+    color:#2f2418;
+}
+
+.archive-contact-form textarea{
+    min-height:170px;
+    resize:vertical;
+}
+
+.archive-contact-form .checkbox-line{
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    margin:8px 0 14px 0;
+    font-size:16px;
+    line-height:1.45;
+}
+
+.archive-contact-form .checkbox-line input{
+    width:auto;
+    margin:4px 0 0 0;
+}
+
+.archive-contact-form button{
+    display:block;
+    margin:24px auto 0 auto;
+    padding:13px 34px;
+    border:none;
+    border-radius:999px;
+    background:#6b4b25;
+    color:white;
+    font-family:Georgia, 'Times New Roman', serif;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 3px 8px rgba(0,0,0,0.25);
+}
+
+.archive-contact-form button:hover{
+    background:#8a652f;
+}
+
+.form-note{
+    font-size:16px !important;
+    line-height:1.55 !important;
+    text-align:left !important;
+    color:#4a3b2a;
+}
+
+@media (max-width: 900px){
+    .archive-contact-form .form-row{
+        grid-template-columns:1fr;
+        gap:0;
+    }
+}
+
+.contact-success-large {
+  max-width: 620px;
+  margin: 20px auto 30px auto;
+  padding: 28px 34px;
+  border: 1px solid #b7d7b7;
+  border-radius: 12px;
+  background: #f4fff4;
+  text-align: center;
+  font-size: 1.08rem;
+}
+
+/* ======================================================
+   RIČICE GALERIJA I VIDEO — ISPRAVLJENO
+====================================================== */
+
+.content-page,
+.content-card{
+    min-width:0;
+}
+
+.content-card img{
+    max-width:100%;
+    height:auto;
+    box-sizing:border-box;
+}
+
+.ricice-gallery{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:22px;
+    margin:26px 0 30px 0;
+    max-width:100%;
+    box-sizing:border-box;
+}
+
+.ricice-item{
+    margin:0;
+    padding:0;
+    min-width:0;
+    box-sizing:border-box;
+    overflow:hidden; /* SPRJEČAVA PRELIJEVANJE */
+}
+
+.ricice-item img{
+    display:block;
+    width:100%;
+    height:auto;      /* ISPRAVAK — više ne probija okvir */
+    object-fit:cover;
+    max-width:100%;
+    border-radius:12px;
+    border:1px solid rgba(80,60,35,0.25);
+    box-shadow:0 3px 8px rgba(0,0,0,0.18);
+}
+
+.ricice-item figcaption{
+    margin-top:8px;
+    font-size:16px;
+    line-height:1.35;
+    text-align:center;
+    color:#4a3b2a;
+}
+
+.ricice-video{
+    max-width:620px;
+    margin:8px auto 36px auto;
+    box-sizing:border-box;
+}
+
+.ricice-video a{
+    position:relative;
+    display:block;
+    width:100%;
+    max-width:100%;
+    border-radius:14px;
+    overflow:hidden;
+    text-decoration:none;
+    color:white;
+    box-shadow:0 4px 12px rgba(0,0,0,0.24);
+    box-sizing:border-box;
+}
+
+.ricice-video img{
+    display:block;
+    width:100%;
+    height:auto;
+    max-width:100%;
+}
+
+.ricice-video .play-icon{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:74px;
+    height:74px;
+    border-radius:50%;
+    background:rgba(0,0,0,.60);
+    color:#fff;
+    font-size:40px;
+    line-height:74px;
+    text-align:center;
+    box-shadow:0 4px 14px rgba(0,0,0,.45);
+    pointer-events:none;
+}
+
+.ricice-video .video-title{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    padding:14px 18px;
+    background:rgba(0,0,0,.55);
+    color:#fff;
+    font-size:20px;
+    font-weight:bold;
+    text-align:center;
+    box-sizing:border-box;
+    pointer-events:none;
+}
+
+@media (max-width:900px){
+    .layout{
+        grid-template-columns:1fr;
+    }
+
+    .left-menu{
+        position:relative;
+        width:100%;
+        height:auto;
+        border-right:0;
+        border-bottom:4px solid #7a7a7a;
+    }
+
+    .content-page{
+        padding:22px 14px;
+    }
+
+    .content-card{
+        padding:28px 18px;
+    }
+
+    .ricice-gallery{
+        grid-template-columns:1fr;
+        gap:18px;
+    }
+
+    .ricice-item img{
+        height:auto;
+    }
+}
+@media (max-width:600px){
+    .ricice-video .play-icon{
+        width:58px;
+        height:58px;
+        font-size:32px;
+        line-height:58px;
+    }
+
+    .ricice-video .video-title{
+        font-size:16px;
+        padding:10px 12px;
+    }
+}
+#ricice-map {
+    width: 100%;
+    height: 450px;
+}
+
+/* ======================================================
+   MOBITEL / TABLET POPRAVAK - dodano nakon revizije
+   Cilj: početna slika i hotspotovi se skaliraju po širini ekrana,
+   a "LIVANJSKE TANDARE" ostaje unutar okvira.
+====================================================== */
+img, video, iframe{
+    max-width:100%;
+}
+
+@media (max-width: 1100px){
+    .layout{
+        grid-template-columns:260px minmax(0, 1fr);
+        gap:12px;
+    }
+
+    .left-menu{
+        width:260px;
+    }
+
+    .heritage-menu a{
+        font-size:16px;
+    }
+
+    .hs-livanjske{
+        width:9.5%;
+        height:5.8%;
+        font-size:clamp(8px, 1.05vw, 13px);
+        line-height:1.0;
+        padding:1px;
+        overflow:hidden;
+    }
+}
+
+@media (max-width: 900px){
+    body{
+        overflow-x:hidden;
+    }
+
+    .layout{
+        grid-template-columns:1fr;
+        gap:0;
+        padding:0;
+        max-width:100%;
+    }
+
+    .left-menu{
+        position:relative;
+        top:auto;
+        width:100%;
+        height:auto;
+        max-height:none;
+        border-right:0;
+        border-bottom:4px solid #7a7a7a;
+        overflow:visible;
+    }
+
+    .right-image{
+        width:100%;
+        overflow-x:hidden;
+        display:block;
+        padding:0;
+    }
+
+    .image-wrapper{
+        display:block;
+        width:100%;
+        height:auto;
+        line-height:0;
+    }
+
+    .bg{
+        width:100%;
+        height:auto;
+        max-width:100%;
+        transform:none;
+    }
+
+    .hs-livanjske{
+        width:13.5%;
+        height:6.4%;
+        font-size:clamp(6px, 1.75vw, 11px);
+        line-height:0.95;
+        border-radius:5px;
+        border-width:1px;
+        padding:1px;
+        overflow:hidden;
+        box-shadow:0 2px 5px rgba(0,0,0,0.25);
+        white-space:normal;
+    }
+
+
+    /* MOBITEL: korekcija klikabilnih okvira bez utjecaja na PC.
+       Pomaci su uneseni prema opažanju na mobitelu:
+       - glavne grane: Jurina/Antina ulijevo 10% širine okvira; Petrova/Matina ulijevo 5%
+       - desni dijagram: Ivan udesno 10% širine; 4 okvira udesno 20%; 8 boxova udesno 30%
+    */
+    .hs-jurina,
+    .hs-antina{
+        left:calc(12.48% - 1.8%);
+    }
+
+    .hs-petrova,
+    .hs-matina{
+        left:calc(36.08% - 0.9%);
+    }
+
+    .hs-ivanov{
+        left:calc(60.9% + 1.17%);
+    }
+
+    .hs-jurin,
+    .hs-petrov,
+    .hs-antin,
+    .hs-matin{
+        left:calc(71.2% + 2.04%);
+    }
+
+    .hs-jurin{
+        left:calc(71% + 2.04%);
+    }
+
+    .hs-box1,
+    .hs-box2,
+    .hs-box3,
+    .hs-box4,
+    .hs-box5,
+    .hs-box6,
+    .hs-box7,
+    .hs-box8{
+        left:calc(83.3% + 3.3%);
+    }
+
+    .branch-content,
+    .content-page{
+        padding:20px 12px;
+    }
+
+    .branch-card,
+    .content-card{
+        padding:24px 16px;
+        max-width:100%;
+    }
+
+    .branch-card h1,
+    .content-card h1{
+        font-size:clamp(26px, 7vw, 34px);
+        overflow-wrap:anywhere;
+    }
+
+    .branch-card h3,
+    .content-card h2{
+        font-size:clamp(20px, 5.5vw, 23px);
+    }
+
+    .branch-text-block p,
+    .content-card p,
+    .content-card li{
+        font-size:17px;
+        line-height:1.6;
+        text-align:left;
+    }
+
+.flagbox img{
+    width:100%;
+    max-width:none;
+}
+}
+
+@media (max-width: 480px){
+    .home-circle{
+        width:56px;
+        height:56px;
+    }
+
+    .left-menu > h2:not(.visitor-title){
+        font-size:22px;
+    }
+
+    .heritage-menu{
+        padding:0 14px;
+    }
+
+    .heritage-menu a{
+        font-size:16px;
+    }
+
+    .hs-livanjske{
+        left:44.4%;
+        width:15.5%;
+        height:7%;
+        font-size:clamp(5.5px, 1.9vw, 9px);
+        letter-spacing:-0.2px;
+    }
+}
+.flag-title{
+    position:absolute;
+    top:0px;
+    left:0px;
+
+    background:#ffffff;
+
+    padding:0 4px;
+
+    font-family:Georgia, serif;
+    font-size:15px;
+    font-weight:bold;
+    color:#4a3b2a;
+
+    z-index:10;
+}
+
+/* Fotografija Sabine Tandara Knezović */
+.sabina-photo {
+    width: 65px;
+    margin: 15px 0 25px 0;
+    text-align: center;
+}
+
+.sabina-photo img {
+    display: block;
+    width: 65px;
+    height: auto;
+    border: 2px solid #b99867;
+    border-radius: 6px;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.25);
+}
+
+.sabina-photo figcaption {
+    margin-top: 5px;
+    color: #4a3927;
+    font-size: 11px;
+    font-style: italic;
+}
+/* ======================================================
+   POSTAVKE PRIVATNOSTI
+====================================================== */
+
+#cookie-banner{
+    position:fixed;
+    left:50%;
+    bottom:20px;
+    transform:translateX(-50%);
+    z-index:9999;
+
+    width:min(680px, calc(100% - 32px));
+    box-sizing:border-box;
+    padding:22px 26px;
+
+    background:#fffaf0;
+    color:#3b2f22;
+    border:2px solid #b99867;
+    border-radius:14px;
+    box-shadow:0 6px 24px rgba(0,0,0,0.35);
+}
+
+#cookie-banner h2{
+    margin:0 0 10px 0;
+    font-size:24px;
+    text-align:left;
+}
+
+#cookie-banner p{
+    margin:0;
+    font-size:17px;
+    line-height:1.5;
+    text-align:left;
+}
+
+#cookie-banner a{
+    color:#6b4b25;
+    font-weight:bold;
+}
+
+.cookie-buttons{
+    display:flex;
+    justify-content:flex-end;
+    gap:12px;
+    margin-top:18px;
+}
+
+.cookie-buttons button{
+    padding:10px 24px;
+    border:1px solid #6b4b25;
+    border-radius:999px;
+    font-family:Georgia, serif;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+#cookie-reject{
+    background:#fffaf0;
+    color:#6b4b25;
+}
+
+#cookie-accept{
+    background:#6b4b25;
+    color:#ffffff;
+}
+
+.cookie-buttons button:hover,
+.cookie-buttons button:focus-visible{
+    outline:3px solid #d4af37;
+    outline-offset:2px;
+}
+
+@media (max-width:600px){
+    #cookie-banner{
+        bottom:10px;
+        width:calc(100% - 20px);
+        padding:18px;
+    }
+
+    .cookie-buttons{
+        flex-direction:column;
+    }
+
+    .cookie-buttons button{
+        width:100%;
+    }
+}
+/* Jasno odvajanje nositelja Filipove loze */
+
+#filipova-loza h4 {
+    margin-top: 48px;
+    margin-bottom: 14px;
+    padding-top: 20px;
+    border-top: 2px solid rgba(107, 61, 31, 0.25);
+    color: #6b3d1f;
+    line-height: 1.4;
+}
+
+/* Prvi naslov ne treba prevelik razmak */
+#filipova-loza h4:first-of-type {
+    margin-top: 28px;
+}
+
+/* Tekst odmah ispod imena ostaje povezan s naslovom */
+#filipova-loza h4 + p {
+    margin-top: 0;
+}
+
+
+/* Keyboard access for family-tree hotspots */
+.hs,
+.hs-livanjske{
+    text-decoration:none;
+}
+
+.hs:focus-visible,
+.hs-livanjske:focus-visible{
+    outline:3px solid #d4af37;
+    outline-offset:2px;
+}
+
+/* Responsive embedded family-tree diagrams */
+.family-diagram-embed {
+    width:100%;
+    margin:30px 0;
+}
+
+.family-diagram-frame {
+    display:block;
+    width:100%;
+    height:clamp(700px, 82vh, 850px);
+    min-height:0;
+    border:1px solid #cccccc;
+    border-radius:12px;
+    background:#ffffff;
+}
+
+@media (max-width:700px) {
+    .family-diagram-embed {
+        margin:24px 0;
+    }
+
+    .family-diagram-frame {
+        height:clamp(560px, 72vh, 720px);
+        border-radius:9px;
+    }
+}
+
+@media (max-height:500px) and (orientation:landscape) {
+    .family-diagram-frame {
+        height:clamp(440px, 88vh, 620px);
+    }
+}
+
+/* ======================================================
+   POČETNE STRANICE: LIJEVI STUPAC + DESNI SADRŽAJ
+   Uvodni tekst ostaje isključivo ispod početne slike u
+   desnom stupcu. Lijevi stupac može rasti s FlagCounterom.
+====================================================== */
+.home-layout{
+    align-items:stretch;
+}
+
+.home-layout .left-menu{
+    position:relative;
+    top:auto;
+    height:auto;
+    min-height:100vh;
+    overflow:visible;
+}
+
+.right-column{
+    min-width:0;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+}
+
+.right-column .right-image{
+    flex:0 0 auto;
+    width:100%;
+}
+
+.right-column .home-intro{
+    flex:0 0 auto;
+    width:100%;
+}
+
+@media (max-width:900px){
+    .home-layout .left-menu{
+        min-height:0;
+    }
+
+    .right-column{
+        width:100%;
+    }
+}
+

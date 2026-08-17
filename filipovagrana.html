@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="hr">
+
+<head>
+<meta content="strict-origin-when-cross-origin" name="referrer"/>
+<meta content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; script-src 'self'; script-src-attr 'none'; connect-src 'self'; style-src 'self' 'sha256-4K2DYZ4n4Na7fuQXi0g1K+WPBWmcGFsDs+AqXnk/zjY='; style-src-elem 'self' 'sha256-4K2DYZ4n4Na7fuQXi0g1K+WPBWmcGFsDs+AqXnk/zjY='; style-src-attr 'none'; frame-src 'self'; form-action 'self' https://formsubmit.co; upgrade-insecure-requests; block-all-mixed-content;" http-equiv="Content-Security-Policy"/>
+
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="description" content="Filipova grana livanjskih Tandara: podrijetlo, rodoslovlje i izvori."/>
+<link rel="canonical" href="https://tandarajure-crypto.github.io/Tandara/filipovagrana.html">
+<meta property="og:url" content="https://tandarajure-crypto.github.io/Tandara/filipovagrana.html">
+<meta property="og:title" content="Livanjske Tandare – Filipova grana">
+<meta property="og:description" content="Filipova grana livanjskih Tandara: podrijetlo, rodoslovlje i izvori.">
+<meta property="og:image" content="https://tandarajure-crypto.github.iofamily-tree.png">
+<meta property="og:type" content="website">
+<link rel="alternate" hreflang="hr" href="https://tandarajure-crypto.github.io/Tandara/filipovagrana.html">
+<link rel="alternate" hreflang="en" href="https://tandarajure-crypto.github.io/Tandara/filipovagrana-en.html">
+<link rel="alternate" hreflang="x-default" href="https://tandarajure-crypto.github.io/Tandara/filipovagrana.html">
+
+<title>Livanjske Tandare – Filipova grana</title>
+
+
+<link href="style.css?v=14" rel="stylesheet"/>
+
+<style>
+/* Jasno razdvajanje pojedinih obitelji u Filipovoj lozi */
+#filipova-loza h4 {
+  margin-top:48px;
+  margin-bottom:14px;
+  padding-top:20px;
+  border-top:2px solid rgba(107,61,31,0.25);
+  color:#6b3d1f;
+  line-height:1.4;
+}
+
+#filipova-loza h4:first-of-type { margin-top:28px; }
+#filipova-loza h4 + p { margin-top:0; }
+
+.family-separator {
+  margin:34px 0 24px;
+  border:0;
+  border-top:1px solid rgba(107,61,31,0.30);
+}
+
+
+
+/* Uklopljeni operativni dijagram Filipove loze */
+.filip-tree-embed{width:100%;margin:38px 0 8px;border:1px solid #c9b99f;border-radius:12px;background:#fffdf8;box-shadow:0 8px 24px rgba(70,48,30,.15);overflow:hidden}
+.filip-tree-embed iframe{display:block;width:100%;height:clamp(650px,78vh,900px);min-height:650px;border:0;background:#fbfaf6}
+.filip-tree-actions{display:flex;justify-content:center;align-items:center;padding:12px 16px 14px;border-top:1px solid #dfd1bd;background:#fffdf8}
+.filip-tree-fullscreen-link{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:9px 16px;border:1px solid #6b3d1f;border-radius:8px;background:#6b3d1f;color:#fff;font-weight:bold;text-decoration:none}
+.filip-tree-fullscreen-link:hover,.filip-tree-fullscreen-link:focus-visible{background:#4f2c17;color:#fff;outline:3px solid rgba(107,61,31,.22);outline-offset:2px}
+@media(max-width:700px){.filip-tree-embed{margin-top:28px;border-radius:9px}.filip-tree-embed iframe{height:72vh;min-height:620px}.filip-tree-actions{padding:10px}.filip-tree-fullscreen-link{width:100%;text-align:center}}
+
+
+
+/* Samo dva uvodna naslova: jednaka širina kao tekst ispod. */
+.branch-text-block > #filipova-grana,
+.branch-text-block > .filipova-grana-podnaslov {
+  display:block;
+  width:100%;
+  max-width:100%;
+  box-sizing:border-box;
+  margin-left:0 !important;
+  margin-right:0 !important;
+  padding-left:0 !important;
+  padding-right:0 !important;
+  transform:none !important;
+  text-indent:0 !important;
+  text-align:left;
+  white-space:normal;
+  overflow-wrap:break-word;
+  word-break:normal;
+}
+
+.branch-text-block > #filipova-grana {
+  margin-top:0;
+  margin-bottom:16px;
+  font-size:clamp(26px, 4vw, 34px);
+  line-height:1.2;
+}
+
+.branch-text-block > .filipova-grana-podnaslov {
+  margin-top:0;
+  margin-bottom:24px;
+  font-size:clamp(20px, 3vw, 24px);
+  line-height:1.3;
+}
+
+/* Proširenje cijelog desnog sadržaja do unutarnjih granica pozadinskog okvira. */
+body.hr .branch-card {
+  max-width:100%;
+}
+
+body.hr .branch-text-block {
+  width:100%;
+  max-width:none;
+  margin-left:0;
+  margin-right:0;
+  box-sizing:border-box;
+}
+
+body.hr .branch-text-block > section,
+body.hr #filipova-loza,
+body.hr .filip-tree-embed {
+  width:100%;
+  max-width:none;
+  box-sizing:border-box;
+}
+
+body.hr #filipova-loza p,
+body.hr #filipova-loza ul,
+body.hr #filipova-loza ol,
+body.hr #filipova-loza h2,
+body.hr #filipova-loza h3,
+body.hr #filipova-loza h4,
+body.hr #izvor-podataka {
+  max-width:none;
+  box-sizing:border-box;
+}
+
+@media (min-width:701px) {
+  body.hr .branch-content {
+    padding-left:20px;
+    padding-right:20px;
+  }
+
+  body.hr .branch-card {
+    padding-left:28px;
+    padding-right:28px;
+  }
+}
+
+/* Centriran je samo vrh desnog sadržaja. */
+body.hr .branch-card > .branch-flag {
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+body.hr .branch-card > .branch-parent-link {
+  text-align:center;
+}
+
+body.hr .branch-text-block > #filipova-grana,
+body.hr .branch-text-block > .filipova-grana-podnaslov {
+  text-align:center;
+}
+
+
+/* Usklađivanje Filipove grane s ostalim granama */
+.diagram-instructions,
+.branch-search-access,
+.tree-note{
+  width:100%;
+  max-width:none;
+  box-sizing:border-box;
+}
+.diagram-instructions{
+  margin:32px 0 24px;
+  padding:20px 22px;
+  border:1px solid #c8b78f;
+  border-radius:12px;
+  background:#fffaf0;
+  box-shadow:0 3px 12px rgba(55,45,25,.08);
+  text-align:left;
+}
+.diagram-instructions h2{margin:0 0 12px;color:#4a3618;font-size:1.25rem;text-align:left}
+.diagram-instructions ol{margin:0;padding-left:24px}
+.diagram-instructions li{margin:0 0 9px;line-height:1.55;text-align:left}
+.diagram-instructions li:last-child{margin-bottom:0}
+.branch-search-access{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  margin:26px 0 0;
+  padding:18px 20px;
+  border:1px solid #c8b78f;
+  border-radius:12px;
+  background:#fffaf0;
+  box-shadow:0 3px 12px rgba(55,45,25,.08);
+  text-align:left;
+}
+.branch-search-access h2{margin:0 0 6px;color:#4a3618;font-size:1.18rem;text-align:left}
+.branch-search-access p{margin:0;color:#403a31;line-height:1.55;text-align:left}
+.branch-search-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 auto;
+  min-height:44px;
+  padding:10px 18px;
+  border-radius:9px;
+  background:#5b4727;
+  color:#fff!important;
+  font-weight:700;
+  text-decoration:none;
+  box-shadow:0 2px 7px rgba(0,0,0,.15);
+}
+.branch-search-button:hover,.branch-search-button:focus-visible{background:#3f301a;outline:3px solid #d4af37;outline-offset:2px;text-decoration:none;transform:translateY(-1px)}
+.tree-note{
+  margin:18px 0 0;
+  padding:18px 20px;
+  border:1px solid #c8b78f;
+  border-left:5px solid #9b7745;
+  border-radius:10px;
+  background:#fff8ec;
+  color:#3b2f22;
+  text-align:left;
+  box-shadow:0 3px 10px rgba(55,45,25,.07);
+}
+.tree-note h3{margin:0 0 10px;color:#6b3d1f;text-align:left}
+.tree-note p{margin:0 0 10px;text-align:left}
+.tree-note p:last-child{margin-bottom:0}
+@media(max-width:640px){
+  .protected-access-notice .protected-family-data-trigger{width:100%;max-width:100%;justify-content:center;white-space:normal;text-align:center}
+  .diagram-instructions,.tree-note{padding:16px}
+  .branch-search-access{align-items:stretch;flex-direction:column;padding:16px}
+  .branch-search-button{width:100%;box-sizing:border-box}
+}
+
+</style>
+<link crossorigin="anonymous" href="protected-access-modal.css?v=20260731" integrity="sha384-30d7m2pxtd/9V8NQzhO7V4HYUwWcxc97W+FJij3vAdNdnAjWOO1TW/c8S2R469Vq" rel="stylesheet"/>
+<script crossorigin="anonymous" defer="" integrity="sha384-Gx6CMszQkCp3v7+F4UUo2gcR0xqAkP78PiIkB3+rXu45BL0FffX6Gdj0mfmTUTuQ" src="protected-access-modal.js?v=20260804"></script>
+</head>
+
+<body class="hr">
+
+<div class="layout">
+
+<!-- LIJEVI STUPAC -->
+<aside class="left-menu">
+
+  <a class="home-button" href="index.html" aria-label="Početna">
+    <div class="home-circle">
+      <svg
+        class="home-svg"
+        fill="none"
+        stroke="white"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24" aria-hidden="true">
+
+        <path d="M3 10.5L12 3l9 7.5"></path>
+        <path d="M5 10v10h14V10"></path>
+        <path d="M10 20v-6h4v6"></path>
+      </svg>
+    </div>
+  </a>
+
+  <div class="lang-switch">
+    <a
+      class="lang-btn flag-btn"
+      href="filipovagrana.html"
+      aria-current="page">
+      <img alt="HR" src="flag-hr.png"/>
+    </a>
+
+    <a
+      class="lang-btn flag-btn"
+      href="filipovagrana-en.html">
+      <img alt="EN" src="flag-uk.png"/>
+    </a>
+  </div>
+
+  <h2>TANDARA-PREZIME</h2>
+
+  <ul class="heritage-menu">
+    <li><span>🌳</span><a href="./autor-hr.html">O autoru i projektu</a></li>
+    <li><span>🌳</span><a href="./podrijetlo-hr.html">Podrijetlo prezimena</a></li>
+    <li><span>🌳</span><a href="./rodoslovlje-hr.html">Rodoslovlje roda</a></li>
+    <li><span>🌳</span><a href="./migracije-hr.html">Migracije i rasprostranjenost</a></li>
+    <li><span>🌳</span><a href="./zanimljivosti.html">Zanimljivosti</a></li>
+    <li><span>🌳</span><a href="./kontakti.html">Kontakt i suradnja</a></li>
+    <li><span>🌳</span><a href="./knjiga-poruka.html">Knjiga poruka</a></li>
+    <li><span>🌳</span><a href="./privatnost.html">Politika privatnosti</a></li>
+  </ul>
+
+  <div class="author-photo">
+    <a href="./autor-hr.html">
+      <img alt="Jure Tandara" src="./jure.png"/>
+    </a>
+  </div>
+
+  
+
+</aside>
+
+<!-- DESNI SADRŽAJ -->
+<main class="branch-content">
+
+<div class="branch-card">
+
+  <img
+    alt="Hrvatska zastava"
+    class="branch-flag"
+    src="flag-hr.png?v=3"/>
+
+  <p class="branch-parent-link">
+    <a href="index.html">← Livanjske Tandare</a>
+  </p>
+
+  <div class="branch-text-block">
+
+  <h1 id="filipova-grana">
+    LIVANJSKE TANDARE – FILIPOVA GRANA
+  </h1>
+<h2 class="filipova-grana-podnaslov">
+    5.0. Filip Tandara – začetnik livanjske grane
+   
+  </h2>
+<p>Filip Tandara smatra se začetnikom livanjske grane Tandara. Bio je oženjen Jelom Bralić. Imali su četiri sina: Matu, Juru, Jakova i Ivana.</p>
+<h3>Podrijetlo Filipove loze</h3>
+
+    <p>Filip Tandarić spominje se 1768. godine kao stanovnik sela Lipa u župi Livno, gdje je živio sa svojom osmeročlanom obitelji. Odakle je i kada došao u Lipu nije poznato jer o tome zasad nisu pronađeni izravni pisani tragovi.</p>
+
+    <p>Ipak, nekoliko pokazatelja govori u prilog pretpostavci da livanjske Tandare pripadaju rodoslovnom stablu ričićkog Ivana Tandare, rođenog oko 1695. godine.</p>
+
+    <p>Ričićki Ivan imao je sinove Juru, Petra, Antu i Matu, dok je livanjski Filip svojim sinovima dao imena Mate, Jure, Jakov i Ivan. Filipov sin Ivan možda je dobio ime po svom mogućem djedu Ivanu iz Ričica, a Filipov sin Mate možda po ričićkom Mati. Sličnost se nastavlja i u sljedećim naraštajima, u kojima se ponavljaju imena Ivan, Petar i Filip.</p>
+
+    <p>Zbog tih podudarnosti Filip je u ovom rodoslovnom prikazu označen kao <strong>5.0</strong> – mogući peti sin Ivana Tandare iz Ričica. Međutim, budući da zasad nije pronađen dokument koji izravno povezuje Filipa s Ivanom Tandarom, ta se povezanost mora prikazivati kao rodoslovna pretpostavka, a ne kao potpuno potvrđena činjenica.</p>
+
+    <p>Prvi zapis o Tandarama u matičnim knjigama župe Livno pronađen je 1773. godine, kada je kršten Frane, sin Jakova Novokmeta i Ivanice Tandara iz Lipe.</p>
+
+    <p>Matične knjige za to razdoblje nisu potpune. Za razdoblje od 1797. do 1802. godine nije bilo zapisa o rođenjima Tandara, dok za razdoblje od 1781. do 1797. godine nema sačuvanih zapisa o rođenju i krštenju djece. Na temelju matica vjenčanih i umrlih ipak je bilo moguće rekonstruirati velik dio Filipova rodoslovlja.</p>
+
+               <hr class="family-separator"/>
+ 
+    <h2>Rodoslovlje Filipove loze</h2>
+      
+          <hr class="family-separator"/>
+
+    <h3>5.0. Filip Tandara</h3>
+<p>Filip Tandara smatra se začetnikom livanjske grane Tandara. Bio je oženjen Jelom Bralić. Imali su četiri sina: Matu, Juru, Jakova i Ivana.</p>
+<h3>5.1. Mate Filipov</h3>
+<p>Mate, najstariji Filipov sin, oženio se Katom Jazvić. Imali su kćer Jelu.</p>
+<h3>5.1.1. Jela Matina</h3>
+<p>Kći Mate Filipova i Kate rođene Jazvić.</p>
+<h3>5.2. Jure Filipov (–1804.)</h3>
+<p>Jure, drugi Filipov sin, oženio se Mandom Matić. Imali su sina Josipa.</p>
+<h3>5.2.1. Josip Jurin</h3>
+<p>Josip, sin Jure Filipova i Mande rođene Matić, vjenčao se 1818. godine s Cvitom Knežević. Imali su sinove Jakova, Ivana i Antuna.</p>
+<h3>5.2.1.1. Jakov Josipov</h3>
+<p>Jakov, najstariji Josipov sin, oženio se Ružom Rimac. Imali su sina Josipa.</p>
+<h3>5.2.1.1.1. Josip Jakovljev</h3>
+<p>Josip Jakovljev oženio se Anđom Gabrić. Imali su sinove Jozu i Matu te kćeri Anu, Maru i Anđu.</p>
+<h3>5.2.1.1.1.1. Jozo Josipov (1884.–)</h3>
+<p>Jozo se ženio dva puta. U prvom braku s Maricom Mioč imao je sina Antu Božidara. U drugom braku s Katom Pastuh imao je sina Jakova i kćer Anu.</p>
+<h3>5.2.1.1.1.1.1. Ante Božidar Jozin</h3>
+<p>Ante Božidar bio je sin Joze Josipova i Marice rođene Mioč iz Jozina prvog braka.</p>
+<h3>5.2.1.1.1.1.2. Jakov Jozin</h3>
+<p>Jakov je bio sin Joze Josipova i Kate rođene Pastuh iz Jozina drugog braka.</p>
+<h3>5.2.1.1.1.1.3. Ana Jozina</h3>
+<p>Kći Joze Josipova iz drugog braka s Katom Pastuh.</p>
+<h3>5.2.1.1.1.2. Mato Josipov</h3>
+<p>Sin Josipa Jakovljeva i Anđe rođene Gabrić.</p>
+<h3>5.2.1.1.1.3. Ana Josipova</h3>
+<p>Kći Josipa Jakovljeva i Anđe rođene Gabrić.</p>
+<h3>5.2.1.1.1.4. Mara Josipova</h3>
+<p>Kći Josipa Jakovljeva i Anđe rođene Gabrić.</p>
+<h3>5.2.1.1.1.5. Anđa Josipova</h3>
+<p>Kći Josipa Jakovljeva i Anđe rođene Gabrić.</p>
+<h3>5.2.1.2. Ivan Josipov</h3>
+<p>Ivan, drugi sin Josipa i Cvite rođene Knežević, ženio se dva puta. Prvi put oženio se 1859. godine Ružom Laštrić. Nema zapisa da su imali djece. Drugi put oženio se Anđom Erceg. Imali su sinove Jakova i Stipu.</p>
+<h3>5.2.1.2.1. Jakov Ivanov</h3>
+<p>Jakov se 1894. godine u Livnu oženio Ružom Meštrović. Imali su osmero djece: Josipa, Stipu, Ivu, Matka, Maru, Jozu, Milku i Anđu.</p>
+<h3>5.2.1.2.1.1. Josip Jakovljev</h3>
+<p>Najstarije navedeno dijete Jakova Ivanova i Ruže rođene Meštrović.</p>
+<h3>5.2.1.2.1.2. Stipo Jakovljev</h3>
+<p>Sin Jakova Ivanova i Ruže rođene Meštrović.</p>
+<h3>5.2.1.2.1.3. Ivo Jakovljev</h3>
+<p>Sin Jakova Ivanova i Ruže rođene Meštrović.</p>
+<h3>5.2.1.2.1.4. Matko Jakovljev</h3>
+<p>Matko, najmlađi Jakovljev sin, oženio se Anicom Župčić. Imali su Krešimira i Davorku.</p>
+<h3>5.2.1.2.1.4.1. Krešimir Matkov </h3> 
+    <p>Krešimir se oženio Biserkom Kučak.</p>
+    <p>Dobili su sina:</p>
+    <ul>
+        <li>5.2.1.2.1.4.1.1. Igor Krešimirov</li>
+    <p>i kćer:</p>
+        <li>5.2.1.2.1.4.1.2. Gordana Krešimirova</li>
+    </ul>
+
+    <hr class="family-separator"/>
+
+    <h3>5.2.1.2.1.4.1.1. Igor Krešimirov (1974.- )</h3>
+    <p>Igor se oženio Edinom Hadžić </p>
+    <p>Dobili su sinove:</p>
+    <ul>
+        <li>5.2.1.2.1.4.1.1.1. Izidor Igorov</li>
+        <li>5.2.1.2.1.4.1.1.2. Edgar Igorov</li>
+    </ul>
+
+         <hr class="family-separator"/>
+ 
+    <h3>5.2.1.2.1.4.2. Davorka Matkova</h3>
+<p>Kći Matka Jakovljeva i Anice rođene Župčić.</p>
+<h3>5.2.1.2.1.5. Mara Jakovljeva</h3>
+<p>Kći Jakova Ivanova i Ruže rođene Meštrović.</p>
+<h3>5.2.1.2.1.6. Joza Jakovljeva</h3>
+<p>Kći Jakova Ivanova i Ruže rođene Meštrović.</p>
+<h3>5.2.1.2.1.7. Milka Jakovljeva</h3>
+<p>Kći Jakova Ivanova i Ruže rođene Meštrović.</p>
+<h3>5.2.1.2.1.8. Anđa Jakovljeva</h3>
+<p>Kći Jakova Ivanova i Ruže rođene Meštrović.</p>
+<h3>5.2.1.2.2. Stipo Ivanov</h3>
+<p>Stipo, mlađi sin Ivana i Anđe rođene Erceg, oženio se Anom Sučić. Imali su sinove Ivu, Peru i Zvonimira te kćeri Ivu, Anđu i Ljubicu.</p>
+<h3>5.2.1.2.2.1. Ivo Stipin</h3>
+<p>Sin Stipe Ivanova i Ane rođene Sučić.</p>
+<h3>5.2.1.2.2.2. Pero Stipin</h3>
+<p>Sin Stipe Ivanova i Ane rođene Sučić.</p>
+<h3>5.2.1.2.2.3. Zvonimir Stipin (1906.–1944.)</h3>
+<p>Zvonimir, najmlađi Stipin sin, oženio se 1930. godine u Beogradu Adelom Szepesi. Imali su Vladimira i Anetu.</p>
+<h3>5.2.1.2.2.3.1. Vladimir Zvonimirov (1936.-1992.)</h3>
+    <p>Vladimir se 1965. godine u Berlinu oženio Ingrid Schmarsch.</p>
+    <p>Dobili su sina:</p>
+    <ul>
+        <li>5.2.1.2.2.3.1.1. Milan-Aleksander Vladimirov</li>
+    <li>
+    <p>i kćer:</p>
+    <ul>
+        <li>5.2.1.2.2.3.1.2. Andrea Vladimirova</li>
+
+        <hr class="family-separator"/>
+  
+    <h3>5.2.1.2.2.3.2. Aneta Zvonimirova</h3>
+<p>Kći Zvonimira Stipina i Adele rođene Szepesi.</p>
+<h3>5.2.1.2.2.4. Iva Stipina</h3>
+<p>Kći Stipe Ivanova i Ane rođene Sučić.</p>
+<h3>5.2.1.2.2.5. Anđa Stipina</h3>
+<p>Kći Stipe Ivanova i Ane rođene Sučić.</p>
+<h3>5.2.1.2.2.6. Ljubica Stipina</h3>
+<p>Kći Stipe Ivanova i Ane rođene Sučić.</p>
+<h3>5.2.1.3. Antun Josipov</h3>
+<p>Najmlađi navedeni sin Josipa Jurina i Cvite rođene Knežević.</p>
+<h3>5.3. Jakov Filipov</h3>
+<p>Jakov, treći Filipov sin, ženio se dva puta. Iz prvog braka s Lucom rođenom Kuprešanin imao je kćeri Josipu i Peru. Iz drugog braka s Katom rođenom Perić imao je kćer Katu.</p>
+<h3>5.3.1. Josipa Jakovljeva</h3>
+<p>Kći Jakova Filipova iz prvog braka s Lucom rođenom Kuprešanin.</p>
+<h3>5.3.2. Pera Jakovljeva</h3>
+<p>Kći Jakova Filipova iz prvog braka s Lucom rođenom Kuprešanin.</p>
+<h3>5.3.3. Kata Jakovljeva</h3>
+<p>Kći Jakova Filipova iz drugog braka s Katom rođenom Perić.</p>
+<h3>5.4. Ivan Filipov</h3>
+<p>Ivan, najmlađi Filipov sin, bio je oženjen Ivom rođenom Knežević. Imali su Agatu i Petra.</p>
+<h3>5.4.1. Agata Ivanova</h3>
+<p>Kći Ivana Filipova i Ive rođene Knežević.</p>
+<h3>5.4.2. Petar Ivanov</h3>
+<p>Petar se ženio dva puta. Prvi put oženio se Lucom Smoljić. Nije poznato jesu li imali djece. U drugom braku s Matijom rođenom Čelan imao je Nikolu, Agatu i Anu.</p>
+<h3>5.4.2.1. Nikola Petrov</h3>
+<p>Sin Petra Ivanova iz drugog braka s Matijom rođenom Čelan.</p>
+<h3>5.4.2.2. Agata Petrova</h3>
+<p>Kći Petra Ivanova iz drugog braka s Matijom rođenom Čelan.</p>
+<h3>5.4.2.3. Ana Petrova</h3>
+<p>Kći Petra Ivanova iz drugog braka s Matijom rođenom Čelan.</p>
+
+<section class="diagram-instructions" aria-labelledby="filip-diagram-instructions">
+<h2 id="filip-diagram-instructions">Upute za korištenje dijagrama</h2>
+<ol>
+<li>U polje za pretraživanje upišite ime, broj osobe, supružnika, mjesto ili drugi poznati podatak, a zatim pritisnite <strong>Pronađi</strong>.</li>
+<li>Gumb <strong>Raširi sve</strong> prikazuje sve unesene članove Filipove grane.</li>
+<li>Gumb <strong>Sažmi</strong> zatvara proširene dijelove dijagrama.</li>
+<li>Gumb <strong>Do 3. naraštaja</strong> prikazuje prva tri naraštaja obiteljske grane.</li>
+<li>Gumb <strong>Uklopi</strong> prilagođava cijeli dijagram dostupnom prostoru.</li>
+<li>Gumbima <strong>＋</strong> i <strong>−</strong> povećavate ili smanjujete prikaz, a povlačenjem mišem ili prstom pomičete dijagram.</li>
+<li>Klikom na okvir osobe otvaraju se njezini podaci i, gdje postoje, prikazuju ili skrivaju potomci.</li>
+<li>Ikona kuće vraća na početnu stranicu, zastavice mijenjaju jezik, a ikona pisača priprema dijagram za ispis.</li>
+<li>Zbog ponavljanja istih imena za precizniji pronalazak unesite ime osobe zajedno s brojem, supružnikom, roditeljem ili mjestom.</li>
+</ol>
+</section>
+
+<!-- POČETAK UGRAĐENOG INTERAKTIVNOG RODOSLOVNOG DIJAGRAMA -->
+<div class="filip-tree-embed" id="filipov-dijagram">
+  <iframe
+    src="filipova-grana-interaktivni-dijagram.html"
+    title="Interaktivni rodoslovni dijagram Filipove loze"
+    loading="lazy"
+    referrerpolicy="no-referrer"
+    allow="fullscreen 'self'; geolocation 'none'; microphone 'none'; camera 'none'; payment 'none'; usb 'none'"
+    allowfullscreen sandbox="allow-scripts allow-same-origin allow-top-navigation-by-user-activation">
+  </iframe>
+  <div class="filip-tree-actions">
+    <a class="filip-tree-fullscreen-link" href="filipova-grana-interaktivni-dijagram.html" target="_blank" rel="noopener noreferrer">Otvori dijagram preko cijelog zaslona</a>
+  </div>
+</div>
+<!-- KRAJ UGRAĐENOG INTERAKTIVNOG RODOSLOVNOG DIJAGRAMA -->
+<section class="tree-note">
+<h3>Napomena!</h3>
+<p>Kompletno rodoslovno stablo Filipove grane nalazi se u ugrađenom interaktivnom dijagramu iznad i može se otvoriti preko cijelog zaslona.</p>
+<p>Na početnoj stranici Digitalnog arhiva roda Tandara Filipovu granu otvarate odabirom poveznice <strong>„Livanjske Tandare – Filipova grana”</strong>.</p>
+</section>
+</div>
+</div>
+</main>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Potpuni klikabilni interaktivni rodoslovni dijagram Filipove livanjske grane roda Tandara.">
+<link rel="canonical" href="https://tandarajure-crypto.github.io/Tandara/filipova-grana-interaktivni-dijagram.html">
+<meta property="og:url" content="https://tandarajure-crypto.github.io/Tandara/filipova-grana-interaktivni-dijagram.html">
+<meta property="og:title" content="Filipova grana – interaktivni rodoslovni dijagram">
+<meta property="og:description" content="Potpuni klikabilni interaktivni rodoslovni dijagram Filipove livanjske grane roda Tandara.">
+<meta property="og:image" content="https://tandarajure-crypto.github.iofamily-tree.png">
+<meta property="og:type" content="website">
+<link rel="alternate" hreflang="hr" href="https://tandarajure-crypto.github.io/Tandara/filipova-grana-interaktivni-dijagram.html">
+<link rel="alternate" hreflang="en" href="https://tandarajure-crypto.github.io/Tandara/filipova-grana-interaktivni-dijagram-en.html">
+<link rel="alternate" hreflang="x-default" href="https://tandarajure-crypto.github.io/Tandara/filipova-grana-interaktivni-dijagram.html">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'sha256-genmG/qFlx4AQGURMCPc4LFHhRx1FcgKtDfmRua+aV0='; style-src-elem 'self' 'sha256-genmG/qFlx4AQGURMCPc4LFHhRx1FcgKtDfmRua+aV0='; style-src-attr 'unsafe-hashes' 'sha256-+pzw8A81bqgs+klLPI5/CiCBM2LSYCC10l7bhdLrhRc=' 'sha256-5+0ERooZeJ2DwksPTUalywdILFHsBc2NB8vaX7fQP58=' 'sha256-EDvhiqz4BtA7Zn5Rfsa8mIvE+vt07Thi2VzcVis5grY='; script-src 'self'; script-src-attr 'none'; connect-src 'self'; frame-src 'none'; form-action 'none'; upgrade-insecure-requests; block-all-mixed-content;">
+<title>Filipova grana – interaktivni rodoslovni dijagram</title>
+<link rel="stylesheet" href="assets/css/common/filip-diagram.css?v=1">
+<link href="./mobile-subpages-fullscreen.css?v=2" rel="stylesheet"/>
+</head>
+<!-- OPERATIVNI FILIPOV DIJAGRAM -->
+<body class="mobile-subpage-full">
+<nav class="mobile-box-topbar" aria-label="Mobilna navigacija">
+  <a class="mobile-box-home" href="index.html">🏠 Početna</a>
+  <div class="mobile-box-flags" aria-label="Odabir jezika">
+    <a href="filipova-grana-interaktivni-dijagram.html" aria-label="Hrvatski"><img src="flag-hr.png" alt="HR"/></a>
+    <a href="filipova-grana-interaktivni-dijagram-en.html" aria-label="English"><img src="flag-uk.png" alt="EN"/></a>
+  </div>
+</nav>
+
+<header>
+  <div class="header-top">
+    <div class="title-wrap">
+      <h1>Filipova grana</h1>
+      <div class="subtitle"><strong>53</strong> numerirane osobe · <strong>9</strong> prikazanih naraštaja · klik na osobu otvara potpuni zapis</div>
+    </div>
+    <nav class="header-actions" aria-label="Glavna navigacija i prikaz">
+      <a class="diagram-home-button" href="index.html" target="_top" title="Početna" aria-label="Početna"><span class="diagram-home-circle"><svg class="diagram-home-svg" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5L12 3l9 7.5"></path><path d="M5 10v10h14V10"></path><path d="M10 20v-6h4v6"></path></svg></span></a>
+      <a class="back-link" href="filipovagrana.html#filipov-dijagram" target="_top">← Filipova grana</a>
+      <a class="header-btn lang-icon active" href="filipova-grana-interaktivni-dijagram.html" lang="hr" hreflang="hr" aria-current="page" aria-label="Hrvatska verzija" title="Hrvatska verzija"><img src="flag-hr.png" alt="HR"></a>
+      <a class="header-btn lang-icon" href="filipova-grana-interaktivni-dijagram-en.html" lang="en" hreflang="en" aria-label="English version" title="English version"><img src="flag-uk.png" alt="EN"></a>
+      <button id="printDiagram" type="button" aria-label="Ispiši dijagram" title="Ispiši dijagram"><img class="print-icon" src="Print.png" alt=""></button>
+    </nav>
+  </div>
+  <div class="header-tools"><div class="toolbar-scroll"><div class="toolbar">
+    <button class="primary" id="expandAll" type="button">Raširi sve</button>
+    <button id="collapse" type="button">Sažmi</button>
+    <button id="threeLevels" type="button">Do 3. naraštaja</button>
+    <button id="fit" type="button">Uklopi</button>
+    <button id="zoomIn" type="button" aria-label="Povećaj">＋</button>
+    <button id="zoomOut" type="button" aria-label="Smanji">−</button>
+    <div class="search-wrap"><input id="search" type="search" placeholder="Ime, šifra, nadimak ili mjesto…" aria-label="Pretraži osobe u Filipovoj grani"><button id="findBtn" type="button">Pronađi</button></div>
+  </div></div></div>
+</header>
+<div id="workspace">
+  <svg id="treeSvg" role="img" aria-label="Interaktivno rodoslovno stablo Filipove grane">
+    <g id="viewport">
+      <g id="links"></g>
+      <g id="nodes"></g>
+    </g>
+    <text id="treeLoading" x="50%" y="50%" text-anchor="middle"
+      font-family="Arial,Helvetica,sans-serif" font-size="18" fill="#68736d">Učitavanje rodoslovnog dijagrama…</text>
+  </svg>
+  <aside id="details" aria-live="polite">
+    <button id="closeDetails" type="button" aria-label="Zatvori">×</button>
+    <h2 id="detailTitle"></h2>
+    <div class="detail-meta"><span class="detail-chip" id="detailCode"></span><span class="detail-chip" id="detailSection"></span></div>
+    <p id="detailText"></p>
+    <a id="detailPage" href="#" target="_top">Otvori pripadajuću stranicu</a>
+  </aside>
+  <div class="legend">
+    <span><i class="swatch" style="background:#174f39;border-color:#0d3425"></i>Filip Tandara</span>
+    <span><i class="swatch" style="background:#e8f2fb;border-color:#4d82aa"></i>Filipovi sinovi</span>
+    <span><i class="swatch" style="background:#fff1df;border-color:#bb8144"></i>Potomci</span>
+  </div>
+  <div class="help">Kotačić: povećanje · povlačenje: pomicanje · klik na okvir: detalji i grananje</div>
+  <div class="status" id="status" aria-live="polite"></div>
+</div>
+<script src="filipova-grana-interaktivni-dijagram.js"></script>
+
+</body>
+</html>
