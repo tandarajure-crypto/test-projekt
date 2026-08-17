@@ -1,0 +1,247 @@
+/* Zajednički tehnički standard za sve četiri glavne grane — HR i EN */
+.branch-card{
+  width:100%;
+  max-width:1200px;
+  box-sizing:border-box;
+}
+
+.branch-card > h1{
+  overflow-wrap:anywhere;
+}
+
+.branch-page-actions{
+  display:flex;
+  justify-content:flex-end;
+  width:100%;
+  max-width:760px;
+  margin:0 auto 12px;
+}
+
+.branch-print-button{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  min-height:44px;
+  padding:9px 15px;
+  border:1px solid #765b32;
+  border-radius:9px;
+  background:#fffaf0;
+  color:#3f301a;
+  font:inherit;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.branch-print-button:hover,
+.branch-print-button:focus-visible{
+  background:#f3e5c7;
+  outline:3px solid #d4af37;
+  outline-offset:2px;
+}
+
+.branch-print-button__icon{
+  font-size:1.2rem;
+  line-height:1;
+}
+
+.branch-root-title{
+  width:100%;
+  max-width:760px;
+  margin:28px auto 14px;
+  text-align:center;
+  overflow-wrap:anywhere;
+}
+
+.branch-text-block{
+  width:100%;
+  max-width:760px;
+  margin:0 auto;
+  box-sizing:border-box;
+  text-align:left;
+}
+
+.branch-text-block > h2,
+.branch-text-block > h3{
+  text-align:left;
+  overflow-wrap:anywhere;
+}
+
+.branch-text-block > p{
+  text-align:justify;
+  overflow-wrap:anywhere;
+  hyphens:auto;
+}
+
+.branch-search-access,
+.people-directory,
+.person-detail-box,
+.branch-diagram-link,
+.tree-note{
+  width:100%;
+  max-width:760px;
+  box-sizing:border-box;
+}
+
+.branch-search-access{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  margin:30px 0 24px;
+  padding:18px 20px;
+  border:1px solid #c8b78f;
+  border-radius:12px;
+  background:#fffaf0;
+  box-shadow:0 3px 12px rgba(55,45,25,.08);
+  text-align:left;
+}
+
+.branch-search-access h2{
+  margin:0 0 6px;
+  color:#4a3618;
+  font-size:1.18rem;
+}
+
+.branch-search-access p{
+  margin:0;
+  color:#403a31;
+  line-height:1.55;
+  text-align:left;
+}
+
+.branch-search-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 auto;
+  min-height:44px;
+  padding:10px 18px;
+  border-radius:9px;
+  background:#5b4727;
+  color:#fff !important;
+  font-weight:700;
+  text-decoration:none;
+  box-shadow:0 2px 7px rgba(0,0,0,.15);
+}
+
+.branch-search-button:hover,
+.branch-search-button:focus-visible{
+  background:#3f301a;
+  outline:3px solid #d4af37;
+  outline-offset:2px;
+  text-decoration:none;
+  transform:translateY(-1px);
+}
+
+.branch-diagram-link{
+  margin-top:32px;
+  margin-bottom:18px;
+}
+
+.tree-note{
+  margin:0;
+  padding:18px 20px;
+  border:1px solid #c8b78f;
+  border-left:5px solid #9b7745;
+  border-radius:10px;
+  background:#fff8ec;
+  color:#3b2f22;
+  text-align:left;
+  box-shadow:0 3px 10px rgba(55,45,25,.07);
+}
+
+.tree-note h3{
+  margin:0 0 10px;
+  color:#6b3d1f;
+  text-align:left;
+}
+
+.tree-note p{
+  margin:0 0 10px;
+  text-align:left;
+}
+
+.tree-note p:last-child{
+  margin-bottom:0;
+}
+
+@media (max-width:900px){
+  .branch-content{
+    padding:20px 12px;
+  }
+
+  .branch-card{
+    max-width:100%;
+    padding:24px 16px;
+  }
+
+  .branch-root-title{
+    margin-top:24px;
+    font-size:clamp(20px,5.5vw,23px);
+  }
+
+  .branch-text-block > p{
+    text-align:left;
+    hyphens:none;
+  }
+}
+
+@media (max-width:640px){
+  .branch-page-actions,
+  .branch-print-button{
+    width:100%;
+  }
+
+  .branch-print-button{
+    justify-content:center;
+  }
+
+  .protected-access-notice .protected-family-data-trigger{
+    width:100%;
+    max-width:100%;
+    justify-content:center;
+    white-space:normal;
+    text-align:center;
+  }
+
+  .branch-search-access{
+    align-items:stretch;
+    flex-direction:column;
+    padding:16px;
+  }
+
+  .branch-search-button{
+    width:100%;
+    box-sizing:border-box;
+  }
+
+  .tree-note{
+    padding:16px;
+  }
+}
+
+@media print{
+  .left-menu,
+  .branch-page-actions,
+  .protected-access-notice,
+  .branch-diagram-link,
+  .tree-note{
+    display:none !important;
+  }
+
+  .layout,
+  .branch-content,
+  .branch-card,
+  .branch-text-block{
+    display:block;
+    width:100%;
+    max-width:none;
+    margin:0;
+    padding:0;
+    box-shadow:none;
+  }
+
+  .branch-text-block > p{
+    text-align:left;
+  }
+}

@@ -1,0 +1,207 @@
+/* Box2a uses the entire free width to the right of the fixed left column. */
+html,body{width:100%;max-width:none}
+body.box-mobile-split .layout{width:100%;max-width:none;margin:0;grid-template-columns:auto minmax(0,1fr);gap:0;padding:0}
+body.box-mobile-split .content-page{width:100%;max-width:none;min-width:0;padding:0;justify-content:stretch}
+body.box-mobile-split .content-card{--card-pad-x:42px;width:100%;max-width:none;min-width:0;margin:0;border-radius:0;padding:36px var(--card-pad-x) 0}
+
+/* Two-column navigation on tablets and phones, identical to boxes 2b, 2c and 2d. */
+@media (max-width:900px){
+  body.box-mobile-split .layout{display:grid;grid-template-columns:minmax(150px,34vw) minmax(0,1fr);align-items:start;gap:0;width:100%;max-width:100%;padding:0}
+  body.box-mobile-split .left-menu{position:sticky;top:0;width:100%;height:100vh;max-height:100vh;overflow-y:auto;overflow-x:hidden;border-right:3px solid #7a7a7a;border-bottom:0;padding:10px 0 14px;z-index:20}
+  body.box-mobile-split .left-menu .home-button,body.box-mobile-split .left-menu .lang-switch,body.box-mobile-split .left-menu>h2,body.box-mobile-split .left-menu .author-photo,body.box-mobile-split .left-menu .flagbox{display:none}
+  body.box-mobile-split .heritage-menu{padding:0 9px}
+  body.box-mobile-split .heritage-menu li{align-items:flex-start;gap:5px;padding:9px 2px}
+  body.box-mobile-split .heritage-menu li span{flex:0 0 auto;font-size:12px;line-height:1.35}
+  body.box-mobile-split .heritage-menu a{display:block;min-width:0;font-size:clamp(12px,2.15vw,16px);line-height:1.25;overflow-wrap:anywhere}
+  body.box-mobile-split .content-page{min-width:0;width:100%;padding:0}
+  body.box-mobile-split .content-card{--card-pad-x:12px;min-width:0;width:100%;padding:20px var(--card-pad-x) 0;border-radius:0}
+  body.box-mobile-split .content-card h1{font-size:clamp(22px,5vw,32px);margin-bottom:18px}
+  body.box-mobile-split .content-card h2{font-size:clamp(17px,3.7vw,22px)}
+  body.box-mobile-split .content-card p,body.box-mobile-split .content-card li{font-size:clamp(14px,2.8vw,17px);line-height:1.55;overflow-wrap:anywhere}
+}
+@media (max-width:480px){
+  body.box-mobile-split .layout{grid-template-columns:minmax(128px,42vw) minmax(0,1fr)}
+  body.box-mobile-split .heritage-menu{padding:0 6px}
+  body.box-mobile-split .heritage-menu li{gap:3px;padding:8px 1px}
+  body.box-mobile-split .heritage-menu a{font-size:12px}
+  body.box-mobile-split .content-card{--card-pad-x:9px;padding:16px var(--card-pad-x) 0}
+  body.box-mobile-split .content-card p,body.box-mobile-split .content-card li{font-size:14px}
+}
+
+.branch-heading{text-align:center;margin:0 0 24px}
+.branch-heading .branch-flag{display:block;width:46px;height:auto;margin:0 auto 10px}
+.branch-heading h1{margin:0;text-transform:uppercase}
+.branch-summary,.diagram-instructions{margin:0 auto 26px;max-width:1280px}
+.branch-summary h2,.diagram-instructions h2{margin:0 0 12px}
+.branch-summary p{margin:0 0 13px}
+.family-data{line-height:1.65}
+.diagram-instructions ol{margin:0;padding-left:24px}
+.diagram-instructions li{margin:0 0 9px}
+.family-dates{font-weight:700;white-space:nowrap}
+@media(max-width:480px){.branch-heading .branch-flag{width:38px}.family-dates{white-space:normal}.diagram-instructions ol{padding-left:20px}}
+
+/* Interactive diagram — the same technical system as the completed branches. */
+.branch-diagram{
+  --green:#174f39;--green-dark:#0d3425;--paper:#fbfaf6;--ink:#22302a;--muted:#68736d;--line:#d9ddd9;
+  width:calc(100% + var(--card-pad-x) + var(--card-pad-x));height:850px;min-height:590px;margin:30px calc(0px - var(--card-pad-x)) 0;
+  display:flex;flex-direction:column;overflow:hidden;background:var(--paper);border-top:1px solid #d8ddd8;border-bottom:1px solid #d8ddd8;
+  box-shadow:0 6px 24px rgba(0,0,0,.08);font-family:Arial,Helvetica,sans-serif;color:var(--ink)
+}
+.branch-diagram *{box-sizing:border-box}
+.branch-diagram button,.branch-diagram input,.branch-diagram a{font:inherit}
+.branch-diagram button,.branch-diagram input,.branch-diagram .diagram-header-btn{border:1px solid #c9cec9;border-radius:8px;background:#fff;color:#26342e;padding:9px 11px;font-size:13px}
+.branch-diagram button,.branch-diagram .diagram-header-btn{cursor:pointer;white-space:nowrap}
+.branch-diagram button:hover,.branch-diagram .diagram-header-btn:hover{background:#f0f4f1}
+.branch-diagram button:focus-visible,.branch-diagram input:focus-visible,.branch-diagram a:focus-visible,.branch-diagram .node:focus-visible,.branch-diagram .family-action:focus-visible{outline:3px solid #d7a629;outline-offset:2px}
+.branch-diagram button.primary{background:var(--green);color:#fff;border-color:var(--green)}
+.branch-diagram .diagram-header{flex:0 0 auto;display:grid;grid-template-columns:minmax(260px,max-content) max-content minmax(0,1fr);align-items:center;gap:8px 12px;padding:8px 14px;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 2px 10px rgba(0,0,0,.05);z-index:20}
+.branch-diagram .diagram-title{min-width:0;max-width:420px}
+.branch-diagram .diagram-title h2{margin:0 0 2px;color:var(--green);font-size:21px;white-space:nowrap}
+.branch-diagram .diagram-subtitle{font-size:12px;color:var(--muted);line-height:1.3;white-space:nowrap}
+.branch-diagram .diagram-actions{display:flex;align-items:center;justify-content:flex-end;gap:6px;flex-wrap:nowrap}
+.branch-diagram .diagram-header-btn{text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:6px;line-height:1.2}
+.branch-diagram .diagram-home-button{padding:0;border:0;background:transparent;border-radius:50%}
+.branch-diagram .diagram-home-circle{width:54px;height:54px;background:#c9a46d;border-radius:50%;border:2px solid transparent;box-shadow:0 0 4px rgba(0,0,0,.30);display:flex;align-items:center;justify-content:center;transition:all .15s ease}
+.branch-diagram .diagram-home-button:hover .diagram-home-circle{border-color:#d4af37;background:#d3b07a}
+.branch-diagram .diagram-home-svg{width:26px;height:26px}
+.branch-diagram .lang-icon{width:42px;height:34px;padding:5px!important}
+.branch-diagram .lang-icon.active{border-color:var(--green);box-shadow:inset 0 0 0 1px var(--green);background:#f0f6f2}
+.branch-diagram .lang-icon img{display:block;width:27px;height:18px;object-fit:cover;border-radius:2px}
+.branch-diagram #printDiagram{width:50px;height:42px;padding:2px 4px;display:inline-flex;align-items:center;justify-content:center}
+.branch-diagram #printDiagram img{display:block;width:40px;height:auto;max-height:36px;object-fit:contain}
+.branch-diagram .diagram-tools{min-width:0}
+.branch-diagram .toolbar-scroll{min-width:0;overflow-x:auto;padding:1px 2px 3px;scrollbar-width:thin}
+.branch-diagram .diagram-toolbar{display:flex;align-items:center;gap:6px;width:max-content;min-width:max-content}
+.branch-diagram .search-wrap{display:flex;gap:6px;position:relative;margin-left:2px}
+.branch-diagram #treeSearch{width:245px}
+.branch-diagram .search-results{position:fixed;left:10px;top:80px;width:min(550px,calc(100vw - 20px));max-height:min(420px,65vh);overflow:auto;background:#fff;border:1px solid #c9cec9;border-radius:11px;box-shadow:0 14px 36px rgba(0,0,0,.22);z-index:1000}
+.branch-diagram .search-results[hidden]{display:none}
+.branch-diagram .search-results-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;background:#f5f7f5;border-bottom:1px solid #e0e3e0;font-size:13px;font-weight:700;position:sticky;top:0;z-index:1}
+.branch-diagram .search-results-close{border:0!important;background:transparent!important;padding:2px 7px!important;font-size:20px!important;line-height:1}
+.branch-diagram .search-result-item{display:block;width:100%;margin:0;padding:10px 12px!important;text-align:left;border:0!important;border-bottom:1px solid #eceeec!important;border-radius:0!important;background:#fff!important;white-space:normal}
+.branch-diagram .search-result-item:last-child{border-bottom:0!important}
+.branch-diagram .search-result-item:hover,.branch-diagram .search-result-item:focus-visible{background:#f0f5f1!important}
+.branch-diagram .search-result-label{display:block;color:var(--green);font-size:13px;font-weight:700;line-height:1.35}
+.branch-diagram .search-result-meta,.branch-diagram .search-result-family{display:block;margin-top:3px;font-size:12px;line-height:1.35}
+.branch-diagram .search-result-meta{color:var(--muted)}
+.branch-diagram .search-result-family{color:#7a6551}
+.branch-diagram .workspace{position:relative;flex:1 1 auto;width:100%;max-width:none;min-height:0;overflow:hidden;background:linear-gradient(180deg,#fbfaf6,#f5f3ec)}
+.branch-diagram #treeSvg{width:100%;height:100%;display:block;cursor:grab;user-select:none;touch-action:none}
+.branch-diagram #treeSvg.dragging{cursor:grabbing}
+.branch-diagram .connector{fill:none;stroke:#a9ada8;stroke-width:2}
+.branch-diagram .marriage-line,.branch-diagram .daughter-line{fill:none;stroke:#9b8a8e;stroke-width:1.8}
+.branch-diagram .node,.branch-diagram .family-action{cursor:pointer}
+.branch-diagram .node rect,.branch-diagram .family-action rect{stroke-width:2;filter:drop-shadow(0 2px 2px rgba(0,0,0,.07));transition:stroke-width .15s,filter .15s}
+.branch-diagram .node:hover rect,.branch-diagram .node:focus-visible rect,.branch-diagram .family-action:hover rect,.branch-diagram .family-action:focus-visible rect{stroke-width:3;filter:drop-shadow(0 3px 4px rgba(0,0,0,.14))}
+.branch-diagram .node text,.branch-diagram .family-action text{pointer-events:none}
+.branch-diagram .node .code{font-size:12px;font-weight:700;letter-spacing:.35px}
+.branch-diagram .node .label{font-size:14px;font-weight:600}
+.branch-diagram .node .hint{font-size:12px}
+.branch-diagram .node.selected rect{stroke:#c63030!important;stroke-width:4}
+.branch-diagram .node.match rect{stroke:#be8b00!important;stroke-width:4}
+.branch-diagram .spouse-node rect{fill:#fff3f4;stroke:#a45c68}
+.branch-diagram .daughter-node rect{fill:#f4effa;stroke:#8064a0}
+.branch-diagram .family-title,.branch-diagram .daughter-title{font-size:12px;font-weight:700;fill:#4d3540}
+.branch-diagram .family-meta,.branch-diagram .daughter-meta{font-size:10px;fill:#65545a}
+.branch-diagram .marriage-label{font-size:9px;text-transform:uppercase;letter-spacing:.4px;fill:#8a5f68}
+.branch-diagram .details{position:absolute;top:12px;right:12px;width:min(410px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto;background:rgba(255,255,255,.97);border:1px solid #c9cec9;border-radius:12px;box-shadow:0 12px 32px rgba(0,0,0,.18);padding:17px;transform:translateX(calc(100% + 28px));transition:transform .22s ease;z-index:10}
+.branch-diagram .details.open{transform:translateX(0)}
+.branch-diagram .details h3{margin:0 28px 4px 0;color:var(--green);font-size:20px}
+.branch-diagram .detail-code{color:var(--muted);font-size:12px;margin-bottom:10px}
+.branch-diagram .details p{margin:0!important;font-size:14px!important;line-height:1.5!important;text-align:left!important;white-space:pre-line}
+.branch-diagram .close-details{position:absolute;top:7px;right:7px;border:0!important;background:transparent!important;font-size:22px!important;padding:3px 8px!important}
+.branch-diagram .legend{position:absolute;left:12px;bottom:11px;display:flex;gap:12px;flex-wrap:wrap;padding:7px 10px;background:rgba(255,255,255,.90);border:1px solid #d8ddd8;border-radius:9px;font-size:11px;color:#56615c;max-width:calc(100% - 24px);z-index:3}
+.branch-diagram .legend span{display:flex;align-items:center;gap:5px}
+.branch-diagram .swatch{width:13px;height:13px;border:2px solid;border-radius:3px;display:inline-block}
+.branch-diagram .help{position:absolute;right:12px;bottom:11px;padding:6px 9px;background:rgba(255,255,255,.88);border:1px solid #d8ddd8;border-radius:8px;font-size:11px;color:#68736d;z-index:3}
+.branch-diagram .live-status{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+
+.branch-diagram:fullscreen{width:100%;height:100dvh;min-height:0;margin:0;border:0;box-shadow:none;background:var(--paper)}
+.branch-diagram:fullscreen .workspace{min-height:0}
+
+@media(max-width:1080px){
+  .branch-diagram .diagram-header{display:flex;flex-direction:column;align-items:stretch;gap:7px;padding:8px 10px}
+  .branch-diagram .diagram-title{width:100%;max-width:none}
+  .branch-diagram .diagram-title h2{font-size:19px;white-space:normal}
+  .branch-diagram .diagram-subtitle{font-size:12px;white-space:normal}
+  .branch-diagram .diagram-actions{justify-content:flex-start;flex-wrap:wrap}
+}
+@media(max-width:600px){
+  .branch-diagram{height:720px;min-height:520px}
+  .branch-diagram .diagram-home-circle{width:44px;height:44px}
+  .branch-diagram .diagram-home-svg{width:22px;height:22px}
+  .branch-diagram button,.branch-diagram input,.branch-diagram .diagram-header-btn{font-size:12px;padding:7px 8px}
+  .branch-diagram #treeSearch{width:190px}
+  .branch-diagram .help{display:none}
+  .branch-diagram .legend{font-size:9px;gap:7px}
+}
+
+@media print{
+  @page{size:landscape;margin:8mm}
+  body{background:#fff!important}
+  .left-menu,.branch-heading,.branch-summary,.diagram-instructions{display:none!important}
+  .layout,.content-page,.content-card{display:block!important;width:100%!important;max-width:none!important;margin:0!important;padding:0!important;border:0!important;box-shadow:none!important}
+  .branch-diagram{width:100%!important;height:185mm!important;min-height:0!important;margin:0!important;border:0!important;box-shadow:none!important}
+  .branch-diagram .diagram-actions,.branch-diagram .diagram-tools,.branch-diagram .details,.branch-diagram .search-results,.branch-diagram .help{display:none!important}
+}
+
+
+/* ZAJEDNIČKI STANDARD ZA SVE BOX3 STRANICE — preuzet iz box1/box2. */
+.branch-diagram{isolation:isolate}
+.branch-diagram .subtree-diagram{display:flex;flex:1 1 auto;min-height:0;flex-direction:column;background:#f8faf8}
+.branch-diagram .subtree-toolbar{flex:0 0 auto;display:flex;align-items:center;gap:7px;flex-wrap:wrap;padding:9px 12px;background:#f5f7f5;border-bottom:1px solid var(--line,#dce1dd)}
+.branch-diagram .subtree-toolbar button{border:1px solid #c9cec9;border-radius:8px;background:#fff;color:#26342e;padding:9px 11px;font-size:13px;cursor:pointer;white-space:nowrap}
+.branch-diagram .subtree-toolbar button:hover{background:#f0f4f1}
+.branch-diagram .subtree-workspace{position:relative;flex:1 1 auto;min-height:520px;height:auto;overflow:hidden;background:linear-gradient(#fbfcfb,#f5f8f5)}
+.branch-diagram .subtree-svg{display:block;width:100%;height:100%;min-height:520px;cursor:grab;user-select:none;touch-action:none}
+.branch-diagram .subtree-svg.dragging{cursor:grabbing}
+.branch-diagram .subtree-help{flex:0 0 auto;margin:0;padding:8px 12px;border-top:1px solid #e2e5e2;color:#68736d;font-size:12px;line-height:1.4;background:#fbfcfb}
+.branch-diagram .subtree-details{position:absolute;top:12px;right:12px;width:min(410px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto;background:rgba(255,255,255,.97);border:1px solid #c9cec9;border-radius:12px;box-shadow:0 12px 32px rgba(0,0,0,.18);padding:17px;display:none;z-index:10}
+.branch-diagram .subtree-details.open{display:block}
+.branch-diagram .subtree-details h3{margin:0 28px 4px 0;color:var(--green,#174f39);font-size:20px}
+.branch-diagram .subtree-details-code{color:var(--muted,#68736d);font-size:12px;margin-bottom:10px}
+.branch-diagram .subtree-details p{margin:0!important;font-size:14px!important;line-height:1.5!important;text-align:left!important;white-space:pre-line}
+.branch-diagram .subtree-details-close{position:absolute;top:7px;right:7px;border:0!important;background:transparent!important;font-size:22px!important;padding:3px 8px!important}
+.branch-diagram .tandara-person-search{position:relative;display:flex;gap:6px;min-width:0;margin-left:2px}
+.branch-diagram .tandara-person-search label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.branch-diagram .tandara-person-search-row{display:flex;gap:6px;min-width:0;width:100%}
+.branch-diagram .tandara-person-search input{width:min(270px,28vw);min-width:170px}
+.branch-diagram .tandara-person-search-results{position:absolute;top:calc(100% + 7px);right:0;width:min(440px,86vw);max-height:330px;overflow:auto;background:#fff;border:1px solid #c9cec9;border-radius:10px;box-shadow:0 12px 28px rgba(0,0,0,.18);padding:8px;z-index:60}
+.branch-diagram .tandara-person-search-results[hidden]{display:none!important}
+.branch-diagram .tandara-person-search-title{margin:0 0 5px!important;padding:2px 5px;font-size:12px!important;font-weight:700;color:#68736d;text-align:left!important}
+.branch-diagram .tandara-person-search-item{display:block;width:100%;text-align:left!important;margin:3px 0;padding:8px 9px!important;border:1px solid #d9ded9!important;border-radius:7px!important;background:#fff!important;color:#26342e!important;white-space:normal!important}
+.branch-diagram .tandara-person-search-item:hover{background:#f0f4f1!important}
+.branch-diagram .tandara-visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.branch-diagram .diagram-fullscreen-button{display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.branch-diagram:fullscreen,.branch-diagram:-webkit-full-screen{width:100vw!important;height:100vh!important;max-width:none!important;margin:0!important;border:0!important;border-radius:0!important;background:#fff}
+.branch-diagram:fullscreen .subtree-workspace,.branch-diagram:-webkit-full-screen .subtree-workspace{min-height:0;height:auto;flex:1 1 auto}
+.branch-diagram:fullscreen .subtree-svg,.branch-diagram:-webkit-full-screen .subtree-svg{min-height:0}
+.branch-diagram .subtree-node,.branch-diagram .subtree-family-card{cursor:pointer}
+.branch-diagram .subtree-node rect,.branch-diagram .subtree-family-card rect{stroke-width:2;filter:drop-shadow(0 2px 2px rgba(0,0,0,.07));transition:stroke-width .15s,filter .15s}
+.branch-diagram .subtree-node:hover rect,.branch-diagram .subtree-node:focus-visible rect,.branch-diagram .subtree-family-card:hover rect,.branch-diagram .subtree-family-card:focus-visible rect{stroke-width:3;filter:drop-shadow(0 3px 4px rgba(0,0,0,.14))}
+.branch-diagram .subtree-node.selected rect{stroke:#c63030!important;stroke-width:4}
+.branch-diagram .subtree-node.match rect{stroke:#be8b00!important;stroke-width:4}
+.branch-diagram .subtree-code{font-size:12px;font-weight:700;letter-spacing:.35px}
+.branch-diagram .subtree-label{font-size:14px;font-weight:600}
+.branch-diagram .subtree-hint{font-size:12px}
+.branch-diagram .subtree-family-title{font-size:12px;font-weight:700;fill:#4d3540}
+.branch-diagram .subtree-family-meta{font-size:10px;fill:#65545a}
+@media(max-width:900px){
+  .branch-diagram .diagram-header{display:flex;flex-direction:column;align-items:stretch;gap:7px;padding:8px 10px}
+  .branch-diagram .diagram-title{max-width:none}
+  .branch-diagram .diagram-title h2,.branch-diagram .diagram-subtitle{white-space:normal}
+  .branch-diagram .diagram-actions{justify-content:flex-start;flex-wrap:wrap}
+  .branch-diagram .tandara-person-search{width:100%;margin:0}
+  .branch-diagram .tandara-person-search input{width:100%;min-width:0}
+  .branch-diagram .subtree-workspace,.branch-diagram .subtree-svg{min-height:520px}
+}
+@media(max-width:480px){
+  .branch-diagram .subtree-toolbar button,.branch-diagram button,.branch-diagram input,.branch-diagram .diagram-header-btn{font-size:12px;padding:7px 8px}
+  .branch-diagram .diagram-home-circle{width:46px;height:46px}
+  .branch-diagram .subtree-workspace,.branch-diagram .subtree-svg{min-height:470px}
+}
+@media print{
+  .branch-diagram .diagram-actions,.branch-diagram .subtree-toolbar,.branch-diagram .subtree-details,.branch-diagram .tandara-person-search-results,.branch-diagram .subtree-help{display:none!important}
+  .branch-diagram{height:auto!important;min-height:0!important;border:0!important;box-shadow:none!important}
+  .branch-diagram .subtree-diagram,.branch-diagram .subtree-workspace,.branch-diagram .subtree-svg{height:760px!important;min-height:760px!important;overflow:visible!important}
+}

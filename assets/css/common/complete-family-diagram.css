@@ -1,0 +1,18 @@
+.tcf-node,.tcf-person{cursor:pointer;outline:none}
+.tcf-node rect,.tcf-person rect{stroke-width:1.5}
+.tcf-node:focus rect,.tcf-person:focus rect,.tcf-focus rect{stroke:#d89200!important;stroke-width:4!important}
+.tcf-code{font:700 11px system-ui,sans-serif}
+.tcf-label{font:700 13px system-ui,sans-serif}
+.tcf-person-name{font:700 12px system-ui,sans-serif}
+.tcf-person-meta{font:11px system-ui,sans-serif}
+.tcf-connector{fill:none;stroke:#aaa69d;stroke-width:1.7}
+.tcf-family-line{fill:none;stroke:#987b82;stroke-width:1.5}
+.tcf-spouse rect{fill:#fff1f3;stroke:#a45c68}
+.tcf-daughter rect{fill:#f3eaff;stroke:#8060aa}
+.tcf-son rect{fill:#edf5fb;stroke:#557f9d}
+.tcf-child rect{fill:#f7f2e6;stroke:#8a7655}
+.tcf-spouse .tcf-code,.tcf-spouse .tcf-person-name,.tcf-spouse .tcf-person-meta{fill:#6d2634}
+.tcf-daughter .tcf-code,.tcf-daughter .tcf-person-name,.tcf-daughter .tcf-person-meta{fill:#4c356b}
+.tcf-son .tcf-code,.tcf-son .tcf-person-name,.tcf-son .tcf-person-meta{fill:#264b64}
+.tcf-child .tcf-code,.tcf-child .tcf-person-name,.tcf-child .tcf-person-meta{fill:#4e422f}
+@media print{.tcf-node rect,.tcf-person rect{filter:none}}

@@ -1,0 +1,9 @@
+/* Mobile top bar: visible only on phones and tablets. */
+.mobile-box-topbar{display:none;}
+@media (max-width:768px){
+  .mobile-box-topbar{display:flex;position:sticky;top:0;z-index:9999;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;background:rgba(255,255,255,.96);border-bottom:1px solid rgba(0,0,0,.12);box-shadow:0 2px 8px rgba(0,0,0,.08);backdrop-filter:blur(6px);}
+  .mobile-box-home{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:0 12px;border-radius:999px;text-decoration:none;font-weight:700;color:#fff;background:#5a3b1f;font-size:15px;line-height:1;}
+  .mobile-box-flags{display:inline-flex;align-items:center;gap:10px;}
+  .mobile-box-flags a{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:38px;border-radius:10px;background:#fff;border:1px solid rgba(0,0,0,.12);}
+  .mobile-box-flags img{width:30px;height:auto;display:block;}
+}

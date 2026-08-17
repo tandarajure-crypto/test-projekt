@@ -1,0 +1,121 @@
+/* Ujednačen tehnički prikaz HR/EN stranice; sadržaj nije mijenjan. */
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.layout,
+.left-menu,
+.content-page,
+.content-card,
+main,
+article,
+section,
+header,
+footer,
+nav,
+div {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.content-page,
+.content-card {
+  overflow-x: hidden;
+}
+
+.content-card h1,
+.content-card h2,
+.content-card h3,
+.content-card p,
+.content-card li,
+.content-card a,
+.content-card strong,
+.content-card em {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  hyphens: auto;
+}
+
+.content-card p {
+  line-height: 1.65;
+}
+
+.content-card img,
+.content-card video,
+.content-card iframe,
+.content-card table,
+.content-card pre {
+  max-width: 100%;
+}
+
+.content-card img,
+.content-card video {
+  height: auto;
+}
+
+.content-card table {
+  display: block;
+  overflow-x: auto;
+}
+
+.content-card pre {
+  overflow-x: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* Na računalu lijevi izbornik ostaje vidljiv tijekom skrolanja stranice. */
+@media (min-width: 901px) {
+  body.box-mobile-split .layout {
+    align-items: flex-start;
+  }
+
+  body.box-mobile-split .left-menu {
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+    height: 100vh;
+    max-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+  }
+
+  body.box-mobile-split .content-page,
+  body.box-mobile-split .content-card {
+    min-width: 0;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  body.box-mobile-split .content-page,
+  body.box-mobile-split .content-card {
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  body.box-mobile-split .content-card h1,
+  body.box-mobile-split .content-card h2,
+  body.box-mobile-split .content-card h3,
+  body.box-mobile-split .content-card p,
+  body.box-mobile-split .content-card li,
+  body.box-mobile-split .content-card a {
+    overflow-wrap: anywhere;
+    word-break: normal;
+    white-space: normal;
+  }
+}

@@ -1,0 +1,15 @@
+@media (min-width:1081px){
+  .branch-diagram .diagram-header{
+    grid-template-columns:minmax(330px,1fr) max-content minmax(250px,300px);
+  }
+  .branch-diagram .diagram-title{max-width:none;}
+  .branch-diagram .diagram-title h2,
+  .branch-diagram .diagram-subtitle{white-space:normal;}
+  .branch-diagram .diagram-actions{justify-self:end;}
+  .branch-diagram .tandara-person-search{
+    width:300px;
+    max-width:300px;
+    min-width:250px;
+    justify-self:end;
+  }
+}

@@ -1,0 +1,170 @@
+/* Osobni zapisi Jurine grane — izdvojeno u ovoj datoteci da se ne mijenja style.css */
+.sr-only{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  padding:0!important;
+  margin:-1px!important;
+  overflow:hidden!important;
+  clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important;
+  border:0!important;
+}
+.people-directory{
+  max-width:900px;
+  margin:34px auto 10px;
+  padding:24px;
+  border:1px solid rgba(80,60,35,.28);
+  border-radius:12px;
+  background:rgba(255,250,238,.68);
+  text-align:left;
+  box-shadow:0 3px 10px rgba(0,0,0,.10);
+}
+.people-directory h2{
+  margin:0 0 8px;
+  text-align:center;
+  font-size:26px;
+  color:#3b2f22;
+}
+.people-directory .directory-intro{
+  margin:0 auto 18px;
+  max-width:720px;
+  text-align:center;
+  font-size:17px;
+  line-height:1.55;
+}
+.person-search-row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:10px;
+  max-width:720px;
+  margin:0 auto 14px;
+}
+.person-search-row input{
+  width:100%;
+  min-height:46px;
+  padding:10px 13px;
+  box-sizing:border-box;
+  border:1px solid #8d7048;
+  border-radius:8px;
+  background:#fffdf8;
+  color:#2f2419;
+  font:17px Georgia,serif;
+}
+.person-search-row input:focus{
+  outline:3px solid rgba(154,113,52,.22);
+  border-color:#6f4e24;
+}
+.person-search-row button,
+.person-chip,
+.person-result-button,
+.person-detail-close{
+  border:1px solid #6f4e24;
+  border-radius:8px;
+  background:#6f4e24;
+  color:#fff;
+  font:700 15px Georgia,serif;
+  cursor:pointer;
+  transition:transform .12s ease, background .12s ease;
+}
+.person-search-row button{
+  min-height:46px;
+  padding:10px 20px;
+}
+.person-search-row button:hover,
+.person-chip:hover,
+.person-result-button:hover,
+.person-detail-close:hover{
+  background:#4f3518;
+  transform:translateY(-1px);
+}
+.person-list-label{
+  margin:15px 0 9px;
+  text-align:center;
+  font-weight:700;
+}
+.person-chips{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:8px;
+}
+.person-chip{
+  padding:8px 11px;
+  background:#866438;
+}
+.person-search-status{
+  min-height:22px;
+  margin:14px 0 0;
+  text-align:center;
+  font-size:16px;
+}
+.person-search-results{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:8px;
+  margin-top:10px;
+}
+.person-result-button{
+  padding:9px 12px;
+}
+.person-detail-box{
+  position:relative;
+  max-width:820px;
+  margin:24px auto 0;
+  padding:24px 26px;
+  border:2px solid #735226;
+  border-radius:12px;
+  background:#fffaf0;
+  box-shadow:0 5px 18px rgba(0,0,0,.16);
+  text-align:left;
+}
+.person-detail-box[hidden]{display:none;}
+.person-detail-box h2{
+  margin:0 48px 4px 0;
+  text-align:left;
+  font-size:28px;
+}
+.person-detail-code{
+  margin:0 48px 18px 0;
+  font-weight:700;
+  color:#735226;
+}
+.person-detail-close{
+  position:absolute;
+  top:14px;
+  right:14px;
+  width:38px;
+  height:38px;
+  padding:0;
+  font-size:22px;
+  line-height:1;
+}
+.person-detail-grid{
+  display:grid;
+  grid-template-columns:190px minmax(0,1fr);
+  gap:9px 16px;
+  margin:0;
+}
+.person-detail-grid dt{
+  font-weight:700;
+  color:#4a341b;
+}
+.person-detail-grid dd{
+  margin:0;
+  overflow-wrap:anywhere;
+}
+.person-detail-note{
+  margin:18px 0 0;
+  padding-top:14px;
+  border-top:1px solid rgba(80,60,35,.28);
+  line-height:1.6;
+}
+@media (max-width:650px){
+  .people-directory{padding:18px 14px;}
+  .person-search-row{grid-template-columns:1fr;}
+  .person-detail-box{padding:22px 16px;}
+  .person-detail-grid{grid-template-columns:1fr;gap:2px;}
+  .person-detail-grid dd{margin:0 0 10px;}
+}

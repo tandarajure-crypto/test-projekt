@@ -1,0 +1,110 @@
+/* Hrvatske box stranice: dvostupčana navigacija samo na tabletima i mobitelima. */
+@media (max-width: 900px){
+  body.box-mobile-split .mobile-box-topbar{
+    position:sticky;
+    top:0;
+  }
+  body.box-mobile-split .layout{
+    display:grid;
+    grid-template-columns:minmax(150px, 34vw) minmax(0, 1fr);
+    align-items:start;
+    gap:0;
+    width:100%;
+    max-width:100%;
+    padding:0;
+  }
+  body.box-mobile-split .left-menu{
+    position:sticky;
+    top:59px;
+    width:100%;
+    height:calc(100vh - 59px);
+    max-height:calc(100vh - 59px);
+    overflow-y:auto;
+    overflow-x:hidden;
+    border-right:3px solid #7a7a7a;
+    border-bottom:0;
+    padding:10px 0 14px;
+    z-index:20;
+  }
+  body.box-mobile-split .left-menu .home-button,
+  body.box-mobile-split .left-menu .lang-switch,
+  body.box-mobile-split .left-menu > h2,
+  body.box-mobile-split .left-menu .author-photo,
+  body.box-mobile-split .left-menu .flagbox{
+    display:none;
+  }
+  body.box-mobile-split .heritage-menu{
+    padding:0 9px;
+  }
+  body.box-mobile-split .heritage-menu li{
+    align-items:flex-start;
+    gap:5px;
+    padding:9px 2px;
+  }
+  body.box-mobile-split .heritage-menu li span{
+    flex:0 0 auto;
+    font-size:12px;
+    line-height:1.35;
+  }
+  body.box-mobile-split .heritage-menu a{
+    display:block;
+    min-width:0;
+    font-size:clamp(12px, 2.15vw, 16px);
+    line-height:1.25;
+    overflow-wrap:anywhere;
+  }
+  body.box-mobile-split .content-page{
+    min-width:0;
+    width:100%;
+    padding:12px 8px;
+  }
+  body.box-mobile-split .content-card{
+    min-width:0;
+    width:100%;
+    padding:20px 12px;
+    border-radius:10px;
+  }
+  body.box-mobile-split .content-card h1{
+    font-size:clamp(22px, 5vw, 32px);
+    margin-bottom:18px;
+  }
+  body.box-mobile-split .content-card h2{
+    font-size:clamp(17px, 3.7vw, 22px);
+  }
+  body.box-mobile-split .content-card p,
+  body.box-mobile-split .content-card li{
+    font-size:clamp(14px, 2.8vw, 17px);
+    line-height:1.55;
+    overflow-wrap:anywhere;
+  }
+  body.box-mobile-split .seo-intro{
+    margin:0 0 22px;
+    font-size:clamp(13px, 2.5vw, 16px);
+    line-height:1.5;
+  }
+}
+@media (max-width: 480px){
+  body.box-mobile-split .layout{
+    grid-template-columns:minmax(128px, 42vw) minmax(0, 1fr);
+  }
+  body.box-mobile-split .heritage-menu{
+    padding:0 6px;
+  }
+  body.box-mobile-split .heritage-menu li{
+    gap:3px;
+    padding:8px 1px;
+  }
+  body.box-mobile-split .heritage-menu a{
+    font-size:12px;
+  }
+  body.box-mobile-split .content-page{
+    padding:8px 5px;
+  }
+  body.box-mobile-split .content-card{
+    padding:16px 9px;
+  }
+  body.box-mobile-split .content-card p,
+  body.box-mobile-split .content-card li{
+    font-size:14px;
+  }
+}

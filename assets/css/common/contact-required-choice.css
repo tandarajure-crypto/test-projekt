@@ -1,0 +1,27 @@
+.required-choice {
+  margin: 20px 0;
+  padding: 14px 16px;
+  border: 1px solid rgba(90, 59, 31, 0.35);
+  border-radius: 10px;
+}
+.required-choice legend {
+  padding: 0 6px;
+  font-weight: 700;
+}
+.required-choice .checkbox-line {
+  margin: 10px 0;
+}
+.archive-contact-form input:invalid,
+.archive-contact-form select:invalid,
+.archive-contact-form textarea:invalid {
+  border-color: #a94442;
+}
+ .form-required-notice{
+    margin:14px 0 20px;
+    padding:14px 16px;
+    border:2px solid #b99867;
+    border-radius:10px;
+    background:#fff8ec;
+    color:#3b2f22;
+    line-height:1.6;
+}
