@@ -1323,3 +1323,58 @@ img, video, iframe{
     }
 }
 
+
+
+/* ======================================================
+   MIGRACIJE — RIČICE: fotografije i video ispod karte
+   Svaki medij ide punom širinom sadržaja; visina ostaje
+   u izvornom omjeru i automatski se prilagođava širini.
+====================================================== */
+.migracije-ricice-media{
+    width:100%;
+    max-width:100%;
+    box-sizing:border-box;
+    margin:30px 0 34px;
+}
+
+.migracije-ricice-gallery{
+    display:block;
+    width:100%;
+    max-width:100%;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+.migracije-ricice-item{
+    display:block;
+    width:100%;
+    max-width:100%;
+    margin:0 0 30px;
+    padding:0;
+    box-sizing:border-box;
+}
+
+.migracije-ricice-item img,
+.migracije-ricice-item video{
+    display:block;
+    width:100%;
+    max-width:100%;
+    height:auto;
+    margin:0;
+    object-fit:contain;
+    box-sizing:border-box;
+}
+
+.migracije-ricice-item figcaption{
+    margin:9px 0 0;
+    padding:0 8px;
+    font-size:16px;
+    line-height:1.4;
+    text-align:center;
+    color:#4a3b2a;
+}
+
+.migracije-ricice-video-item{
+    margin-bottom:8px;
+}
