@@ -750,28 +750,33 @@ margin:28px 0 10px 0;
 }
 
 .ricice-gallery{
-    display:grid;
-    grid-template-columns:repeat(2, minmax(0, 1fr));
-    gap:22px;
-    margin:26px 0 30px 0;
+    display:block;
+    width:100%;
     max-width:100%;
+    margin:26px 0 30px 0;
+    padding:0;
     box-sizing:border-box;
 }
 
 .ricice-item{
-    margin:0;
+    display:block;
+    width:100%;
+    max-width:100%;
+    margin:0 0 30px;
     padding:0;
     min-width:0;
     box-sizing:border-box;
-    overflow:hidden; /* SPRJEČAVA PRELIJEVANJE */
+    overflow:hidden;
 }
 
 .ricice-item img{
     display:block;
     width:100%;
-    height:auto;      /* ISPRAVAK — više ne probija okvir */
-    object-fit:cover;
     max-width:100%;
+    height:auto;
+    margin:0;
+    object-fit:contain;
+    box-sizing:border-box;
     border-radius:12px;
     border:1px solid rgba(80,60,35,0.25);
     box-shadow:0 3px 8px rgba(0,0,0,0.18);
