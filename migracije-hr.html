@@ -3,7 +3,7 @@
 
 <html lang="hr">
 <head>
-<meta content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' https://*.tile.openstreetmap.org https://unpkg.com data:; script-src 'self' https://unpkg.com; script-src-attr 'none'; connect-src 'self' https://*.tile.openstreetmap.org; style-src 'self' https://unpkg.com 'sha256-Qzyq3K3M9yziTJWJTtGmVAEOkt4pGUEjQT0uJ0JOcXQ=' 'sha256-BztjUHUPbgdt8xam7TeWakoPLJPQ9gteTxvZU+M/Vpk='; style-src-elem 'self' https://unpkg.com 'sha256-Qzyq3K3M9yziTJWJTtGmVAEOkt4pGUEjQT0uJ0JOcXQ=' 'sha256-BztjUHUPbgdt8xam7TeWakoPLJPQ9gteTxvZU+M/Vpk='; style-src-attr 'none'; form-action 'self' https://formsubmit.co; upgrade-insecure-requests; block-all-mixed-content;" http-equiv="Content-Security-Policy"/>
+<meta content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' https://s01.flagcounter.com https://*.tile.openstreetmap.org https://unpkg.com data:; script-src 'self' https://unpkg.com; script-src-attr 'none'; connect-src 'self' https://*.tile.openstreetmap.org https://api-gateway.umami.dev; style-src 'self' https://unpkg.com 'sha256-Qzyq3K3M9yziTJWJTtGmVAEOkt4pGUEjQT0uJ0JOcXQ=' 'sha256-BztjUHUPbgdt8xam7TeWakoPLJPQ9gteTxvZU+M/Vpk='; style-src-elem 'self' https://unpkg.com 'sha256-Qzyq3K3M9yziTJWJTtGmVAEOkt4pGUEjQT0uJ0JOcXQ=' 'sha256-BztjUHUPbgdt8xam7TeWakoPLJPQ9gteTxvZU+M/Vpk='; style-src-attr 'none'; form-action 'self' https://formsubmit.co; upgrade-insecure-requests; block-all-mixed-content;" http-equiv="Content-Security-Policy"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta name="referrer" content="strict-origin-when-cross-origin"/>
@@ -17,10 +17,11 @@
 <meta property="og:title" content="Migracije i rasprostranjenost | TANDARA-PREZIME"/>
 <meta property="og:description" content="Migracije i zemljopisna rasprostranjenost roda Tandara kroz povijest u Hrvatskoj, Bosni i Hercegovini i drugim zemljama."/>
 <meta property="og:url" content="https://tandarajure-crypto.github.io/Tandara/migracije-hr.html"/>
-<meta property="og:image" content="https://tandarajure-crypto.github.iofamily-tree.png"/>
+<meta property="og:image" content="https://tandarajure-crypto.github.io/Tandara/family-tree.png"/>
 <meta name="twitter:card" content="summary_large_image"/>
 
 
+<script defer src="umami-tracker.js" integrity="sha384-e3RxMgp4P3PdYNypfLmPgiuyYjCW9pCHTnhy/zqdvmPrY9+xrarWVQyIlT+eqano" data-host-url="https://api-gateway.umami.dev" data-website-id="41653efe-d2ca-47a1-99c0-8fa9d20b128a" data-domains="tandarajure-crypto.github.io" data-exclude-search="true" data-exclude-hash="true" data-do-not-track="true"></script>
 <!-- OPEN GRAPH -->
 <link rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -69,7 +70,12 @@
 <img alt="Jure Tandara" src="./jure.png"/>
 </a>
 </div>
-
+<div class="flagbox">
+<div class="flag-title">Posjetitelji</div>  
+<a href="https://info.flagcounter.com/OyvA" rel="noopener noreferrer" target="_blank" referrerpolicy="no-referrer">
+<img alt="Flag Counter" src="https://s01.flagcounter.com/countxl/OyvA/bg_FFFFFF/txt_000000/border_CCCCCC/columns_4/maxflags_50/viewers_0/labels_0/pageviews_0/flags_1/percent_0/" referrerpolicy="no-referrer"/>
+</a>
+</div>
 </aside>
 <main class="content-page">
 <article class="content-card">
@@ -86,7 +92,7 @@
 </section>
 <section>
 <div id="ricice-map"></div>
-</section>        
+</section>
 <section class="migracije-ricice-media" aria-labelledby="ricice-prikazi-title">
 <h2 id="ricice-prikazi-title">Ričice kroz godišnja doba i različite perspektive</h2>
 <div class="migracije-ricice-gallery">
@@ -95,20 +101,8 @@
 <figcaption>Ričice i Zeleno jezero iz zraka</figcaption>
 </figure>
 <figure class="migracije-ricice-item">
-<img src="ricice2.png" alt="Obala Zelenog jezera i cesta kroz Ričice" loading="lazy" decoding="async"/>
-<figcaption>Obala Zelenog jezera i cesta kroz Ričice</figcaption>
-</figure>
-<figure class="migracije-ricice-item">
-<img src="ricice3.png" alt="Župna crkva svetog Ivana Krstitelja u Ričicama" loading="lazy" decoding="async"/>
-<figcaption>Župna crkva sv. Ivana Krstitelja u Ričicama</figcaption>
-</figure>
-<figure class="migracije-ricice-item">
-<img src="ricice4.png" alt="Ričice iz zraka s naseljem i turističkim sadržajima" loading="lazy" decoding="async"/>
-<figcaption>Ričice iz zraka – naselje i turistički sadržaji</figcaption>
-</figure>
-<figure class="migracije-ricice-item">
-<img src="ricice5.jpg" alt="Zeleno jezero u razdoblju nižeg vodostaja, pogled s uzvisine" loading="lazy" decoding="async"/>
-<figcaption>Zeleno jezero u razdoblju nižeg vodostaja – pogled s uzvisine</figcaption>
+<img src="ricice5.jpg" alt="Zeleno jezero u zimskom razdoblju, pogled s uzvisine" loading="lazy" decoding="async"/>
+<figcaption>Zeleno jezero u zimskom razdoblju – pogled s uzvisine</figcaption>
 </figure>
 <figure class="migracije-ricice-item">
 <img src="ricice6.jpg" alt="Ričice i Zeleno jezero u zelenom ljetnom krajoliku" loading="lazy" decoding="async"/>
@@ -141,9 +135,16 @@ Vaš preglednik ne podržava HTML5 video.
 </video>
 <figcaption>Potok Suvaja u proljeće</figcaption>
 </figure>
+<figure class="migracije-ricice-item migracije-ricice-video-item">
+<video controls preload="metadata">
+<source src="Ricice%20by%20Vice.mp4" type="video/mp4"/>
+Vaš preglednik ne podržava HTML5 video.
+</video>
+<figcaption>Ričice i Zeleno jezero – video Vice</figcaption>
+</figure>
 </div>
 </section>
-
+        
 <section>
 <h2>Širenje unutar Imotske krajine</h2>
 <p>Tijekom 18. i 19. stoljeća broj članova roda postupno se povećavao. Kako su nastajala nova kućanstva, dio obitelji selio se u obližnja mjesta, tražeći obradivo zemljište, mogućnost osnivanja vlastitoga doma ili bolje gospodarske uvjete.</p>
