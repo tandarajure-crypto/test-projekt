@@ -24,11 +24,12 @@
 <meta content="strict-origin-when-cross-origin" name="referrer"/>
 
 <meta
-  content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; img-src 'self' data:; media-src 'self'; script-src 'self' 'sha256-MeHr958CpG2ERz8nay0KmY2P/mR+AdFxMX5J+j9qaL4='; script-src-attr 'none'; connect-src 'self'; style-src 'self' 'sha256-JZRXEcMeB/YuiS7Dxy58uU+Y3GbiaV3yMAJ86IH2l+4=' 'sha256-02k0rluV7zZUlmvJ6oObEesZjDY2g86UsL/lFXT1WNY=' 'sha256-QnurNjW96t1kp/sbeXepjaqk2GGXzMKDAWInOBQzLGQ='; style-src-elem 'self' 'sha256-JZRXEcMeB/YuiS7Dxy58uU+Y3GbiaV3yMAJ86IH2l+4=' 'sha256-02k0rluV7zZUlmvJ6oObEesZjDY2g86UsL/lFXT1WNY=' 'sha256-QnurNjW96t1kp/sbeXepjaqk2GGXzMKDAWInOBQzLGQ='; style-src-attr 'none'; form-action 'self' https://formsubmit.co; upgrade-insecure-requests; block-all-mixed-content;"
+  content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; img-src 'self' https://s01.flagcounter.com data:; media-src 'self'; script-src 'self' 'sha256-MeHr958CpG2ERz8nay0KmY2P/mR+AdFxMX5J+j9qaL4='; script-src-attr 'none'; connect-src 'self' https://api-gateway.umami.dev; style-src 'self' 'sha256-JZRXEcMeB/YuiS7Dxy58uU+Y3GbiaV3yMAJ86IH2l+4=' 'sha256-02k0rluV7zZUlmvJ6oObEesZjDY2g86UsL/lFXT1WNY=' 'sha256-QnurNjW96t1kp/sbeXepjaqk2GGXzMKDAWInOBQzLGQ='; style-src-elem 'self' 'sha256-JZRXEcMeB/YuiS7Dxy58uU+Y3GbiaV3yMAJ86IH2l+4=' 'sha256-02k0rluV7zZUlmvJ6oObEesZjDY2g86UsL/lFXT1WNY=' 'sha256-QnurNjW96t1kp/sbeXepjaqk2GGXzMKDAWInOBQzLGQ='; style-src-attr 'none'; form-action 'self' https://formsubmit.co; upgrade-insecure-requests; block-all-mixed-content;"
   http-equiv="Content-Security-Policy"
 />
 
 
+<script defer src="umami-tracker.js" integrity="sha384-e3RxMgp4P3PdYNypfLmPgiuyYjCW9pCHTnhy/zqdvmPrY9+xrarWVQyIlT+eqano" data-host-url="https://api-gateway.umami.dev" data-website-id="41653efe-d2ca-47a1-99c0-8fa9d20b128a" data-domains="tandarajure-crypto.github.io" data-exclude-search="true" data-exclude-hash="true" data-do-not-track="true"></script>
 <link href="style.css?v=14" rel="stylesheet"/>
 
 <link rel="stylesheet" href="assets/css/common/curiosities-accessibility.css?v=1">
@@ -177,7 +178,21 @@ Skip to main content
 
 </div>
 
+<div class="flagbox">
 
+<a
+  aria-label="Open visitor statistics"
+  href="https://info.flagcounter.com/OyvA"
+  rel="noopener noreferrer"
+  target="_blank" referrerpolicy="no-referrer">
+<img
+  alt="Visitor counter by country"
+  decoding="async"
+  loading="lazy"
+  src="https://s01.flagcounter.com/countxl/OyvA/bg_FFFFFF/txt_000000/border_CCCCCC/columns_4/maxflags_50/viewers_0/labels_0/pageviews_0/flags_1/percent_0/" referrerpolicy="no-referrer"/>
+</a>
+
+</div>
 
 </aside>
 
@@ -325,7 +340,86 @@ woodworking
 Click the speaker icon to hear the pronunciation
 </p>
 
-<p class="audio-status"><strong>Note:</strong> Audio recordings are not included in this private server version.</p>
+<div class="audio-icon-row">
+
+<button
+  aria-label="Listen to the Croatian pronunciation of the surname Tandara"
+  aria-pressed="false"
+  class="audio-icon-button"
+  id="playHR"
+  type="button"
+>
+<span class="speaker-icon">
+
+<svg
+  aria-hidden="true"
+  focusable="false"
+  viewBox="0 0 24 24"
+>
+<path
+  d="M3 10v4h4l5 4V6L7 10H3zm13.5 2c0-1.77-1-3.29-2.5-4.03v8.05c1.5-.74 2.5-2.26 2.5-4.02zm2.5 0c0 3.04-1.72 5.64-4.25 6.92v-1.83c1.58-1.09 2.62-2.91 2.62-5.09s-1.04-4-2.62-5.09V5.08C18.28 6.36 20 8.96 20 12z"
+  fill="currentColor"
+></path>
+</svg>
+
+</span>
+
+<span>
+Listen to the Croatian pronunciation<br>
+<span class="audio-label-small">Tandara</span>
+</span>
+
+</button>
+
+<button
+  aria-label="Listen to the Romanian pronunciation of the name Țândără"
+  aria-pressed="false"
+  class="audio-icon-button"
+  id="playRO"
+  type="button"
+>
+<span class="speaker-icon">
+
+<svg
+  aria-hidden="true"
+  focusable="false"
+  viewBox="0 0 24 24"
+>
+<path
+  d="M3 10v4h4l5 4V6L7 10H3zm13.5 2c0-1.77-1-3.29-2.5-4.03v8.05c1.5-.74 2.5-2.26 2.5-4.02zm2.5 0c0 3.04-1.72 5.64-4.25 6.92v-1.83c1.58-1.09 2.62-2.91 2.62-5.09s-1.04-4-2.62-5.09V5.08C18.28 6.36 20 8.96 20 12z"
+  fill="currentColor"
+></path>
+</svg>
+
+</span>
+
+<span>
+Listen to the Romanian pronunciation<br>
+<span class="audio-label-small">Țândără</span>
+</span>
+
+</button>
+
+</div>
+
+<audio
+  id="audioHR"
+  preload="none"
+  src="audio/mp3-hr.mp3"
+></audio>
+
+<audio
+  id="audioRO"
+  preload="none"
+  src="audio/mp3-ro.mp3"
+></audio>
+
+<p
+  aria-live="polite"
+  class="audio-status"
+  id="audioStatus"
+  role="status"
+></p>
 
 </div>
 
@@ -403,6 +497,17 @@ volleyball player <strong>Tandara Caixeta</strong>. Although there is no
 single official explanation for why this particular name became popular, its
 phonetic and aesthetic qualities very likely contributed to its appeal.
 </p>
+
+<div class="ricice-gallery" aria-label="Tandara Caixeta – photographs">
+  <figure class="ricice-item">
+    <img src="Tandara%20Caixeta.png" alt="Tandara Caixeta, Brazilian volleyball player and Olympic champion" loading="lazy"/>
+    <figcaption>Tandara Caixeta – Brazilian volleyball player and Olympic champion</figcaption>
+  </figure>
+  <figure class="ricice-item">
+    <img src="tandara-caixeta.png" alt="Tandara Caixeta – a view of her volleyball career" loading="lazy"/>
+    <figcaption>Tandara Caixeta – a view of her volleyball career</figcaption>
+  </figure>
+</div>
 
 <p>
 The name <strong>Tandara</strong> gives the impression of being
