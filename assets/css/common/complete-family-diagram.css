@@ -1,18 +1,25 @@
-.tcf-node,.tcf-person{cursor:pointer;outline:none}
-.tcf-node rect,.tcf-person rect{stroke-width:1.5}
-.tcf-node:focus rect,.tcf-person:focus rect,.tcf-focus rect{stroke:#d89200!important;stroke-width:4!important}
-.tcf-code{font:700 11px system-ui,sans-serif}
-.tcf-label{font:700 13px system-ui,sans-serif}
+.tcf-node,.tcf-person{cursor:pointer;outline:none;transform-box:fill-box;transform-origin:center;transition:filter .18s ease,opacity .18s ease}
+.tcf-node rect,.tcf-person rect{stroke-width:2;vector-effect:non-scaling-stroke;transition:stroke-width .18s ease,stroke .18s ease,filter .18s ease}
+.tcf-node:hover rect,.tcf-person:hover rect,.tcf-node:focus rect,.tcf-person:focus rect{stroke:#d89200!important;stroke-width:4!important;filter:drop-shadow(0 3px 5px rgba(42,31,7,.28))}
+.tcf-focus rect{stroke:#c63030!important;stroke-width:4!important}
+.tcf-search-focus{transform:scale(1.14);filter:drop-shadow(0 8px 12px rgba(0,0,0,.42))}
+.tcf-search-focus rect{stroke:#ffb000!important;stroke-width:7!important;filter:drop-shadow(0 0 7px rgba(255,176,0,.92))}
+.tcf-code{font:800 11px system-ui,sans-serif;letter-spacing:.2px}
+.tcf-label{font:750 13px system-ui,sans-serif}
 .tcf-person-name{font:700 12px system-ui,sans-serif}
 .tcf-person-meta{font:11px system-ui,sans-serif}
-.tcf-connector{fill:none;stroke:#aaa69d;stroke-width:1.7}
-.tcf-family-line{fill:none;stroke:#987b82;stroke-width:1.5}
-.tcf-spouse rect{fill:#fff1f3;stroke:#a45c68}
-.tcf-daughter rect{fill:#f3eaff;stroke:#8060aa}
-.tcf-son rect{fill:#edf5fb;stroke:#557f9d}
-.tcf-child rect{fill:#f7f2e6;stroke:#8a7655}
+.tcf-connector{fill:none;stroke:#77736c;stroke-width:2;vector-effect:non-scaling-stroke}
+.tcf-family-line{fill:none;stroke:#987b82;stroke-width:1.7;vector-effect:non-scaling-stroke}
+.tcf-spouse rect{fill:#fff1f3;stroke:#9d4052}
+.tcf-daughter rect{fill:#f3eaff;stroke:#72509d}
+.tcf-son rect{fill:#edf5fb;stroke:#3e7398}
+.tcf-related rect{fill:#f7f2e6;stroke:#806b49}
+.tcf-terminal-son rect{fill:#edf5fb!important;stroke:#3e7398!important;stroke-dasharray:8 4}
 .tcf-spouse .tcf-code,.tcf-spouse .tcf-person-name,.tcf-spouse .tcf-person-meta{fill:#6d2634}
 .tcf-daughter .tcf-code,.tcf-daughter .tcf-person-name,.tcf-daughter .tcf-person-meta{fill:#4c356b}
-.tcf-son .tcf-code,.tcf-son .tcf-person-name,.tcf-son .tcf-person-meta{fill:#264b64}
-.tcf-child .tcf-code,.tcf-child .tcf-person-name,.tcf-child .tcf-person-meta{fill:#4e422f}
-@media print{.tcf-node rect,.tcf-person rect{filter:none}}
+.tcf-son .tcf-code,.tcf-son .tcf-person-name,.tcf-son .tcf-person-meta,.tcf-terminal-son .tcf-code,.tcf-terminal-son .tcf-label{fill:#264b64}
+.tcf-related .tcf-code,.tcf-related .tcf-person-name,.tcf-related .tcf-person-meta{fill:#4e422f}
+.tcf-carrier-mark circle{fill:#123d2e;stroke:#fff;stroke-width:3;vector-effect:non-scaling-stroke;filter:drop-shadow(0 2px 2px rgba(0,0,0,.35))}
+.tcf-carrier-mark text{fill:#fff;font:900 24px/1 system-ui,sans-serif;pointer-events:none}
+@media (prefers-reduced-motion:reduce){.tcf-node,.tcf-person,.tcf-node rect,.tcf-person rect{transition:none}}
+@media print{.tcf-node rect,.tcf-person rect,.tcf-carrier-mark circle{filter:none}.tcf-search-focus{transform:none;filter:none}}

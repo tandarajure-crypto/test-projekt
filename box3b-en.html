@@ -649,27 +649,7 @@ body.box-mobile-split .content-card{--card-pad-x:42px;width:100%;max-width:none;
 }
 
 </style>
-<style data-inline-source="assets/css/common/complete-family-diagram.css">
-.tcf-node,.tcf-person{cursor:pointer;outline:none}
-.tcf-node rect,.tcf-person rect{stroke-width:1.5}
-.tcf-node:focus rect,.tcf-person:focus rect,.tcf-focus rect{stroke:#d89200!important;stroke-width:4!important}
-.tcf-code{font:700 11px system-ui,sans-serif}
-.tcf-label{font:700 13px system-ui,sans-serif}
-.tcf-person-name{font:700 12px system-ui,sans-serif}
-.tcf-person-meta{font:11px system-ui,sans-serif}
-.tcf-connector{fill:none;stroke:#aaa69d;stroke-width:1.7}
-.tcf-family-line{fill:none;stroke:#987b82;stroke-width:1.5}
-.tcf-spouse rect{fill:#fff1f3;stroke:#a45c68}
-.tcf-daughter rect{fill:#f3eaff;stroke:#8060aa}
-.tcf-son rect{fill:#edf5fb;stroke:#557f9d}
-.tcf-child rect{fill:#f7f2e6;stroke:#8a7655}
-.tcf-spouse .tcf-code,.tcf-spouse .tcf-person-name,.tcf-spouse .tcf-person-meta{fill:#6d2634}
-.tcf-daughter .tcf-code,.tcf-daughter .tcf-person-name,.tcf-daughter .tcf-person-meta{fill:#4c356b}
-.tcf-son .tcf-code,.tcf-son .tcf-person-name,.tcf-son .tcf-person-meta{fill:#264b64}
-.tcf-child .tcf-code,.tcf-child .tcf-person-name,.tcf-child .tcf-person-meta{fill:#4e422f}
-@media print{.tcf-node rect,.tcf-person rect{filter:none}}
-
-</style>
+<link rel="stylesheet" href="assets/css/common/complete-family-diagram.css?v=20260820">
 </head>
 <body class="en box-mobile-split">
 <div class="layout">
@@ -1121,71 +1101,6 @@ ROOT._tandaraOpenPerson=function(id){const p=PEOPLE.find(x=>x.id===id);if(p)show
 
 </script>
 <script id="completeFamilyData" type="application/json">{"tree":{"code":"2.1","detail":"Grgo, Petar’s eldest son, married Ruža, née Pušić. They had a son, Šimun, and a daughter, Iva (1798–).","children":[{"code":"2.1.1","detail":"Šimun was married to Jela, née Budimir, with whom he had a son, Mate (1826–), and three daughters: Iva (1831–), Matija (1837–) and Marta (1845–). Only Mate’s year of birth is known, so his later life and the circumstances explaining the absence of further records cannot be established. Šimun’s family line ended after his son Mate.","children":[],"label":"Šimun, son of Grgo (★ 1800 – ✝ 1874)"}],"label":"Grgo, son of Petar (★ 1770 – ✝ unknown)"},"persons":[{"code":"2.1","name":"Grgo, son of Petar","qualifier":"★ 1770 – ✝ unknown","father":"Petar Tandara","fatherCode":"2.0","mother":"Jela Budić","spouses":["Ruža Pušić"],"spouseCodes":["2.1-SP-1"],"relation":"surname holder in the diagram","note":"Grgo, Petar’s eldest son, married Ruža, née Pušić. They had a son, Šimun, and a daughter, Iva (1798–).","kind":"node","hostCode":"2.1","branch":"Petrova grana","source":"box3b.html","inferred":[],"maritalStatus":"oženjen/udana","years":["1770","1798"],"parentCodes":["2.0"],"childCodes":["2.1.1","2.1-K1"]},{"code":"2.1.1","name":"Šimun, son of Grgo","qualifier":"★ 1800 – ✝ 1874","father":"Grgo, son of Petar","fatherCode":"","mother":"Ruža Pušić","spouses":["Jela Budimir"],"spouseCodes":["2.1.1-SP-1"],"relation":"surname holder in the diagram","note":"Šimun was married to Jela, née Budimir, with whom he had a son, Mate (1826–), and three daughters: Iva (1831–), Matija (1837–) and Marta (1845–). Only Mate’s year of birth is known, so his later life and the circumstances explaining the absence of further records cannot be established. Šimun’s family line ended after his son Mate.","kind":"node","hostCode":"2.1.1","branch":"Petrova grana","source":"box3b.html","inferred":[],"maritalStatus":"oženjen/udana","years":["1800","1874"],"parentCodes":["2.1","2.1-SP-1"],"childCodes":["2.1.1-S1","2.1.1-K1","2.1.1-K2","2.1.1-K3"]},{"code":"2.1.1-SP-1","name":"Jela Budimir","qualifier":"","father":"","fatherCode":"","mother":"","spouses":[],"spouseCodes":["2.1.1"],"relation":"spouse of record holder 2.1.1","note":"Total children: 4.","kind":"spouse","hostCode":"2.1.1","branch":"Petrova grana","source":"box3b.html","inferred":[],"maritalStatus":"oženjen/udana","years":[],"parentCodes":[],"childCodes":["2.1.1-S1","2.1.1-K1","2.1.1-K2","2.1.1-K3"]},{"code":"2.1.1-S1","name":"Mate Šimunov","qualifier":"1826–","father":"Šimun Grgin","fatherCode":"","mother":"Jela Budimir","spouses":[],"spouseCodes":[],"relation":"sin","note":"Osoba je evidentirana u proširenom obiteljskom zapisu.","kind":"virtual","hostCode":"2.1.1","branch":"Petrova grana","source":"box3b.html","inferred":[],"maritalStatus":"podatak nije dostupan","years":["1826"],"parentCodes":["2.1.1","2.1.1-SP-1"],"childCodes":[]},{"code":"2.1.1-K1","name":"Iva Šimunova","qualifier":"1831–","father":"Šimun Grgin","fatherCode":"","mother":"Jela Budimir","spouses":[],"spouseCodes":[],"relation":"kći","note":"Osoba je evidentirana u proširenom obiteljskom zapisu.","kind":"virtual","hostCode":"2.1.1","branch":"Petrova grana","source":"box3b.html","inferred":[],"maritalStatus":"podatak nije dostupan","years":["1831"],"parentCodes":["2.1.1","2.1.1-SP-1"],"childCodes":[]},{"code":"2.1.1-K2","name":"Matija Šimunova","qualifier":"1837–","father":"Šimun Grgin","fatherCode":"","mother":"Jela Budimir","spouses":[],"spouseCodes":[],"relation":"kći","note":"Osoba je evidentirana u proširenom obiteljskom zapisu.","kind":"virtual","hostCode":"2.1.1","branch":"Petrova grana","source":"box3b.html","inferred":[],"maritalStatus":"podatak nije dostupan","years":["1837"],"parentCodes":["2.1.1","2.1.1-SP-1"],"childCodes":[]},{"code":"2.1.1-K3","name":"Marta Šimunova","qualifier":"1845–","father":"Šimun Grgin","fatherCode":"","mother":"Jela Budimir","spouses":[],"spouseCodes":[],"relation":"kći","note":"Osoba je evidentirana u proširenom obiteljskom zapisu.","kind":"virtual","hostCode":"2.1.1","branch":"Petrova grana","source":"box3b.html","inferred":[],"maritalStatus":"podatak nije dostupan","years":["1845"],"parentCodes":["2.1.1","2.1.1-SP-1"],"childCodes":[]},{"code":"2.1-SP-1","name":"Ruža Pušić","qualifier":"","father":"","fatherCode":"","mother":"","spouses":[],"spouseCodes":["2.1"],"relation":"spouse of record holder 2.1","note":"Total children: 2.","kind":"spouse","hostCode":"2.1","branch":"Petrova grana","source":"box3b.html","inferred":[],"maritalStatus":"oženjen/udana","years":[],"parentCodes":[],"childCodes":["2.1.1","2.1-K1"]},{"code":"2.1-K1","name":"Iva Grgina","qualifier":"1798–","father":"Grgo Petrov","fatherCode":"","mother":"Ruža Pušić","spouses":[],"spouseCodes":[],"relation":"kći","note":"Osoba je evidentirana u proširenom obiteljskom zapisu.","kind":"virtual","hostCode":"2.1","branch":"Petrova grana","source":"box3b.html","inferred":[],"maritalStatus":"podatak nije dostupan","years":["1798"],"parentCodes":["2.1","2.1-SP-1"],"childCodes":[]}]}</script>
-<script data-inline-source="assets/js/common/complete-family-diagram.js">
-(function(){
-'use strict';
-var embedded=document.getElementById('completeFamilyData');
-var parsed=null,raw=[],treeData=null;
-if(embedded){try{parsed=JSON.parse(embedded.textContent||'[]');raw=Array.isArray(parsed)?parsed:(parsed.persons||[]);treeData=(!Array.isArray(parsed)&&parsed.tree)||null;}catch(_error){raw=[];}}
-if(!treeData){try{treeData=DATA;}catch(_error){treeData=null;}}
-if(!treeData)return;
-if(!raw.length){try{if(typeof PEOPLE!=='undefined')raw=PEOPLE;}catch(_error){raw=[];}}
-if(!raw.length)return;
-function clean(value){return String(value==null?'':value).trim();}
-var records=raw.map(function(p){return{
-  code:clean(p.code||p.id),name:clean(p.name||p.label||p.rawName||'Nepoznata osoba'),qualifier:clean(p.qualifier),
-  father:clean(p.father),mother:clean(p.mother),relation:clean(p.relation||p.gender),note:clean(p.note),
-  kind:clean(p.kind||'person'),hostCode:clean(p.hostCode||p.code||p.id),parentCodes:Array.isArray(p.parentCodes)?p.parentCodes:[],
-  spouseCodes:Array.isArray(p.spouseCodes)?p.spouseCodes:[]
-};}).filter(function(p){return p.code;});
-var svgOld=document.querySelector('#treeSvg,.subtree-svg');
-if(!svgOld)return;
-var svg=svgOld.cloneNode(false);
-svg.innerHTML='<g data-tcf-viewport><g data-tcf-links></g><g data-tcf-nodes></g></g>';
-svgOld.replaceWith(svg);
-var viewport=svg.querySelector('[data-tcf-viewport]'),linksLayer=svg.querySelector('[data-tcf-links]'),nodesLayer=svg.querySelector('[data-tcf-nodes]');
-var nodeCodes=new Set();
-function walk(node,callback,parent,depth){callback(node,parent||null,depth||0);(node.children||[]).forEach(function(child){walk(child,callback,node,(depth||0)+1);});}
-walk(treeData,function(node){nodeCodes.add(clean(node.code));});
-var byHost=new Map(),byCode=new Map();
-records.forEach(function(p){byCode.set(p.code,p);if(!byHost.has(p.hostCode))byHost.set(p.hostCode,[]);byHost.get(p.hostCode).push(p);});
-function kindOrder(p){if(p.kind==='spouse'||p.code.indexOf('-SP-')>=0)return 0;return 1;}
-function extras(node){return(byHost.get(clean(node.code))||[]).filter(function(p){return !nodeCodes.has(p.code)||p.kind==='spouse'||p.code.indexOf('-SP-')>=0;}).sort(function(a,b){return kindOrder(a)-kindOrder(b)||a.code.localeCompare(b.code,undefined,{numeric:true});});}
-var BOX_W=300,BOX_H=64,PERSON_H=56,PERSON_GAP=6,FAMILY_TOP=10,X_STEP=392,ROW_GAP=26,MARGIN=48;
-var scale=1,panX=20,panY=20,bounds={width:1000,height:700},selected='';
-function itemHeight(node){var list=extras(node);return BOX_H+(list.length?FAMILY_TOP+list.length*(PERSON_H+PERSON_GAP)-PERSON_GAP:0);}
-function visibleTree(){var list=[];function visit(node,parent,depth){var item={node:node,parent:parent,depth:depth,x:0,y:0,height:itemHeight(node),subtreeHeight:0,children:[]};list.push(item);if(node.expanded)item.children=(node.children||[]).map(function(child){return visit(child,node,depth+1);});return item;}return{list:list,root:visit(treeData,null,0)};}
-function layout(){var tree=visibleTree();function measure(item){if(!item.children.length)return item.subtreeHeight=item.height;var total=item.children.reduce(function(sum,c){return sum+measure(c);},0)+ROW_GAP*(item.children.length-1);return item.subtreeHeight=Math.max(item.height,total);}function place(item,top){item.x=MARGIN+item.depth*X_STEP;item.y=top+(item.subtreeHeight-item.height)/2;if(item.children.length){var total=item.children.reduce(function(sum,c){return sum+c.subtreeHeight;},0)+ROW_GAP*(item.children.length-1),next=top+(item.subtreeHeight-total)/2;item.children.forEach(function(c){place(c,next);next+=c.subtreeHeight+ROW_GAP;});}}measure(tree.root);place(tree.root,MARGIN);var maxDepth=Math.max.apply(null,tree.list.map(function(i){return i.depth;}).concat([0])),maxBottom=Math.max.apply(null,tree.list.map(function(i){return i.y+i.height;}).concat([MARGIN]));bounds={width:MARGIN*2+maxDepth*X_STEP+BOX_W,height:maxBottom+MARGIN};return tree.list;}
-function esc(value){return String(value==null?'':value).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c];});}
-function wrap(text,max){var words=clean(text).split(/\s+/).filter(Boolean),lines=[],line='';words.forEach(function(word){var next=(line+' '+word).trim();if(next.length>(max||36)&&line){lines.push(line);line=word;}else line=next;});if(line)lines.push(line);if(lines.length>2)lines[1]=lines.slice(1).join(' ').slice(0,(max||36)-1)+'…';return lines.slice(0,2);}
-function colors(code){if(code==='0.0')return{fill:'#174f39',text:'#fff',stroke:'#0d3425'};if(code.indexOf('1.')===0)return{fill:'#e8f2fb',text:'#173a57',stroke:'#4d82aa'};if(code.indexOf('2.')===0)return{fill:'#fff4cf',text:'#4d3b00',stroke:'#b9952e'};if(code.indexOf('3.')===0)return{fill:'#f9e4e4',text:'#572626',stroke:'#b75d5d'};return{fill:'#fff1df',text:'#553719',stroke:'#bb8144'};}
-function personClass(p){var relation=(p.relation+' '+p.kind).toLocaleLowerCase('hr');if(p.kind==='spouse'||p.code.indexOf('-SP-')>=0)return'tcf-spouse';if(relation.indexOf('kći')>=0||relation.indexOf('daughter')>=0)return'tcf-daughter';if(relation.indexOf('sin')>=0||relation.indexOf('son')>=0)return'tcf-son';return'tcf-child';}
-function labelFor(node){return clean(node.label||((byCode.get(clean(node.code))||{}).name)||node.code);}
-function render(){var visible=layout(),pos=new Map(visible.map(function(i){return[i.node.code,i];}));linksLayer.innerHTML=visible.map(function(item){if(!item.parent||!pos.has(item.parent.code))return'';var p=pos.get(item.parent.code),x1=p.x+BOX_W,y1=p.y+BOX_H/2,x2=item.x,y2=item.y+BOX_H/2,elbow=x1+(x2-x1)/2;return'<path class="tcf-connector" d="M'+x1+','+y1+' H'+elbow+' V'+y2+' H'+x2+'"/>';}).join('');
-nodesLayer.innerHTML=visible.map(function(item){var node=item.node,code=clean(node.code),color=colors(code),lines=wrap(labelFor(node),35),has=(node.children||[]).length>0,main='<g class="tcf-node tcf-main-node'+(selected===code?' tcf-focus':'')+'" data-tcf-code="'+esc(code)+'" transform="translate('+item.x+','+item.y+')" role="button" tabindex="0" aria-label="'+esc(code+' '+labelFor(node))+'"><rect width="'+BOX_W+'" height="'+BOX_H+'" rx="9" fill="'+color.fill+'" stroke="'+color.stroke+'"></rect><text class="tcf-code" x="13" y="18" fill="'+color.text+'">'+esc(code)+'</text>'+lines.map(function(line,index){return'<text class="tcf-label" x="13" y="'+(40+index*16)+'" fill="'+color.text+'">'+esc(line)+'</text>';}).join('')+(has?'<circle cx="282" cy="18" r="11" fill="rgba(255,255,255,.78)" stroke="'+color.stroke+'"></circle><text class="tcf-label" x="282" y="22" text-anchor="middle" fill="'+color.stroke+'">'+(node.expanded?'−':'+')+'</text>':'')+'</g>';
-var extra=extras(node),y=item.y+BOX_H+FAMILY_TOP;var family=extra.map(function(p,index){var cls=personClass(p),lines=wrap(p.name+(p.qualifier?' · '+p.qualifier:''),38),top=y+index*(PERSON_H+PERSON_GAP),line='<path class="tcf-family-line" d="M'+(item.x+BOX_W/2)+','+(index?top-PERSON_GAP:item.y+BOX_H)+' V'+top+'"/>';return line+'<g class="tcf-person '+cls+'" data-tcf-person="'+esc(p.code)+'" transform="translate('+item.x+','+top+')" role="button" tabindex="0" aria-label="'+esc(p.code+' '+p.name)+'"><rect width="'+BOX_W+'" height="'+PERSON_H+'" rx="8"></rect><text class="tcf-code" x="11" y="16">'+esc(p.code)+'</text>'+lines.map(function(part,i){return'<text class="tcf-person-name" x="11" y="'+(34+i*14)+'">'+esc(part)+'</text>';}).join('')+'</g>';}).join('');return main+family;}).join('');
-nodesLayer.querySelectorAll('[data-tcf-code]').forEach(function(group){function activate(){var code=group.getAttribute('data-tcf-code'),node=null;walk(treeData,function(n){if(clean(n.code)===code)node=n;});if(!node)return;selected=code;showRecord(byCode.get(code)||{code:code,name:labelFor(node),note:node.detail||''});if((node.children||[]).length)node.expanded=!node.expanded;render();requestAnimationFrame(fit);}group.addEventListener('click',function(e){e.stopPropagation();activate();});group.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();activate();}});});
-nodesLayer.querySelectorAll('[data-tcf-person]').forEach(function(group){function activate(){var p=byCode.get(group.getAttribute('data-tcf-person'));if(p){selected=p.code;showRecord(p);render();}}group.addEventListener('click',function(e){e.stopPropagation();activate();});group.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();activate();}});});apply();}
-function detailElements(){return{box:document.querySelector('#details,[data-tree-details]'),title:document.querySelector('#detailTitle,[data-tree-detail-title]'),code:document.querySelector('#detailCode,[data-tree-detail-code]'),text:document.querySelector('#detailText,[data-tree-detail-text]')};}
-function showRecord(p){var d=detailElements();if(!d.box)return;if(d.title)d.title.textContent=p.name||'Nepoznata osoba';if(d.code)d.code.textContent=p.code||'';if(d.text)d.text.textContent=[p.qualifier,p.relation,p.father?'Otac: '+p.father:'',p.mother?'Majka: '+p.mother:'',p.note].filter(Boolean).join('\n');d.box.classList.add('open');}
-function apply(){viewport.setAttribute('transform','translate('+panX+','+panY+') scale('+scale+')');}
-function fit(){var r=svg.getBoundingClientRect();if(!r.width||!r.height)return;scale=Math.max(.08,Math.min((r.width-40)/bounds.width,(r.height-40)/bounds.height,1.12));panX=(r.width-bounds.width*scale)/2;panY=(r.height-bounds.height*scale)/2;apply();}
-function zoom(factor,cx,cy){var old=scale;scale=Math.max(.08,Math.min(4,scale*factor));panX=cx-(cx-panX)*(scale/old);panY=cy-(cy-panY)*(scale/old);apply();}
-function setDepth(max){walk(treeData,function(n,_p,d){n.expanded=d<max;});treeData.expanded=true;}
-function replaceControl(selector,handler){var old=document.querySelector(selector);if(!old)return null;var fresh=old.cloneNode(true);old.replaceWith(fresh);fresh.addEventListener('click',handler);return fresh;}
-replaceControl('#expandAll,[data-tree-action="expand"]',function(){walk(treeData,function(n){n.expanded=true;});render();fit();});
-replaceControl('#collapse,[data-tree-action="collapse"]',function(){walk(treeData,function(n){n.expanded=false;});treeData.expanded=true;render();fit();});
-replaceControl('#threeLevels,[data-tree-action="three"]',function(){setDepth(3);render();fit();});
-replaceControl('#fit,[data-tree-action="fit"]',fit);
-replaceControl('#zoomIn,[data-tree-action="zoom-in"]',function(){zoom(1.22,svg.clientWidth/2,svg.clientHeight/2);});
-replaceControl('#zoomOut,[data-tree-action="zoom-out"]',function(){zoom(.82,svg.clientWidth/2,svg.clientHeight/2);});
-document.querySelectorAll('.branch-button').forEach(function(old){var fresh=old.cloneNode(true);old.replaceWith(fresh);fresh.addEventListener('click',function(){var target=clean(fresh.getAttribute('data-code'));walk(treeData,function(n){if(target&&clean(n.code).indexOf(target)===0)n.expanded=true;});render();fit();});});
-var searchOld=document.querySelector('#search,[data-diagram-search-input],input[type="search"]');var search=null;if(searchOld){search=searchOld.cloneNode(true);searchOld.replaceWith(search);}var findOld=document.querySelector('#findBtn,[data-diagram-search-button]');var findBtn=null;if(findOld){findBtn=findOld.cloneNode(true);findOld.replaceWith(findBtn);}function norm(value){return clean(value).toLocaleLowerCase('hr').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d');}function find(){if(!search)return;var q=norm(search.value);if(!q)return;var p=records.find(function(x){return norm([x.code,x.name,x.qualifier,x.father,x.mother,x.relation].join(' ')).indexOf(q)>=0;});if(!p)return;var host=p.hostCode||p.code;walk(treeData,function(n){var c=clean(n.code);if(host===c||host.indexOf(c+'.')===0)n.expanded=true;});selected=p.code;render();requestAnimationFrame(function(){fit();var target=nodesLayer.querySelector('[data-tcf-person="'+CSS.escape(p.code)+'"],[data-tcf-code="'+CSS.escape(host)+'"]');if(target){target.classList.add('tcf-focus');target.focus();}showRecord(p);});}if(findBtn)findBtn.addEventListener('click',find);if(search)search.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();find();}});
-var close=document.querySelector('#closeDetails,[data-tree-close]');if(close)close.addEventListener('click',function(){var d=detailElements();if(d.box)d.box.classList.remove('open');});
-var dragging=false,start=null;svg.addEventListener('pointerdown',function(e){if(e.target.closest('[data-tcf-code],[data-tcf-person]'))return;dragging=true;start={x:e.clientX,y:e.clientY,px:panX,py:panY};try{svg.setPointerCapture(e.pointerId);}catch(_error){}});svg.addEventListener('pointermove',function(e){if(!dragging)return;panX=start.px+e.clientX-start.x;panY=start.py+e.clientY-start.y;apply();});svg.addEventListener('pointerup',function(){dragging=false;});svg.addEventListener('pointercancel',function(){dragging=false;});svg.addEventListener('wheel',function(e){e.preventDefault();var r=svg.getBoundingClientRect();zoom(e.deltaY<0?1.12:.89,e.clientX-r.left,e.clientY-r.top);},{passive:false});
-setDepth(1);render();requestAnimationFrame(fit);window.addEventListener('resize',fit);window.TandaraCompleteFamilyDiagramReady=true;
-}());
-
-</script>
+<script src="assets/js/common/complete-family-diagram.js?v=20260820"></script>
 </body>
 </html>
