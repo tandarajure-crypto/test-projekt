@@ -323,26 +323,6 @@
 }
 
 </style>
-<style data-inline-source="assets/css/common/box3-subtree-diagram.css">
-.subtree-diagram{width:100%;min-width:0;border:1px solid #d6ddd8;border-radius:12px;background:#fff;overflow:hidden;box-shadow:0 3px 14px rgba(0,0,0,.07)}
-.subtree-toolbar{display:flex;align-items:center;gap:7px;flex-wrap:wrap;padding:10px;background:#f5f7f5;border-bottom:1px solid #dce1dd}
-.subtree-toolbar button{border:1px solid #c8d0ca;border-radius:8px;background:#fff;color:#24352d;padding:8px 10px;font:inherit;font-size:13px;cursor:pointer}
-.subtree-toolbar button:hover{background:#edf3ef}.subtree-toolbar button:focus-visible{outline:3px solid #d7a629;outline-offset:2px}
-.subtree-workspace{position:relative;width:100%;height:620px;min-height:420px;overflow:hidden;background:linear-gradient(180deg,#fff,#fbfaf6)}
-.subtree-svg{width:100%;height:100%;display:block;cursor:grab;user-select:none;touch-action:none}.subtree-svg.dragging{cursor:grabbing}
-.subtree-connector{fill:none;stroke:#a8ada9;stroke-width:2}.subtree-family-line{fill:none;stroke:#9b8a8e;stroke-width:1.7}
-.subtree-node,.subtree-family-card{cursor:pointer}.subtree-node rect,.subtree-family-card rect{stroke-width:2;filter:drop-shadow(0 2px 2px rgba(0,0,0,.08))}
-.subtree-node:hover rect,.subtree-family-card:hover rect{stroke-width:3}.subtree-node.selected rect{stroke:#c63030!important;stroke-width:4}.subtree-node.match rect{stroke:#b98500!important;stroke-width:4}
-.subtree-code{font-size:12px;font-weight:700}.subtree-label{font-size:14px;font-weight:700}.subtree-hint{font-size:13px;font-weight:700}
-.subtree-family-title{font-size:12px;font-weight:700;fill:#4b2930}.subtree-family-meta{font-size:11px;font-weight:600;fill:#67545a}
-.subtree-details{position:absolute;right:12px;top:12px;width:min(460px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto;background:rgba(255,255,255,.98);border:1px solid #d3d7d2;border-radius:12px;box-shadow:0 10px 35px rgba(0,0,0,.18);padding:17px;display:none;z-index:20}
-.subtree-details.open{display:block}.subtree-details h3{margin:0 34px 6px 0;color:#174f39;font-size:19px}.subtree-details-code{font-size:12px;font-weight:700;color:#68736d;margin-bottom:11px}.subtree-details p{white-space:pre-line;line-height:1.55;margin:0}
-.subtree-details-close{position:absolute;right:9px;top:7px;border:0;background:transparent;font-size:26px;line-height:1;cursor:pointer;color:#45564d}
-.subtree-help{margin:0;padding:8px 12px;border-top:1px solid #e2e5e2;color:#68736d;font-size:12px;line-height:1.4;background:#fbfcfb}
-.diagram-setup:fullscreen .subtree-workspace,.diagram-setup:-webkit-full-screen .subtree-workspace{height:calc(100vh - 190px);min-height:360px}
-@media(max-width:700px){.subtree-workspace{height:520px}.subtree-toolbar button{font-size:12px;padding:7px 8px}}
-
-</style>
 <style data-inline-source="assets/css/common/box3-shared-standard-hr.css">
 /* Box2a koristi cijelu slobodnu širinu desno od stalnog lijevog stupca. */
 html,body{width:100%;max-width:none}
@@ -987,6 +967,7 @@ const DATA={"code":"1.1","label":"Frane, Jurin sin (★ nepoznato – ✝ nepozn
 const FAMILY_META={"1.1":[{"spouse":"Boža rođ. Ćosić","total":1,"sons":["Nikola (★ 1792.)"],"daughters":[]}]};
 const PEOPLE=[{"id":"1.1","name":"Frane, Jurin sin","qualifier":"★ nepoznato – ✝ nepoznato","hostCode":"1.1","aliases":[],"father":"Jure Tandara – Ivanov sin","fatherCode":"1.0","mother":"Matija Lekić","relation":"sin Jure Tandare i Matije Lekić; nositelj prezimena u dijagramu","note":"Frane, Jurin sin, bio je oženjen Božom rođ. Ćosić. Njihov sin Nikola rođen je 1792. godine.","kind":"node"},{"id":"1.1-S1","name":"Nikola, Franin sin","qualifier":"★ 1792. – ✝ nepoznato","hostCode":"1.1-S1","aliases":[],"father":"Frane, Jurin sin","fatherCode":"1.1","mother":"Boža rođ. Ćosić","relation":"sin Frane i Bože Ćosić; nositelj prezimena u dijagramu","note":"Nikola, Franin sin, bio je jedino dijete Frane i Bože Ćosić. Nije poznato je li se oženio niti je li imao djece.","kind":"node"},{"id":"1.1-SP-1","name":"Boža rođ. Ćosić","hostCode":"1.1","aliases":[],"relation":"supruga nositelja zapisa 1.1","father":"","mother":"","qualifier":"","note":"Ukupno djece: 1.","kind":"spouse"}];
 const BRANCH="Jurina grana";
+return; // Stari renderer je isključen; koristi se samo zajednička dijagramska platforma.
 const svg=ROOT.querySelector('.subtree-svg'),viewport=ROOT.querySelector('[data-tree-viewport]'),linksLayer=ROOT.querySelector('[data-tree-links]'),nodesLayer=ROOT.querySelector('[data-tree-nodes]'),details=ROOT.querySelector('[data-tree-details]');
 const BOX_W=300,BOX_H=64,FAMILY_W=300,FAMILY_H=68,X_STEP=348,ROW_STEP=158,MARGIN=46;
 let scale=1,panX=20,panY=20,selectedCode=null,matchCode=null,bounds={width:1000,height:650},dragging=false,dragStart=null;

@@ -368,26 +368,6 @@
 }
 
 </style>
-<style data-inline-source="assets/css/common/box3-subtree-diagram.css">
-.subtree-diagram{width:100%;min-width:0;border:1px solid #d6ddd8;border-radius:12px;background:#fff;overflow:hidden;box-shadow:0 3px 14px rgba(0,0,0,.07)}
-.subtree-toolbar{display:flex;align-items:center;gap:7px;flex-wrap:wrap;padding:10px;background:#f5f7f5;border-bottom:1px solid #dce1dd}
-.subtree-toolbar button{border:1px solid #c8d0ca;border-radius:8px;background:#fff;color:#24352d;padding:8px 10px;font:inherit;font-size:13px;cursor:pointer}
-.subtree-toolbar button:hover{background:#edf3ef}.subtree-toolbar button:focus-visible{outline:3px solid #d7a629;outline-offset:2px}
-.subtree-workspace{position:relative;width:100%;height:620px;min-height:420px;overflow:hidden;background:linear-gradient(180deg,#fff,#fbfaf6)}
-.subtree-svg{width:100%;height:100%;display:block;cursor:grab;user-select:none;touch-action:none}.subtree-svg.dragging{cursor:grabbing}
-.subtree-connector{fill:none;stroke:#a8ada9;stroke-width:2}.subtree-family-line{fill:none;stroke:#9b8a8e;stroke-width:1.7}
-.subtree-node,.subtree-family-card{cursor:pointer}.subtree-node rect,.subtree-family-card rect{stroke-width:2;filter:drop-shadow(0 2px 2px rgba(0,0,0,.08))}
-.subtree-node:hover rect,.subtree-family-card:hover rect{stroke-width:3}.subtree-node.selected rect{stroke:#c63030!important;stroke-width:4}.subtree-node.match rect{stroke:#b98500!important;stroke-width:4}
-.subtree-code{font-size:12px;font-weight:700}.subtree-label{font-size:14px;font-weight:700}.subtree-hint{font-size:13px;font-weight:700}
-.subtree-family-title{font-size:12px;font-weight:700;fill:#4b2930}.subtree-family-meta{font-size:11px;font-weight:600;fill:#67545a}
-.subtree-details{position:absolute;right:12px;top:12px;width:min(460px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto;background:rgba(255,255,255,.98);border:1px solid #d3d7d2;border-radius:12px;box-shadow:0 10px 35px rgba(0,0,0,.18);padding:17px;display:none;z-index:20}
-.subtree-details.open{display:block}.subtree-details h3{margin:0 34px 6px 0;color:#174f39;font-size:19px}.subtree-details-code{font-size:12px;font-weight:700;color:#68736d;margin-bottom:11px}.subtree-details p{white-space:pre-line;line-height:1.55;margin:0}
-.subtree-details-close{position:absolute;right:9px;top:7px;border:0;background:transparent;font-size:26px;line-height:1;cursor:pointer;color:#45564d}
-.subtree-help{margin:0;padding:8px 12px;border-top:1px solid #e2e5e2;color:#68736d;font-size:12px;line-height:1.4;background:#fbfcfb}
-.diagram-setup:fullscreen .subtree-workspace,.diagram-setup:-webkit-full-screen .subtree-workspace{height:calc(100vh - 190px);min-height:360px}
-@media(max-width:700px){.subtree-workspace{height:520px}.subtree-toolbar button{font-size:12px;padding:7px 8px}}
-
-</style>
 <style data-inline-source="assets/css/common/box3-shared-standard-en.css">
 /* Box2a uses the entire free width to the right of the fixed left column. */
 html,body{width:100%;max-width:none}
@@ -693,7 +673,7 @@ body.box-mobile-split .content-card{--card-pad-x:42px;width:100%;max-width:none;
 </section>
 <section aria-labelledby="box3h-en-diagram-title" class="branch-diagram diagram-setup" data-common-surname="Tandara" data-diagram-setup="" id="box3h-en-diagram"><header class="diagram-header">
 <div class="diagram-title">
-<h2 id="box3h-en-diagram-title">Ivan Matin – Second marriage</h2>
+<h2 id="box3h-en-diagram-title">Family-tree diagram of Ivan, son of Mate – second marriage</h2>
 <div class="diagram-subtitle"><strong>1</strong> numbered person · <strong>1</strong> generation · starting person: <strong>Ivan, son of Mate (–1870)</strong></div>
 </div>
 <div aria-label="Diagram navigation and display" class="diagram-actions">
@@ -1022,6 +1002,7 @@ const DATA={"code":"4.1","label":"Ivan, son of Mate (–1870)","detail":"Ivan, s
 const FAMILY_META={"4.1":[{"spouse":"Jela Parlov","total":1,"sons":[],"daughters":["Ruža (★ 1849)"],"other":[]}],"4.0":[{"spouse":"Filipa Kopač","total":5,"sons":["Ivan Matin (–1870.)"],"daughters":["Matija Matina (–1845.)","Manda Matina (1790.–)","Jaka Matina (1793.–)","Cecilija Matina (godine nisu dostupne)"],"other":[]}],"4.1.1.2.2.4.1":[{"spouse":"Ivana Tomić","total":6,"sons":[],"daughters":[],"other":["Dijete 1 — podaci će se dopuniti","Dijete 2 — podaci će se dopuniti","Dijete 3 — podaci će se dopuniti","Dijete 4 — podaci će se dopuniti","Dijete 5 — podaci će se dopuniti","Dijete 6 — podaci će se dopuniti"]}]};
 const PEOPLE=[{"id":"4.1","name":"Ivan, son of Mate","qualifier":"–1870","hostCode":"4.1","aliases":["Ivan Matin"],"father":"Mate Tandara – son of Ivan","mother":"Filipa Kopač","relation":"surname holder in the diagram","note":"Ivan, son of Mate, married twice. He first married Pava Sičenica in 1817, and they had a son, Ante. In his second marriage to Jela Parlov, he had a daughter, Ruža (1849–).","kind":"node"},{"id":"4.1-K1","name":"Ruža","aliases":["Ruža","Ruža Ivanova kći daughter of Ivana Matina and Jele Parlov"],"qualifier":"born 1849.","hostCode":"4.1","father":"Ivan, son of Mate","mother":"Jela Parlov","relation":"daughter","note":"The person is recorded in the extended family record.","kind":"virtual"},{"id":"4.1-SP-1","name":"Jela Parlov","hostCode":"4.1","aliases":[],"relation":"spouse of record holder 4.1","father":"","mother":"","qualifier":"","note":"Total children: 1.","kind":"spouse"}];
 const BRANCH="Mate’s branch – marriage to Jela Parlov";
+return; // Stari renderer je isključen; koristi se samo zajednička dijagramska platforma.
 const svg=ROOT.querySelector('.subtree-svg'),viewport=ROOT.querySelector('[data-tree-viewport]'),linksLayer=ROOT.querySelector('[data-tree-links]'),nodesLayer=ROOT.querySelector('[data-tree-nodes]'),details=ROOT.querySelector('[data-tree-details]');
 const BOX_W=300,BOX_H=64,FAMILY_W=300,FAMILY_H=68,X_STEP=348,ROW_STEP=158,MARGIN=46;
 let scale=1,panX=20,panY=20,selectedCode=null,matchCode=null,bounds={width:1000,height:650},dragging=false,dragStart=null;
