@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Jurina grana – interaktivni dijagram</title>
+<link rel="stylesheet" href="assets/css/common/branch-diagram.css?v=20260820-unified2">
+<link rel="stylesheet" href="assets/css/common/complete-family-diagram.css?v=20260820-unified2">
+</head>
+<body data-diagram-setup data-root-code="1.0">
+<header>
+  <div class="header-top">
+    <div class="title-wrap"><h1>Jurina grana</h1><div class="subtitle"></div></div>
+    <nav class="header-actions" aria-label="Navigacija i prikaz">
+      <a class="diagram-home-button" href="index.html" target="_top" aria-label="Početna stranica" title="Početna stranica"><span class="diagram-home-circle"><svg class="diagram-home-svg" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5L12 3l9 7.5"></path><path d="M5 10v10h14V10"></path><path d="M10 20v-6h4v6"></path></svg></span></a>
+      <a class="header-btn lang-icon active" href="box2a.html" target="_top" lang="hr" hreflang="hr" aria-current="page" aria-label="Hrvatska verzija"><img src="flag-hr.png" alt="HR"></a>
+      <a class="header-btn lang-icon" href="box2a-en.html" target="_top" lang="en" hreflang="en" aria-label="English version"><img src="flag-uk.png" alt="EN"></a>
+      <button id="fullscreenDiagram" data-diagram-fullscreen type="button" aria-label="Cijeli ekran" title="Cijeli ekran"><span aria-hidden="true">⛶</span> <span data-diagram-fullscreen-label>Cijeli ekran</span></button>
+      <button id="printDiagram" type="button" aria-label="Ispiši dijagram" title="Ispiši dijagram"><img class="print-icon" src="Print.png" alt=""></button>
+    </nav>
+  </div>
+  <div class="header-tools"><div class="toolbar-scroll"><div class="toolbar">
+    <button class="primary" id="expandAll" type="button">Raširi sve</button>
+    <button id="collapse" type="button">Sažmi</button>
+    <button id="threeLevels" type="button">Do 3. koljena</button>
+    <button id="fit" type="button">Uklopi</button>
+    <button id="zoomIn" type="button" aria-label="Povećaj">＋</button>
+    <button id="zoomOut" type="button" aria-label="Smanji">−</button>
+    <div class="search-wrap"><label class="sr-only" for="search">Pretraži osobe</label><input id="search" type="search" placeholder="Ime osobe ili šifra" autocomplete="off"><button id="findBtn" type="button">Pronađi</button></div>
+  </div></div></div>
+</header>
+<div id="workspace">
+  <svg id="treeSvg" role="img" aria-label="Interaktivni rodoslovni dijagram – Jurina grana"></svg>
+  <aside id="details"><button id="closeDetails" type="button" aria-label="Zatvori podatke">×</button><h2 id="detailTitle"></h2><div class="detail-code" id="detailCode"></div><p id="detailText"></p></aside>
+  <div class="legend"><span><i class="swatch" style="background:#fff4cf;border-color:#9c7712"></i>Brojčana linija prezimena</span><span><i class="swatch" style="background:#edf5fb;border-color:#3e7398"></i>S sin – bez potvrđenog nastavka</span><span><i class="swatch" style="background:#fff1f3;border-color:#9d4052"></i>Supruga</span><span><i class="swatch" style="background:#f3eaff;border-color:#72509d"></i>Kći</span></div>
+  <div class="help">Kotačić: zumiranje · povlačenje: pomicanje · klik na + / okvir: grananje</div><div data-diagram-status aria-live="polite"></div>
+</div>
+<script id="completeFamilyData" type="application/json">{"rootCode":"1.0","persons":[{"code":"1.0","name":"Jure Tandara – Ivanov sin","qualifier":"★ oko 1725. – ✝ nepoznato","father":"Ivan Tandara","fatherCode":"0.0","mother":"","spouses":["Matija Lekić","Matija rođ. Lekić"],"spouseCodes":["1.0-SP-01"],"relation":"početni nositelj grane","note":"Najstariji Ivanov sin; nositelj Jurine grane.","kind":"node","hostCode":"1.0","branch":"Početna hijerarhija","source":"dijagramivan.html?v=20260814-standalone","inferred":[],"maritalStatus":"oženjen/udana","years":["1725"],"parentCodes":["0.0"],"childCodes":["1.1","1.0-K1","1.0-K2"]},{"code":"1.0-SP-01","name":"Matija rođ. Lekić","qualifier":"★ nepoznato – ✝ nepoznato","father":"","fatherCode":"","mother":"","spouses":[],"spouseCodes":["1.0"],"relation":"supruga Jure Tandare","note":"Supruga Jure Tandare; majka Frane, Anđe i Ane.","kind":"spouse","hostCode":"1.0","branch":"Jurina grana","source":"box2a.html","inferred":[],"maritalStatus":"oženjen/udana","years":[],"parentCodes":[],"childCodes":["1.1","1.0-K1","1.0-K2"]},{"code":"1.0-K1","name":"Anđa Jurina","qualifier":"★ nepoznato – ✝ nepoznato","father":"Jure Tandara – Ivanov sin","fatherCode":"1.0","mother":"Matija rođ. Lekić","spouses":[],"spouseCodes":[],"relation":"kći Jure Tandare i Matije Lekić","note":"Kći Jure Tandare i Matije rođ. Lekić.","kind":"virtual","hostCode":"1.0","branch":"Jurina grana","source":"box2a.html","inferred":[],"maritalStatus":"podatak nije dostupan","years":[],"parentCodes":["1.0","1.0-SP-01"],"childCodes":[]},{"code":"1.0-K2","name":"Ana Jurina","qualifier":"★ nepoznato – ✝ nepoznato","father":"Jure Tandara – Ivanov sin","fatherCode":"1.0","mother":"Matija rođ. Lekić","spouses":[],"spouseCodes":[],"relation":"kći Jure Tandare i Matije Lekić","note":"Kći Jure Tandare i Matije rođ. Lekić.","kind":"virtual","hostCode":"1.0","branch":"Jurina grana","source":"box2a.html","inferred":[],"maritalStatus":"podatak nije dostupan","years":[],"parentCodes":["1.0","1.0-SP-01"],"childCodes":[]},{"code":"1.1","name":"Frane, Jurin sin","qualifier":"★ nepoznato – ✝ nepoznato","father":"Jure Tandara – Ivanov sin","fatherCode":"1.0","mother":"Matija rođ. Lekić","spouses":["Boža rođ. Ćosić"],"spouseCodes":["1.1-SP-01"],"relation":"sin Jure Tandare i Matije Lekić; nositelj prezimena u dijagramu","note":"Frane, Jurin sin, bio je oženjen Božom rođ. Ćosić. Njihov sin Nikola rođen je 1792. godine.","kind":"node","hostCode":"1.1","branch":"Jurina grana","source":"box3a.html","inferred":[],"maritalStatus":"oženjen/udana","years":["1792"],"parentCodes":["1.0","1.0-SP-01"],"childCodes":["1.1-S1"]},{"code":"1.1-S1","name":"Nikola, Franin sin","qualifier":"★ 1792. – ✝ nepoznato","father":"Frane, Jurin sin","fatherCode":"1.1","mother":"Boža rođ. Ćosić","spouses":[],"spouseCodes":[],"relation":"sin Frane i Bože Ćosić; nositelj prezimena u dijagramu","note":"Nikola, Franin sin, bio je jedino dijete Frane i Bože Ćosić. Nije poznato je li se oženio niti je li imao djece.","kind":"node","hostCode":"1.1-S1","branch":"Jurina grana","source":"box3a.html","inferred":[],"maritalStatus":"nije poznato","years":["1792"],"parentCodes":["1.1","1.1-SP-01"],"childCodes":[]},{"code":"1.1-SP-01","name":"Boža rođ. Ćosić","qualifier":"","father":"","fatherCode":"","mother":"","spouses":[],"spouseCodes":["1.1"],"relation":"supruga nositelja zapisa 1.1","note":"Ukupno djece: 1.","kind":"spouse","hostCode":"1.1","branch":"Jurina grana","source":"box3a.html","inferred":[],"maritalStatus":"oženjen/udana","years":[],"parentCodes":[],"childCodes":["1.1-S1"]}]}</script>
+<script src="assets/js/common/complete-family-diagram.js?v=20260820-unified2"></script>
+<script src="assets/js/common/diagram-fullscreen-hr.js?v=20260820-unified2"></script>
+<script src="assets/js/common/print-diagram.js?v=20260820-unified2"></script>
+</body>
+</html>

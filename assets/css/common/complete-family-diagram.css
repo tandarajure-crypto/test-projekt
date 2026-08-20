@@ -1,25 +1,28 @@
 .tcf-node,.tcf-person{cursor:pointer;outline:none;transform-box:fill-box;transform-origin:center;transition:filter .18s ease,opacity .18s ease}
 .tcf-node rect,.tcf-person rect{stroke-width:2;vector-effect:non-scaling-stroke;transition:stroke-width .18s ease,stroke .18s ease,filter .18s ease}
-.tcf-node:hover rect,.tcf-person:hover rect,.tcf-node:focus rect,.tcf-person:focus rect{stroke:#d89200!important;stroke-width:4!important;filter:drop-shadow(0 3px 5px rgba(42,31,7,.28))}
-.tcf-focus rect{stroke:#c63030!important;stroke-width:4!important}
-.tcf-search-focus{transform:scale(1.14);filter:drop-shadow(0 8px 12px rgba(0,0,0,.42))}
-.tcf-search-focus rect{stroke:#ffb000!important;stroke-width:7!important;filter:drop-shadow(0 0 7px rgba(255,176,0,.92))}
+.tcf-node:hover rect,.tcf-person:hover rect,.tcf-node:focus rect,.tcf-person:focus rect{stroke:#111!important;stroke-width:4!important;filter:drop-shadow(0 0 5px rgba(255,198,0,.85))}
+.tcf-focus rect{stroke:#111!important;stroke-width:5!important}
+/* Ne skalira se sam okvir: zumira se SVG prikaz, pa veza s ocem ostaje fizički spojena. */
+.tcf-search-focus{filter:drop-shadow(0 0 9px rgba(255,196,0,.98))}
+.tcf-search-focus rect{stroke:#111!important;stroke-width:8!important;filter:drop-shadow(0 0 5px rgba(255,213,0,1))}
 .tcf-code{font:800 11px system-ui,sans-serif;letter-spacing:.2px}
 .tcf-label{font:750 13px system-ui,sans-serif}
 .tcf-person-name{font:700 12px system-ui,sans-serif}
-.tcf-person-meta{font:11px system-ui,sans-serif}
-.tcf-connector{fill:none;stroke:#77736c;stroke-width:2;vector-effect:non-scaling-stroke}
-.tcf-family-line{fill:none;stroke:#987b82;stroke-width:1.7;vector-effect:non-scaling-stroke}
+.tcf-connector{fill:none;stroke:#68645e;stroke-width:2.2;vector-effect:non-scaling-stroke}
+.tcf-family-line{fill:none;stroke:#8b747b;stroke-width:1.9;vector-effect:non-scaling-stroke}
+.tcf-focused-connector{stroke:#111!important;stroke-width:4!important;filter:drop-shadow(0 0 3px rgba(255,213,0,.95))}
 .tcf-spouse rect{fill:#fff1f3;stroke:#9d4052}
 .tcf-daughter rect{fill:#f3eaff;stroke:#72509d}
-.tcf-son rect{fill:#edf5fb;stroke:#3e7398}
 .tcf-related rect{fill:#f7f2e6;stroke:#806b49}
 .tcf-terminal-son rect{fill:#edf5fb!important;stroke:#3e7398!important;stroke-dasharray:8 4}
-.tcf-spouse .tcf-code,.tcf-spouse .tcf-person-name,.tcf-spouse .tcf-person-meta{fill:#6d2634}
-.tcf-daughter .tcf-code,.tcf-daughter .tcf-person-name,.tcf-daughter .tcf-person-meta{fill:#4c356b}
-.tcf-son .tcf-code,.tcf-son .tcf-person-name,.tcf-son .tcf-person-meta,.tcf-terminal-son .tcf-code,.tcf-terminal-son .tcf-label{fill:#264b64}
-.tcf-related .tcf-code,.tcf-related .tcf-person-name,.tcf-related .tcf-person-meta{fill:#4e422f}
-.tcf-carrier-mark circle{fill:#123d2e;stroke:#fff;stroke-width:3;vector-effect:non-scaling-stroke;filter:drop-shadow(0 2px 2px rgba(0,0,0,.35))}
-.tcf-carrier-mark text{fill:#fff;font:900 24px/1 system-ui,sans-serif;pointer-events:none}
+.tcf-spouse .tcf-code,.tcf-spouse .tcf-person-name{fill:#6d2634}
+.tcf-daughter .tcf-code,.tcf-daughter .tcf-person-name{fill:#4c356b}
+.tcf-terminal-son .tcf-code,.tcf-terminal-son .tcf-label{fill:#264b64}
+.tcf-related .tcf-code,.tcf-related .tcf-person-name{fill:#4e422f}
+/* Veći i kontrastniji + / −. Prikazuje se samo čvorovima koji zaista imaju vodoravni nastavak. */
+.tcf-carrier-mark circle{fill:#071f16;stroke:#ffd400;stroke-width:4;vector-effect:non-scaling-stroke;filter:drop-shadow(0 2px 4px rgba(0,0,0,.55))}
+.tcf-carrier-mark text{fill:#fff;font:900 31px/1 system-ui,sans-serif;pointer-events:none}
+[data-diagram-status]{position:absolute;left:50%;top:12px;transform:translateX(-50%);z-index:50;background:#111;color:#fff;padding:8px 12px;border-radius:8px;font:700 13px system-ui,sans-serif;opacity:0;pointer-events:none;transition:opacity .15s}
+[data-diagram-status].show{opacity:1}
 @media (prefers-reduced-motion:reduce){.tcf-node,.tcf-person,.tcf-node rect,.tcf-person rect{transition:none}}
-@media print{.tcf-node rect,.tcf-person rect,.tcf-carrier-mark circle{filter:none}.tcf-search-focus{transform:none;filter:none}}
+@media print{.tcf-node rect,.tcf-person rect,.tcf-carrier-mark circle,.tcf-focused-connector{filter:none}.tcf-search-focus{filter:none}}

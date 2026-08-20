@@ -2,73 +2,21 @@
   'use strict';
 
   var embedded = document.getElementById('completeFamilyData');
-  var parsed = null;
-  var raw = [];
-  var sourceTree = null;
+  if (!embedded) return;
 
-  if (embedded) {
-    try {
-      parsed = JSON.parse(embedded.textContent || '[]');
-      raw = Array.isArray(parsed) ? parsed : (parsed.persons || []);
-      sourceTree = Array.isArray(parsed) ? null : (parsed.tree || null);
-    } catch (_error) {
-      raw = [];
-    }
-  }
+  var parsed;
+  try { parsed = JSON.parse(embedded.textContent || '{}'); } catch (_error) { return; }
+  var raw = Array.isArray(parsed) ? parsed : (parsed.persons || []);
+  if (!raw.length) return;
 
-  if (!sourceTree) {
-    try { sourceTree = DATA; } catch (_error) { sourceTree = null; }
-  }
-  if (!sourceTree) return;
-
-  function clean(value) {
-    return String(value == null ? '' : value).trim();
-  }
-
-  function walkSource(node, callback, parent, depth) {
-    if (!node) return;
-    callback(node, parent || null, depth || 0);
-    (node.children || []).forEach(function (child) {
-      walkSource(child, callback, node, (depth || 0) + 1);
-    });
-  }
-
-  function deriveRecords(node, parentCode, output) {
-    if (!node) return output;
-    var code = clean(node.code || node.id);
-    output.push({
-      code: code,
-      name: clean(node.name || node.label || code),
-      qualifier: clean(node.qualifier),
-      father: clean(node.father),
-      mother: clean(node.mother),
-      relation: clean(node.relation || ''),
-      note: clean(node.note || node.detail),
-      kind: clean(node.kind || 'node'),
-      hostCode: clean(node.hostCode || code),
-      parentCodes: parentCode ? [parentCode] : []
-    });
-    (node.spouses || []).forEach(function (spouse) {
-      output.push({
-        code: clean(spouse.code || spouse.id),
-        name: clean(spouse.name || spouse.label),
-        qualifier: clean(spouse.qualifier),
-        father: clean(spouse.father),
-        mother: clean(spouse.mother),
-        relation: clean(spouse.relation || 'spouse'),
-        note: clean(spouse.note || spouse.detail),
-        kind: 'spouse',
-        hostCode: clean(spouse.hostCode || code),
-        parentCodes: []
-      });
-    });
-    (node.children || []).forEach(function (child) {
-      deriveRecords(child, code, output);
-    });
-    return output;
-  }
-
-  if (!raw.length) raw = deriveRecords(sourceTree, '', []);
+  function clean(value) { return String(value == null ? '' : value).trim(); }
+  function codeArray(value) { return Array.isArray(value) ? value.map(clean).filter(Boolean) : []; }
+  function isSpouseCode(code) { return /-SP-?\d+$/i.test(code); }
+  function isDaughterCode(code) { return /-K\d+$/i.test(code); }
+  function isTerminalSonCode(code) { return /-S\d+$/i.test(code); }
+  function isCollateralPath(code) { return /-(?:K\d+|SP-?\d+|V\d+)(?:-|$)/i.test(code); }
+  function isVerticalCode(code) { return isSpouseCode(code) || isDaughterCode(code) || /-V\d+$/i.test(code); }
+  function isStructuralCode(code) { return Boolean(code) && !isCollateralPath(code); }
 
   var records = raw.map(function (person) {
     return {
@@ -81,138 +29,99 @@
       note: clean(person.note || person.detail),
       kind: clean(person.kind || 'person'),
       hostCode: clean(person.hostCode || person.code || person.id),
-      parentCodes: Array.isArray(person.parentCodes) ? person.parentCodes.map(clean) : [],
-      spouseCodes: Array.isArray(person.spouseCodes) ? person.spouseCodes.map(clean) : []
+      parentCodes: codeArray(person.parentCodes),
+      spouseCodes: codeArray(person.spouseCodes),
+      childCodes: codeArray(person.childCodes)
     };
   }).filter(function (person) { return person.code; });
 
   var byCode = new Map();
-  records.forEach(function (person) {
-    if (!byCode.has(person.code)) byCode.set(person.code, person);
+  records.forEach(function (person) { if (!byCode.has(person.code)) byCode.set(person.code, person); });
+
+  var structuralRecords = records.filter(function (person) { return isStructuralCode(person.code); });
+  var nodeByCode = new Map();
+  structuralRecords.forEach(function (person) {
+    nodeByCode.set(person.code, {
+      code: person.code,
+      label: [person.name, person.qualifier].filter(Boolean).join(' '),
+      detail: person.note,
+      expanded: false,
+      children: [],
+      parent: null,
+      record: person
+    });
   });
 
-  walkSource(sourceTree, function (node, parent) {
-    var code = clean(node.code || node.id);
-    if (!code || byCode.has(code)) return;
-    var person = {
-      code: code,
-      name: clean(node.name || node.label || code),
-      qualifier: clean(node.qualifier),
-      father: clean(node.father),
-      mother: clean(node.mother),
-      relation: clean(node.relation),
-      note: clean(node.note || node.detail),
-      kind: 'node',
-      hostCode: code,
-      parentCodes: parent ? [clean(parent.code || parent.id)] : [],
-      spouseCodes: []
-    };
-    records.push(person);
-    byCode.set(code, person);
-  });
-
-  function isCollateralCode(code) {
-    return /-(?:K|SP|V)\d*(?:-|$)/i.test(code);
+  function inferredParentCode(code) {
+    if (isTerminalSonCode(code)) return code.replace(/-S\d+$/i, '');
+    if (!/^\d+(?:\.\d+)+$/.test(code)) return '';
+    var parts = code.split('.');
+    if (parts.length <= 2) return '';
+    parts.pop();
+    return parts.join('.');
   }
 
-  function isTerminalSonCode(code) {
-    return /-S\d+$/i.test(code) && !isCollateralCode(code);
-  }
-
-  function isStructuralCode(code) {
-    return Boolean(code) && !isCollateralCode(code);
-  }
-
-  function copyStructuralTree(node) {
-    var code = clean(node && (node.code || node.id));
-    if (!isStructuralCode(code)) return null;
-    var copy = {
-      code: code,
-      label: clean(node.label || node.name || (byCode.get(code) || {}).name || code),
-      detail: clean(node.detail || node.note || (byCode.get(code) || {}).note),
-      expanded: Boolean(node.expanded),
-      children: []
-    };
-    (node.children || []).forEach(function (child) {
-      var childCopy = copyStructuralTree(child);
-      if (childCopy) copy.children.push(childCopy);
-    });
-    return copy;
-  }
-
-  var treeData = copyStructuralTree(sourceTree);
-  if (!treeData) return;
-
-  function walk(node, callback, parent, depth) {
-    callback(node, parent || null, depth || 0);
-    (node.children || []).forEach(function (child) {
-      walk(child, callback, node, (depth || 0) + 1);
-    });
-  }
-
-  var structuralNodes = new Map();
-  walk(treeData, function (node) { structuralNodes.set(node.code, node); });
-
-  function nearestStructuralHost(person) {
-    var current = clean(person && person.hostCode);
-    var seen = new Set();
-    while (current && !seen.has(current)) {
-      seen.add(current);
-      if (structuralNodes.has(current)) return current;
-      var hostRecord = byCode.get(current);
-      if (hostRecord && hostRecord.hostCode && hostRecord.hostCode !== current) {
-        current = hostRecord.hostCode;
-        continue;
+  structuralRecords.forEach(function (person) {
+    var node = nodeByCode.get(person.code);
+    var parentCode = '';
+    for (var i = 0; i < person.parentCodes.length; i += 1) {
+      if (person.parentCodes[i] !== person.code && nodeByCode.has(person.parentCodes[i])) {
+        parentCode = person.parentCodes[i];
+        break;
       }
-      var parentRecord = hostRecord && hostRecord.parentCodes && hostRecord.parentCodes.length ? byCode.get(hostRecord.parentCodes[0]) : null;
-      current = parentRecord ? parentRecord.code : '';
     }
-    return '';
-  }
-
-  records.forEach(function (person) {
-    if (!isTerminalSonCode(person.code) || structuralNodes.has(person.code)) return;
-    var hostCode = nearestStructuralHost(person);
-    var host = structuralNodes.get(hostCode);
-    if (!host) return;
-    var leaf = { code: person.code, label: person.name, detail: person.note, expanded: false, children: [] };
-    host.children.push(leaf);
-    structuralNodes.set(person.code, leaf);
+    if (!parentCode) {
+      var inferred = inferredParentCode(person.code);
+      if (nodeByCode.has(inferred)) parentCode = inferred;
+    }
+    if (parentCode) {
+      var parent = nodeByCode.get(parentCode);
+      node.parent = parent;
+      parent.children.push(node);
+    }
   });
+
+  function codeSort(a, b) {
+    return a.code.localeCompare(b.code, undefined, { numeric: true, sensitivity: 'base' });
+  }
+  nodeByCode.forEach(function (node) { node.children.sort(codeSort); });
+
+  var requestedRoot = clean(document.body.getAttribute('data-root-code') || parsed.rootCode);
+  var roots = Array.from(nodeByCode.values()).filter(function (node) { return !node.parent; }).sort(function (a, b) {
+    return a.code.length - b.code.length || codeSort(a, b);
+  });
+  var treeData = nodeByCode.get(requestedRoot) || roots[0];
+  if (!treeData) return;
 
   var extrasByHost = new Map();
   records.forEach(function (person) {
-    if (structuralNodes.has(person.code)) return;
-    var hostCode = nearestStructuralHost(person);
-    if (!hostCode) return;
-    if (!extrasByHost.has(hostCode)) extrasByHost.set(hostCode, []);
-    extrasByHost.get(hostCode).push(person);
+    if (isStructuralCode(person.code)) return;
+    var host = person.hostCode;
+    if (!nodeByCode.has(host)) {
+      for (var i = 0; i < person.parentCodes.length; i += 1) {
+        if (nodeByCode.has(person.parentCodes[i])) { host = person.parentCodes[i]; break; }
+      }
+    }
+    if (!nodeByCode.has(host)) return;
+    if (!extrasByHost.has(host)) extrasByHost.set(host, []);
+    extrasByHost.get(host).push(person);
   });
 
-  function relationText(person) {
-    return (person.relation + ' ' + person.kind).toLocaleLowerCase('hr');
-  }
-
+  function relationText(person) { return (person.relation + ' ' + person.kind).toLocaleLowerCase('hr'); }
   function personClass(person) {
     var relation = relationText(person);
-    if (person.kind === 'spouse' || /-SP-?\d*$/i.test(person.code)) return 'tcf-spouse';
-    if (relation.indexOf('kći') >= 0 || relation.indexOf('daughter') >= 0 || /-K\d+$/i.test(person.code)) return 'tcf-daughter';
-    if (relation.indexOf('sin') >= 0 || relation.indexOf('son') >= 0 || /-S\d+$/i.test(person.code)) return 'tcf-son';
+    if (isSpouseCode(person.code) || person.kind === 'spouse') return 'tcf-spouse';
+    if (isDaughterCode(person.code) || relation.indexOf('kći') >= 0 || relation.indexOf('daughter') >= 0) return 'tcf-daughter';
     return 'tcf-related';
   }
-
   function extraOrder(person) {
-    var className = personClass(person);
-    if (className === 'tcf-spouse') return 0;
-    if (className === 'tcf-daughter') return 1;
-    if (className === 'tcf-son') return 2;
-    return 3;
+    var cls = personClass(person);
+    if (cls === 'tcf-spouse') return 0;
+    if (cls === 'tcf-daughter') return 1;
+    return 2;
   }
-
   extrasByHost.forEach(function (list) {
-    list.sort(function (a, b) {
-      return extraOrder(a) - extraOrder(b) || a.code.localeCompare(b.code, undefined, { numeric: true });
-    });
+    list.sort(function (a, b) { return extraOrder(a) - extraOrder(b) || a.code.localeCompare(b.code, undefined, { numeric: true }); });
   });
 
   var oldSvg = document.querySelector('#treeSvg,.subtree-svg');
@@ -220,46 +129,36 @@
   var svg = oldSvg.cloneNode(false);
   svg.innerHTML = '<g data-tcf-viewport><g data-tcf-links></g><g data-tcf-nodes></g></g>';
   oldSvg.replaceWith(svg);
-
   var viewport = svg.querySelector('[data-tcf-viewport]');
   var linksLayer = svg.querySelector('[data-tcf-links]');
   var nodesLayer = svg.querySelector('[data-tcf-nodes]');
-  var BOX_W = 310;
-  var BOX_H = 70;
-  var PERSON_H = 58;
-  var PERSON_GAP = 7;
-  var FAMILY_TOP = 12;
-  var X_STEP = 410;
-  var ROW_GAP = 34;
-  var MARGIN = 56;
-  var scale = 1;
-  var panX = 20;
-  var panY = 20;
+
+  var BOX_W = 310, BOX_H = 72, PERSON_H = 58, PERSON_GAP = 7, FAMILY_TOP = 12;
+  var X_STEP = 420, ROW_GAP = 34, MARGIN = 58;
+  var scale = 1, panX = 20, panY = 20;
   var bounds = { width: 1000, height: 700 };
-  var selected = '';
-  var searchFocused = '';
+  var selected = '', searchFocused = '';
   var renderedBounds = new Map();
 
-  function extras(node) {
-    return extrasByHost.get(clean(node.code)) || [];
-  }
-
+  function extras(node) { return extrasByHost.get(node.code) || []; }
   function itemHeight(node) {
     var list = extras(node);
     return BOX_H + (list.length ? FAMILY_TOP + list.length * (PERSON_H + PERSON_GAP) - PERSON_GAP : 0);
   }
-
+  function walk(node, callback, depth) {
+    callback(node, depth || 0);
+    node.children.forEach(function (child) { walk(child, callback, (depth || 0) + 1); });
+  }
   function visibleTree() {
     var list = [];
-    function visit(node, parent, depth) {
-      var item = { node: node, parent: parent, depth: depth, x: 0, y: 0, height: itemHeight(node), subtreeHeight: 0, children: [] };
+    function visit(node, depth) {
+      var item = { node: node, depth: depth, x: 0, y: 0, height: itemHeight(node), subtreeHeight: 0, children: [] };
       list.push(item);
-      if (node.expanded) item.children = (node.children || []).map(function (child) { return visit(child, node, depth + 1); });
+      if (node.expanded) item.children = node.children.map(function (child) { return visit(child, depth + 1); });
       return item;
     }
-    return { list: list, root: visit(treeData, null, 0) };
+    return { list: list, root: visit(treeData, 0) };
   }
-
   function layout() {
     var tree = visibleTree();
     function measure(item) {
@@ -274,53 +173,32 @@
       if (!item.children.length) return;
       var total = item.children.reduce(function (sum, child) { return sum + child.subtreeHeight; }, 0) + ROW_GAP * (item.children.length - 1);
       var next = top + (item.subtreeHeight - total) / 2;
-      item.children.forEach(function (child) {
-        place(child, next);
-        next += child.subtreeHeight + ROW_GAP;
-      });
+      item.children.forEach(function (child) { place(child, next); next += child.subtreeHeight + ROW_GAP; });
     }
-    measure(tree.root);
-    place(tree.root, MARGIN);
+    measure(tree.root); place(tree.root, MARGIN);
     var maxDepth = Math.max.apply(null, tree.list.map(function (item) { return item.depth; }).concat([0]));
     var maxBottom = Math.max.apply(null, tree.list.map(function (item) { return item.y + item.height; }).concat([MARGIN]));
     bounds = { width: MARGIN * 2 + maxDepth * X_STEP + BOX_W, height: maxBottom + MARGIN };
     return tree.list;
   }
 
-  function esc(value) {
-    return String(value == null ? '' : value).replace(/[&<>"']/g, function (character) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[character];
-    });
-  }
-
+  function esc(value) { return String(value == null ? '' : value).replace(/[&<>"']/g, function (ch) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[ch]; }); }
   function wrap(text, max) {
-    var words = clean(text).split(/\s+/).filter(Boolean);
-    var lines = [];
-    var line = '';
+    var words = clean(text).split(/\s+/).filter(Boolean), lines = [], line = '';
     words.forEach(function (word) {
       var next = (line + ' ' + word).trim();
-      if (next.length > (max || 36) && line) {
-        lines.push(line);
-        line = word;
-      } else {
-        line = next;
-      }
+      if (next.length > (max || 36) && line) { lines.push(line); line = word; } else line = next;
     });
     if (line) lines.push(line);
     if (lines.length > 2) lines[1] = lines.slice(1).join(' ').slice(0, (max || 36) - 1) + '…';
     return lines.slice(0, 2);
   }
-
   function colors(code) {
-    if (code === '0.0' || code === '5.0') return { fill: '#174f39', text: '#fff', stroke: '#0d3425' };
-    if (code.indexOf('1.') === 0) return { fill: '#e8f2fb', text: '#173a57', stroke: '#4d82aa' };
-    if (code.indexOf('2.') === 0) return { fill: '#fff4cf', text: '#4d3b00', stroke: '#9c7712' };
-    if (code.indexOf('3.') === 0) return { fill: '#f9e4e4', text: '#572626', stroke: '#a64242' };
-    return { fill: '#fff1df', text: '#553719', stroke: '#a86c2f' };
-  }
-
-  function labelFor(node) {
-    return clean(node.label || (byCode.get(clean(node.code)) || {}).name || node.code);
+    if (/^1\./.test(code)) return { fill:'#e8f2fb', text:'#173a57', stroke:'#4d82aa' };
+    if (/^2\./.test(code)) return { fill:'#fff4cf', text:'#4d3b00', stroke:'#9c7712' };
+    if (/^3\./.test(code)) return { fill:'#f9e4e4', text:'#572626', stroke:'#a64242' };
+    if (/^4\./.test(code)) return { fill:'#fff1df', text:'#553719', stroke:'#a86c2f' };
+    return { fill:'#174f39', text:'#fff', stroke:'#0d3425' };
   }
 
   function render() {
@@ -328,322 +206,150 @@
     var positions = new Map(visible.map(function (item) { return [item.node.code, item]; }));
     renderedBounds = new Map();
     linksLayer.innerHTML = visible.map(function (item) {
-      if (!item.parent || !positions.has(item.parent.code)) return '';
-      var parent = positions.get(item.parent.code);
-      var x1 = parent.x + BOX_W;
-      var y1 = parent.y + BOX_H / 2;
-      var x2 = item.x;
-      var y2 = item.y + BOX_H / 2;
+      var parentNode = item.node.parent;
+      if (!parentNode || !positions.has(parentNode.code)) return '';
+      var parent = positions.get(parentNode.code);
+      var x1 = parent.x + BOX_W, y1 = parent.y + BOX_H / 2, x2 = item.x, y2 = item.y + BOX_H / 2;
       var elbow = x1 + (x2 - x1) / 2;
-      return '<path class="tcf-connector" d="M' + x1 + ',' + y1 + ' H' + elbow + ' V' + y2 + ' H' + x2 + '"/>';
+      var cls = searchFocused === item.node.code ? 'tcf-connector tcf-focused-connector' : 'tcf-connector';
+      return '<path class="' + cls + '" data-tcf-link-to="' + esc(item.node.code) + '" d="M' + x1 + ',' + y1 + ' H' + elbow + ' V' + y2 + ' H' + x2 + '"/>';
     }).join('');
 
     nodesLayer.innerHTML = visible.map(function (item) {
-      var node = item.node;
-      var code = clean(node.code);
-      var color = colors(code);
-      var lines = wrap(labelFor(node), 36);
-      var hasChildren = (node.children || []).length > 0;
+      var node = item.node, code = node.code, color = colors(code), lines = wrap(node.label, 36);
+      var hasChildren = node.children.length > 0;
       var terminal = isTerminalSonCode(code);
-      var carrier = !terminal && item.depth > 0;
-      var marker = carrier || hasChildren;
-      var symbol = hasChildren && node.expanded ? '−' : '+';
-      var classes = ['tcf-node', 'tcf-main-node'];
+      var classes = ['tcf-node','tcf-main-node'];
       if (terminal) classes.push('tcf-terminal-son');
-      if (carrier) classes.push('tcf-surname-carrier');
       if (selected === code) classes.push('tcf-focus');
       if (searchFocused === code) classes.push('tcf-search-focus');
-      renderedBounds.set(code, { x: item.x, y: item.y, width: BOX_W, height: BOX_H });
-      var main = '<g class="' + classes.join(' ') + '" data-tcf-code="' + esc(code) + '" transform="translate(' + item.x + ',' + item.y + ')" role="button" tabindex="0" aria-label="' + esc(code + ' ' + labelFor(node)) + '">' +
+      renderedBounds.set(code, { x:item.x, y:item.y, width:BOX_W, height:BOX_H });
+      var symbol = node.expanded ? '−' : '+';
+      var main = '<g class="' + classes.join(' ') + '" data-tcf-code="' + esc(code) + '" transform="translate(' + item.x + ',' + item.y + ')" role="button" tabindex="0" aria-label="' + esc(code + ' ' + node.label) + '">' +
         '<rect width="' + BOX_W + '" height="' + BOX_H + '" rx="10" fill="' + color.fill + '" stroke="' + color.stroke + '"></rect>' +
         '<text class="tcf-code" x="14" y="20" fill="' + color.text + '">' + esc(code) + '</text>' +
-        lines.map(function (line, index) { return '<text class="tcf-label" x="14" y="' + (44 + index * 16) + '" fill="' + color.text + '">' + esc(line) + '</text>'; }).join('') +
-        (marker ? '<g class="tcf-carrier-mark" aria-hidden="true"><circle cx="286" cy="23" r="16"></circle><text x="286" y="30" text-anchor="middle">' + symbol + '</text></g>' : '') +
+        lines.map(function (line,index) { return '<text class="tcf-label" x="14" y="' + (45 + index * 16) + '" fill="' + color.text + '">' + esc(line) + '</text>'; }).join('') +
+        (hasChildren ? '<g class="tcf-carrier-mark" aria-hidden="true"><circle cx="284" cy="25" r="19"></circle><text x="284" y="34" text-anchor="middle">' + symbol + '</text></g>' : '') +
         '</g>';
 
-      var y = item.y + BOX_H + FAMILY_TOP;
-      var family = extras(node).map(function (person, index) {
-        var className = personClass(person);
+      var baseY = item.y + BOX_H + FAMILY_TOP;
+      var family = extras(node).map(function (person,index) {
+        var cls = personClass(person), top = baseY + index * (PERSON_H + PERSON_GAP);
         var personLines = wrap(person.name + (person.qualifier ? ' · ' + person.qualifier : ''), 39);
-        var top = y + index * (PERSON_H + PERSON_GAP);
-        var line = '<path class="tcf-family-line" d="M' + (item.x + BOX_W / 2) + ',' + (index ? top - PERSON_GAP : item.y + BOX_H) + ' V' + top + '"/>';
+        var lineStart = index ? top - PERSON_GAP : item.y + BOX_H;
         var focusClass = searchFocused === person.code ? ' tcf-search-focus' : '';
-        renderedBounds.set(person.code, { x: item.x, y: top, width: BOX_W, height: PERSON_H });
-        return line + '<g class="tcf-person ' + className + focusClass + '" data-tcf-person="' + esc(person.code) + '" transform="translate(' + item.x + ',' + top + ')" role="button" tabindex="0" aria-label="' + esc(person.code + ' ' + person.name) + '">' +
-          '<rect width="' + BOX_W + '" height="' + PERSON_H + '" rx="8"></rect>' +
-          '<text class="tcf-code" x="12" y="17">' + esc(person.code) + '</text>' +
-          personLines.map(function (part, lineIndex) { return '<text class="tcf-person-name" x="12" y="' + (37 + lineIndex * 14) + '">' + esc(part) + '</text>'; }).join('') +
-          '</g>';
+        renderedBounds.set(person.code, { x:item.x, y:top, width:BOX_W, height:PERSON_H });
+        return '<path class="tcf-family-line' + (searchFocused === person.code ? ' tcf-focused-connector' : '') + '" d="M' + (item.x + BOX_W / 2) + ',' + lineStart + ' V' + top + '"/>' +
+          '<g class="tcf-person ' + cls + focusClass + '" data-tcf-person="' + esc(person.code) + '" transform="translate(' + item.x + ',' + top + ')" role="button" tabindex="0" aria-label="' + esc(person.code + ' ' + person.name) + '">' +
+          '<rect width="' + BOX_W + '" height="' + PERSON_H + '" rx="8"></rect><text class="tcf-code" x="12" y="17">' + esc(person.code) + '</text>' +
+          personLines.map(function (part,lineIndex) { return '<text class="tcf-person-name" x="12" y="' + (37 + lineIndex * 14) + '">' + esc(part) + '</text>'; }).join('') + '</g>';
       }).join('');
       return main + family;
     }).join('');
 
     nodesLayer.querySelectorAll('[data-tcf-code]').forEach(function (group) {
       function activate() {
-        var code = group.getAttribute('data-tcf-code');
-        var node = structuralNodes.get(code);
-        if (!node) return;
-        selected = code;
-        searchFocused = '';
-        showRecord(byCode.get(code) || { code: code, name: labelFor(node), note: node.detail || '' });
-        if ((node.children || []).length) node.expanded = !node.expanded;
+        var code = group.getAttribute('data-tcf-code'), node = nodeByCode.get(code); if (!node) return;
+        selected = code; searchFocused = ''; showRecord(node.record);
+        if (node.children.length) node.expanded = !node.expanded;
         render();
       }
       group.addEventListener('click', function (event) { event.stopPropagation(); activate(); });
-      group.addEventListener('keydown', function (event) {
-        if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); activate(); }
-      });
+      group.addEventListener('keydown', function (event) { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); activate(); } });
     });
-
     nodesLayer.querySelectorAll('[data-tcf-person]').forEach(function (group) {
-      function activate() {
-        var person = byCode.get(group.getAttribute('data-tcf-person'));
-        if (!person) return;
-        selected = person.code;
-        searchFocused = '';
-        showRecord(person);
-        render();
-      }
+      function activate() { var person = byCode.get(group.getAttribute('data-tcf-person')); if (!person) return; selected = person.code; searchFocused = ''; showRecord(person); render(); }
       group.addEventListener('click', function (event) { event.stopPropagation(); activate(); });
-      group.addEventListener('keydown', function (event) {
-        if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); activate(); }
-      });
+      group.addEventListener('keydown', function (event) { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); activate(); } });
     });
     apply();
-  }
-
-  function detailElements() {
-    return {
-      box: document.querySelector('#details,[data-tree-details]'),
-      title: document.querySelector('#detailTitle,[data-tree-detail-title]'),
-      code: document.querySelector('#detailCode,[data-tree-detail-code]'),
-      text: document.querySelector('#detailText,[data-tree-detail-text]'),
-      section: document.querySelector('#detailSection')
-    };
   }
 
   var isEnglish = (document.documentElement.lang || '').toLowerCase().indexOf('en') === 0;
+  function detailElements() { return { box:document.querySelector('#details,[data-tree-details]'), title:document.querySelector('#detailTitle,[data-tree-detail-title]'), code:document.querySelector('#detailCode,[data-tree-detail-code]'), text:document.querySelector('#detailText,[data-tree-detail-text]') }; }
   function showRecord(person) {
-    var details = detailElements();
-    if (!details.box) return;
+    var details = detailElements(); if (!details.box) return;
     if (details.title) details.title.textContent = person.name || (isEnglish ? 'Unknown person' : 'Nepoznata osoba');
     if (details.code) details.code.textContent = (isEnglish ? 'Code: ' : 'Šifra: ') + (person.code || '');
-    if (details.section) details.section.textContent = '';
-    if (details.text) {
-      details.text.textContent = [
-        person.qualifier,
-        person.relation,
-        person.father ? (isEnglish ? 'Father: ' : 'Otac: ') + person.father : '',
-        person.mother ? (isEnglish ? 'Mother: ' : 'Majka: ') + person.mother : '',
-        person.note
-      ].filter(Boolean).join('\n');
-    }
+    if (details.text) details.text.textContent = [person.qualifier, person.relation, person.father ? (isEnglish ? 'Father: ' : 'Otac: ') + person.father : '', person.mother ? (isEnglish ? 'Mother: ' : 'Majka: ') + person.mother : '', person.note].filter(Boolean).join('\n');
     details.box.classList.add('open');
   }
 
-  function apply() {
-    viewport.setAttribute('transform', 'translate(' + panX + ',' + panY + ') scale(' + scale + ')');
-  }
-
+  function apply() { viewport.setAttribute('transform', 'translate(' + panX + ',' + panY + ') scale(' + scale + ')'); }
   function fit() {
-    var rectangle = svg.getBoundingClientRect();
-    if (!rectangle.width || !rectangle.height) return;
-    scale = Math.max(0.07, Math.min((rectangle.width - 42) / bounds.width, (rectangle.height - 42) / bounds.height, 1.12));
-    panX = (rectangle.width - bounds.width * scale) / 2;
-    panY = (rectangle.height - bounds.height * scale) / 2;
-    searchFocused = '';
-    apply();
+    var rect = svg.getBoundingClientRect(); if (!rect.width || !rect.height) return;
+    scale = Math.max(0.06, Math.min((rect.width - 42) / bounds.width, (rect.height - 42) / bounds.height, 1.1));
+    panX = (rect.width - bounds.width * scale) / 2; panY = (rect.height - bounds.height * scale) / 2; searchFocused = ''; apply();
   }
-
-  function zoom(factor, centerX, centerY) {
-    var old = scale;
-    scale = Math.max(0.07, Math.min(4, scale * factor));
-    panX = centerX - (centerX - panX) * (scale / old);
-    panY = centerY - (centerY - panY) * (scale / old);
-    apply();
+  function zoom(factor,cx,cy) {
+    var old = scale; scale = Math.max(0.06, Math.min(4, scale * factor));
+    panX = cx - (cx - panX) * (scale / old); panY = cy - (cy - panY) * (scale / old); apply();
   }
+  function setDepth(maxDepth) { walk(treeData, function (node,depth) { node.expanded = depth < maxDepth; }); treeData.expanded = true; }
+  function bindButton(selector,handler) { var el=document.querySelector(selector); if(el) el.addEventListener('click',handler); }
+  bindButton('#expandAll,[data-tree-action="expand"]', function(){ walk(treeData,function(node){node.expanded=true;}); render(); fit(); });
+  bindButton('#collapse,[data-tree-action="collapse"]', function(){ walk(treeData,function(node){node.expanded=false;}); treeData.expanded=true; render(); fit(); });
+  bindButton('#threeLevels,[data-tree-action="three"]', function(){ setDepth(3); render(); fit(); });
+  bindButton('#fit,[data-tree-action="fit"]', fit);
+  bindButton('#zoomIn,[data-tree-action="zoom-in"]', function(){ zoom(1.22,svg.clientWidth/2,svg.clientHeight/2); });
+  bindButton('#zoomOut,[data-tree-action="zoom-out"]', function(){ zoom(0.82,svg.clientWidth/2,svg.clientHeight/2); });
 
-  function setDepth(maxDepth) {
-    walk(treeData, function (node, _parent, depth) { node.expanded = depth < maxDepth; });
-    treeData.expanded = true;
+  function normalize(value) { return clean(value).toLocaleLowerCase(isEnglish?'en':'hr').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/[^a-z0-9]+/g,' ').trim(); }
+  function searchScore(person,query) {
+    var code=normalize(person.code), name=normalize(person.name), hay=normalize([person.code,person.name,person.qualifier,person.father,person.mother,person.relation,person.note].join(' '));
+    if(query===code) return 0; if(query===name) return 1; if(code.indexOf(query)===0) return 2; if(name.indexOf(query)===0) return 3; if(hay.indexOf(query)>=0) return 4; return Infinity;
   }
-
-  function replaceControl(selector, handler) {
-    var old = document.querySelector(selector);
-    if (!old) return null;
-    var fresh = old.cloneNode(true);
-    old.replaceWith(fresh);
-    fresh.addEventListener('click', handler);
-    return fresh;
-  }
-
-  replaceControl('#expandAll,[data-tree-action="expand"]', function () { walk(treeData, function (node) { node.expanded = true; }); render(); fit(); });
-  replaceControl('#collapse,[data-tree-action="collapse"]', function () { walk(treeData, function (node) { node.expanded = false; }); treeData.expanded = true; render(); fit(); });
-  replaceControl('#threeLevels,[data-tree-action="three"]', function () { setDepth(3); render(); fit(); });
-  replaceControl('#fit,[data-tree-action="fit"]', fit);
-  replaceControl('#zoomIn,[data-tree-action="zoom-in"]', function () { zoom(1.22, svg.clientWidth / 2, svg.clientHeight / 2); });
-  replaceControl('#zoomOut,[data-tree-action="zoom-out"]', function () { zoom(0.82, svg.clientWidth / 2, svg.clientHeight / 2); });
-
-  document.querySelectorAll('.branch-button').forEach(function (old) {
-    var fresh = old.cloneNode(true);
-    old.replaceWith(fresh);
-    fresh.addEventListener('click', function () {
-      var target = clean(fresh.getAttribute('data-code'));
-      walk(treeData, function (node) {
-        if (target && clean(node.code).indexOf(target) === 0) node.expanded = true;
-      });
-      render();
-      fit();
-    });
-  });
-
-  function normalize(value) {
-    return clean(value).toLocaleLowerCase(isEnglish ? 'en' : 'hr').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/[^a-z0-9]+/g, ' ').trim();
-  }
-
-  function searchScore(person, query) {
-    var code = normalize(person.code);
-    var name = normalize(person.name);
-    var haystack = normalize([person.code, person.name, person.qualifier, person.father, person.mother, person.relation, person.note].join(' '));
-    if (query === code) return 0;
-    if (query === name) return 1;
-    if (code.indexOf(query) === 0) return 2;
-    if (name.indexOf(query) === 0) return 3;
-    if (haystack.indexOf(query) >= 0) return 4;
-    return Infinity;
-  }
-
-  function expandAncestors(code) {
-    function visit(node) {
-      if (node.code === code) return true;
-      for (var index = 0; index < (node.children || []).length; index += 1) {
-        if (visit(node.children[index])) {
-          node.expanded = true;
-          return true;
-        }
-      }
-      return false;
-    }
-    visit(treeData);
-  }
-
-  function elementForCode(code) {
-    var result = null;
-    nodesLayer.querySelectorAll('[data-tcf-code],[data-tcf-person]').forEach(function (element) {
-      if (element.getAttribute('data-tcf-code') === code || element.getAttribute('data-tcf-person') === code) result = element;
-    });
-    return result;
-  }
-
+  function expandAncestors(node) { var current=node; while(current){ if(current.parent) current.parent.expanded=true; current=current.parent; } }
+  function elementForCode(code) { return nodesLayer.querySelector('[data-tcf-code="' + CSS.escape(code) + '"],[data-tcf-person="' + CSS.escape(code) + '"]'); }
   function focusRecord(person) {
-    var hostCode = structuralNodes.has(person.code) ? person.code : nearestStructuralHost(person);
-    expandAncestors(hostCode);
-    selected = person.code;
-    searchFocused = person.code;
-    render();
-    requestAnimationFrame(function () {
-      var targetBounds = renderedBounds.get(person.code) || renderedBounds.get(hostCode);
-      var target = elementForCode(person.code) || elementForCode(hostCode);
-      if (!targetBounds || !target) return;
-      var rectangle = svg.getBoundingClientRect();
-      var desiredScale = Math.max(1.45, Math.min(2.1, Math.min((rectangle.width * 0.62) / targetBounds.width, (rectangle.height * 0.42) / targetBounds.height)));
-      scale = desiredScale;
-      panX = rectangle.width / 2 - (targetBounds.x + targetBounds.width / 2) * scale;
-      panY = rectangle.height / 2 - (targetBounds.y + targetBounds.height / 2) * scale;
+    var node = nodeByCode.get(person.code) || nodeByCode.get(person.hostCode);
+    if (node) expandAncestors(node);
+    selected = person.code; searchFocused = person.code; render();
+    requestAnimationFrame(function(){
+      var targetBounds = renderedBounds.get(person.code) || (node && renderedBounds.get(node.code));
+      var target = elementForCode(person.code) || (node && elementForCode(node.code));
+      if(!targetBounds || !target) return;
+      var rect=svg.getBoundingClientRect();
+      var desired=Math.min(2.5,Math.max(1.65,Math.min((rect.width*0.68)/targetBounds.width,(rect.height*0.48)/targetBounds.height)));
+      scale=desired;
+      panX=rect.width/2-(targetBounds.x+targetBounds.width/2)*scale;
+      panY=rect.height/2-(targetBounds.y+targetBounds.height/2)*scale;
       apply();
-      try { target.focus({ preventScroll: true }); } catch (_error) { target.focus(); }
+      try{target.focus({preventScroll:true});}catch(_error){target.focus();}
     });
   }
 
-  var searchOld = document.querySelector('#search,#treeSearch,[data-diagram-search-input],[data-tandara-search-input],input[type="search"]');
-  var search = null;
-  if (searchOld) {
-    search = searchOld.cloneNode(true);
-    searchOld.replaceWith(search);
+  var search=document.querySelector('#search,#treeSearch,[data-diagram-search-input],input[type="search"]');
+  var findButton=document.querySelector('#findBtn,[data-diagram-search-button]');
+  function status(message){ var el=document.querySelector('#status,[data-diagram-status]'); if(el){el.textContent=message;el.classList.add('show');window.setTimeout(function(){el.classList.remove('show');},2600);} }
+  function find(){
+    if(!search) return; var query=normalize(search.value); if(!query) return;
+    var matches=records.map(function(person,index){return{person:person,index:index,score:searchScore(person,query)};}).filter(function(m){return Number.isFinite(m.score);});
+    matches.sort(function(a,b){return a.score-b.score||a.index-b.index;});
+    if(!matches.length){status((isEnglish?'No result for: ':'Nema rezultata za: ')+search.value.trim());return;}
+    showRecord(matches[0].person); focusRecord(matches[0].person);
   }
-  var findOld = document.querySelector('#findBtn,[data-diagram-search-button],[data-tandara-search-button]');
-  var findButton = null;
-  if (findOld) {
-    findButton = findOld.cloneNode(true);
-    findOld.replaceWith(findButton);
-  }
-  document.querySelectorAll('.search-results,.tandara-person-search-results').forEach(function (panel) { panel.hidden = true; });
+  if(findButton) findButton.addEventListener('click',find);
+  if(search) search.addEventListener('keydown',function(event){if(event.key==='Enter'){event.preventDefault();find();}});
+  var close=document.querySelector('#closeDetails,[data-tree-close]'); if(close) close.addEventListener('click',function(){var d=detailElements();if(d.box)d.box.classList.remove('open');});
 
-  function showStatus(message) {
-    var status = document.querySelector('#status,[data-tandara-search-status]');
-    if (status) {
-      status.textContent = message;
-      status.classList.add('show');
-      window.setTimeout(function () { status.classList.remove('show'); }, 2600);
-    }
-  }
+  var dragging=false,dragStart=null;
+  svg.addEventListener('pointerdown',function(event){if(event.target.closest('[data-tcf-code],[data-tcf-person]'))return;dragging=true;dragStart={x:event.clientX,y:event.clientY,panX:panX,panY:panY};try{svg.setPointerCapture(event.pointerId);}catch(_error){}});
+  svg.addEventListener('pointermove',function(event){if(!dragging)return;panX=dragStart.panX+event.clientX-dragStart.x;panY=dragStart.panY+event.clientY-dragStart.y;apply();});
+  svg.addEventListener('pointerup',function(){dragging=false;}); svg.addEventListener('pointercancel',function(){dragging=false;});
+  svg.addEventListener('wheel',function(event){event.preventDefault();var rect=svg.getBoundingClientRect();zoom(event.deltaY<0?1.12:0.89,event.clientX-rect.left,event.clientY-rect.top);},{passive:false});
 
-  function find() {
-    if (!search) return;
-    var query = normalize(search.value);
-    if (!query) return;
-    var matches = records.map(function (person, index) {
-      return { person: person, index: index, score: searchScore(person, query) };
-    }).filter(function (match) { return Number.isFinite(match.score); });
-    matches.sort(function (a, b) { return a.score - b.score || a.index - b.index; });
-    if (!matches.length) {
-      showStatus((isEnglish ? 'No result for: ' : 'Nema rezultata za: ') + search.value.trim());
-      return;
-    }
-    var person = matches[0].person;
-    showRecord(person);
-    focusRecord(person);
+  function updateSubtitle(){
+    var subtitle=document.querySelector('.subtitle,.diagram-subtitle');if(!subtitle)return;
+    var spouses=records.filter(function(p){return personClass(p)==='tcf-spouse';}).length;
+    var daughters=records.filter(function(p){return personClass(p)==='tcf-daughter';}).length;
+    var terminal=records.filter(function(p){return isTerminalSonCode(p.code);}).length;
+    var carriers=structuralRecords.length-terminal;
+    subtitle.innerHTML=isEnglish
+      ? '<strong>'+records.length+'</strong> coded people · <strong>'+carriers+'</strong> numbered carriers · <strong>'+spouses+'</strong> spouses · <strong>'+daughters+'</strong> daughters · <strong>'+terminal+'</strong> S sons'
+      : '<strong>'+records.length+'</strong> osoba sa šifrom · <strong>'+carriers+'</strong> brojčanih nositelja · <strong>'+spouses+'</strong> supruga · <strong>'+daughters+'</strong> kćeri · <strong>'+terminal+'</strong> S sinova';
   }
 
-  if (findButton) findButton.addEventListener('click', find);
-  if (search) search.addEventListener('keydown', function (event) {
-    if (event.key === 'Enter') { event.preventDefault(); find(); }
-  });
-
-  var close = document.querySelector('#closeDetails,[data-tree-close]');
-  if (close) close.addEventListener('click', function () {
-    var details = detailElements();
-    if (details.box) details.box.classList.remove('open');
-  });
-
-  var dragging = false;
-  var dragStart = null;
-  svg.addEventListener('pointerdown', function (event) {
-    if (event.target.closest('[data-tcf-code],[data-tcf-person]')) return;
-    dragging = true;
-    dragStart = { x: event.clientX, y: event.clientY, panX: panX, panY: panY };
-    try { svg.setPointerCapture(event.pointerId); } catch (_error) {}
-  });
-  svg.addEventListener('pointermove', function (event) {
-    if (!dragging) return;
-    panX = dragStart.panX + event.clientX - dragStart.x;
-    panY = dragStart.panY + event.clientY - dragStart.y;
-    apply();
-  });
-  svg.addEventListener('pointerup', function () { dragging = false; });
-  svg.addEventListener('pointercancel', function () { dragging = false; });
-  svg.addEventListener('wheel', function (event) {
-    event.preventDefault();
-    var rectangle = svg.getBoundingClientRect();
-    zoom(event.deltaY < 0 ? 1.12 : 0.89, event.clientX - rectangle.left, event.clientY - rectangle.top);
-  }, { passive: false });
-
-  function updateSubtitle() {
-    var subtitle = document.querySelector('.diagram-subtitle,.subtitle');
-    if (!subtitle) return;
-    var spouseCount = records.filter(function (person) { return personClass(person) === 'tcf-spouse'; }).length;
-    var daughterCount = records.filter(function (person) { return personClass(person) === 'tcf-daughter'; }).length;
-    var terminalSonCount = records.filter(function (person) { return isTerminalSonCode(person.code); }).length;
-    var carrierCount = records.filter(function (person) { return structuralNodes.has(person.code) && !isTerminalSonCode(person.code); }).length;
-    subtitle.innerHTML = isEnglish
-      ? '<strong>' + records.length + '</strong> coded people · <strong>' + carrierCount + '</strong> surname carriers · <strong>' + spouseCount + '</strong> spouses · <strong>' + daughterCount + '</strong> daughters · <strong>' + terminalSonCount + '</strong> terminal sons'
-      : '<strong>' + records.length + '</strong> osoba sa šifrom · <strong>' + carrierCount + '</strong> nositelja prezimena · <strong>' + spouseCount + '</strong> supruga · <strong>' + daughterCount + '</strong> kćeri · <strong>' + terminalSonCount + '</strong> završnih sinova';
-  }
-
-  setDepth(2);
-  updateSubtitle();
-  render();
-  requestAnimationFrame(fit);
-  window.addEventListener('resize', fit);
-  window.TandaraCompleteFamilyDiagramReady = true;
+  setDepth(2); updateSubtitle(); render(); requestAnimationFrame(fit); window.addEventListener('resize',fit);
+  window.TandaraCompleteFamilyDiagramReady=true;
 }());

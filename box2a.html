@@ -1,541 +1,241 @@
+
 <!DOCTYPE html>
 
 <html lang="hr">
 <head>
+<meta content="strict-origin-when-cross-origin" name="referrer"/>
+<meta content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; script-src 'self'; script-src-attr 'none'; connect-src 'self'; style-src 'self' 'sha256-y3wwt600KNt6Q05Omq1ysNO7o9ySzNVZ3kt0lg7Ixd8=' 'unsafe-hashes' 'sha256-T6AAKdWxO6p6GZVyzGAJDSLhOoPuuoZ6LlqMX153CvM=' 'sha256-s9H6/WV28hZ6x2zvjlQOWvjk8PQ7HAn3I7P58L736/Y=' 'sha256-kUE4zBho9VvWELaCY3kuR7wQE56oEIOdFULbVSmWRWs=' 'sha256-Pcd7uxwpXDB+Ij3eQGmkDLZc+s5rs6lGiVoC6I1yZjw='; style-src-elem 'self' 'sha256-y3wwt600KNt6Q05Omq1ysNO7o9ySzNVZ3kt0lg7Ixd8='; style-src-attr 'unsafe-hashes' 'sha256-T6AAKdWxO6p6GZVyzGAJDSLhOoPuuoZ6LlqMX153CvM=' 'sha256-s9H6/WV28hZ6x2zvjlQOWvjk8PQ7HAn3I7P58L736/Y=' 'sha256-kUE4zBho9VvWELaCY3kuR7wQE56oEIOdFULbVSmWRWs=' 'sha256-Pcd7uxwpXDB+Ij3eQGmkDLZc+s5rs6lGiVoC6I1yZjw='; form-action 'self' https://formsubmit.co; upgrade-insecure-requests; block-all-mixed-content;" http-equiv="Content-Security-Policy"/>
 <meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-<meta name="referrer" content="strict-origin-when-cross-origin"/>
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; script-src 'self' 'sha256-B4t79WzCrxLLtfOEmi7viRvUU8v96A0HasywWdqDn5U=' 'sha256-Cn6+n5HC0z0/6oQ3sCtqBSzNqC0mHeIL200Fjz+nrsU='; script-src-attr 'none'; connect-src 'self'; style-src 'self' 'sha256-cxK/sN+pmR+4ksDihwnRYOAL7H21DUPNiqk4/UoscrU=' 'sha256-oeL8IU0hxI1mpvb67WLZVt8oHW8FLFJRE21KlIlup9I=' 'unsafe-hashes' 'sha256-iYwYhiMcsGmXCUzLEpEzZNz5dINrlkqf1sLbLhEcqGM=' 'sha256-jNTAZOEneas6SvOv59AToI9b4eb19A9bzc0MAy0280w=' 'sha256-+pzw8A81bqgs+klLPI5/CiCBM2LSYCC10l7bhdLrhRc=' 'sha256-5+0ERooZeJ2DwksPTUalywdILFHsBc2NB8vaX7fQP58=' 'sha256-EDvhiqz4BtA7Zn5Rfsa8mIvE+vt07Thi2VzcVis5grY=' 'sha256-5JAy+7S4ZDHhY5EsVihCqUCzZaFytTaImMUtGcWF17A=' 'sha256-kzWVul6FLYVHE4Wl5jp8OVvxDsmYu+xRA4hEjw2vbE0=' 'sha256-bJRerTjYkZKZGl5/mEWL4C+z8bO0UA1U732klHkrAvw=' 'sha256-xuphXEYQsLAOeqZkSou1Ajd/CFCtoEBPYyrG+2Y33vg='; style-src-elem 'self' 'sha256-cxK/sN+pmR+4ksDihwnRYOAL7H21DUPNiqk4/UoscrU=' 'sha256-oeL8IU0hxI1mpvb67WLZVt8oHW8FLFJRE21KlIlup9I=' 'sha256-bJRerTjYkZKZGl5/mEWL4C+z8bO0UA1U732klHkrAvw=' 'sha256-xuphXEYQsLAOeqZkSou1Ajd/CFCtoEBPYyrG+2Y33vg='; style-src-attr 'unsafe-hashes' 'sha256-+pzw8A81bqgs+klLPI5/CiCBM2LSYCC10l7bhdLrhRc=' 'sha256-5+0ERooZeJ2DwksPTUalywdILFHsBc2NB8vaX7fQP58=' 'sha256-kzWVul6FLYVHE4Wl5jp8OVvxDsmYu+xRA4hEjw2vbE0=' 'sha256-EDvhiqz4BtA7Zn5Rfsa8mIvE+vt07Thi2VzcVis5grY=' 'sha256-5JAy+7S4ZDHhY5EsVihCqUCzZaFytTaImMUtGcWF17A=' 'sha256-jNTAZOEneas6SvOv59AToI9b4eb19A9bzc0MAy0280w=' 'sha256-iYwYhiMcsGmXCUzLEpEzZNz5dINrlkqf1sLbLhEcqGM='; form-action 'self' https://formsubmit.co; upgrade-insecure-requests; block-all-mixed-content;"/>
-<title>Jurina grana | TANDARA-PREZIME</title>
-<meta name="description" content="Jurina grana roda Tandara: Jure Tandara, supruga Matija rođ. Lekić, sin Frane, unuk Nikola te kćeri Anđa i Ana u interaktivnom rodoslovnom dijagramu."/>
-<link rel="canonical" href="https://tandarajure-crypto.github.io/Tandara/box2a.html"/>
-<link rel="alternate" hreflang="hr" href="https://tandarajure-crypto.github.io/Tandara/box2a.html"/>
-<link rel="alternate" hreflang="en" href="https://tandarajure-crypto.github.io/Tandara/box2a-en.html"/>
-<link rel="alternate" hreflang="x-default" href="https://tandarajure-crypto.github.io/Tandara/box2a.html"/>
-<meta property="og:type" content="website"/>
-<meta property="og:title" content="Jurina grana | TANDARA-PREZIME"/>
-<meta property="og:description" content="Interaktivni prikaz Jurine grane roda Tandara sa suprugama, sinovima i kćerima."/>
-<meta property="og:url" content="https://tandarajure-crypto.github.io/Tandara/box2a.html"/>
-<meta property="og:image" content="https://tandarajure-crypto.github.iofamily-tree.png"/>
-<meta name="twitter:card" content="summary_large_image"/>
-
-
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Jurina grana – Digitalni arhiv roda Tandara</title>
+<meta content="Jurina grana roda Tandara s jedinstvenim interaktivnim rodoslovnim dijagramom." name="description"/>
+<link href="https://tandarajure-crypto.github.io/Tandara/box2a.html" rel="canonical"/>
+<link href="https://tandarajure-crypto.github.io/Tandara/box2a.html" hreflang="hr" rel="alternate"/>
+<link href="https://tandarajure-crypto.github.io/Tandara/box2a-en.html" hreflang="en" rel="alternate"/>
+<link href="https://tandarajure-crypto.github.io/Tandara/box2a.html" hreflang="x-default" rel="alternate"/>
+<meta content="website" property="og:type"/>
+<meta content="Petar | TANDARA-PREZIME" property="og:title"/>
+<meta content="Stranica Digitalnog arhiva roda Tandara posvećena Petru Tandari i Jeli rođ. Budić, s obiteljskim podacima i interaktivnim rodoslovnim dijagramom Petrove grane." property="og:description"/>
+<meta content="https://tandarajure-crypto.github.io/Tandara/box2a.html" property="og:url"/>
+<meta content="https://tandarajure-crypto.github.iofamily-tree.png" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
 <link href="style.css?v=14" rel="stylesheet"/>
-
 <style>
-/* Box2a koristi cijelu slobodnu širinu desno od stalnog lijevog stupca. */
-html,body{width:100%;max-width:none}
-body.box-mobile-split .layout{width:100%;max-width:none;margin:0;grid-template-columns:auto minmax(0,1fr);gap:0;padding:0}
-body.box-mobile-split .content-page{width:100%;max-width:none;min-width:0;padding:0;justify-content:stretch}
-body.box-mobile-split .content-card{--card-pad-x:42px;width:100%;max-width:none;min-width:0;margin:0;border-radius:0;padding:36px var(--card-pad-x) 0}
+/* Hrvatske box stranice: dvostupčana navigacija samo na tabletima i mobitelima. */
+@media (max-width: 900px){
+  body.box-mobile-split .mobile-box-topbar{
+    position:sticky;
+    top:0;
+  }
+  body.box-mobile-split .layout{
+    display:grid;
+    grid-template-columns:minmax(150px, 34vw) minmax(0, 1fr);
+    align-items:start;
+    gap:0;
+    width:100%;
+    max-width:100%;
+    padding:0;
+  }
+  body.box-mobile-split .left-menu{
+    position:sticky;
+    top:59px;
+    width:100%;
+    height:calc(100vh - 59px);
+    max-height:calc(100vh - 59px);
+    overflow-y:auto;
+    overflow-x:hidden;
+    border-right:3px solid #7a7a7a;
+    border-bottom:0;
+    padding:10px 0 14px;
+    z-index:20;
+  }
+  body.box-mobile-split .left-menu .home-button,
+  body.box-mobile-split .left-menu .lang-switch,
+  body.box-mobile-split .left-menu > h2,
+  body.box-mobile-split .left-menu .author-photo,
+  body.box-mobile-split .left-menu .flagbox{
+    display:none;
+  }
+  body.box-mobile-split .heritage-menu{
+    padding:0 9px;
+  }
+  body.box-mobile-split .heritage-menu li{
+    align-items:flex-start;
+    gap:5px;
+    padding:9px 2px;
+  }
+  body.box-mobile-split .heritage-menu li span{
+    flex:0 0 auto;
+    font-size:12px;
+    line-height:1.35;
+  }
+  body.box-mobile-split .heritage-menu a{
+    display:block;
+    min-width:0;
+    font-size:clamp(12px, 2.15vw, 16px);
+    line-height:1.25;
+    overflow-wrap:anywhere;
+  }
+  body.box-mobile-split .content-page{
+    min-width:0;
+    width:100%;
+    padding:12px 8px;
+  }
+  body.box-mobile-split .content-card{
+    min-width:0;
+    width:100%;
+    padding:20px 12px;
+    border-radius:10px;
+  }
+  body.box-mobile-split .content-card h1{
+    font-size:clamp(22px, 5vw, 32px);
+    margin-bottom:18px;
+  }
+  body.box-mobile-split .content-card h2{
+    font-size:clamp(17px, 3.7vw, 22px);
+  }
+  body.box-mobile-split .content-card p,
+  body.box-mobile-split .content-card li{
+    font-size:clamp(14px, 2.8vw, 17px);
+    line-height:1.55;
+    overflow-wrap:anywhere;
+  }
+  body.box-mobile-split .seo-intro{
+    margin:0 0 22px;
+    font-size:clamp(13px, 2.5vw, 16px);
+    line-height:1.5;
+  }
+}
+@media (max-width: 480px){
+  body.box-mobile-split .layout{
+    grid-template-columns:minmax(128px, 42vw) minmax(0, 1fr);
+  }
+  body.box-mobile-split .heritage-menu{
+    padding:0 6px;
+  }
+  body.box-mobile-split .heritage-menu li{
+    gap:3px;
+    padding:8px 1px;
+  }
+  body.box-mobile-split .heritage-menu a{
+    font-size:12px;
+  }
+  body.box-mobile-split .content-page{
+    padding:8px 5px;
+  }
+  body.box-mobile-split .content-card{
+    padding:16px 9px;
+  }
+  body.box-mobile-split .content-card p,
+  body.box-mobile-split .content-card li{
+    font-size:14px;
+  }
+}
 
-/* Dvostupčana navigacija na tabletima i mobitelima, jednaka boxovima 2b, 2c i 2d. */
-@media (max-width:900px){
-  body.box-mobile-split .layout{display:grid;grid-template-columns:minmax(150px,34vw) minmax(0,1fr);align-items:start;gap:0;width:100%;max-width:100%;padding:0}
-  body.box-mobile-split .left-menu{position:sticky;top:0;width:100%;height:100vh;max-height:100vh;overflow-y:auto;overflow-x:hidden;border-right:3px solid #7a7a7a;border-bottom:0;padding:10px 0 14px;z-index:20}
-  body.box-mobile-split .left-menu .home-button,body.box-mobile-split .left-menu .lang-switch,body.box-mobile-split .left-menu>h2,body.box-mobile-split .left-menu .author-photo,body.box-mobile-split .left-menu .flagbox{display:none}
-  body.box-mobile-split .heritage-menu{padding:0 9px}
-  body.box-mobile-split .heritage-menu li{align-items:flex-start;gap:5px;padding:9px 2px}
-  body.box-mobile-split .heritage-menu li span{flex:0 0 auto;font-size:12px;line-height:1.35}
-  body.box-mobile-split .heritage-menu a{display:block;min-width:0;font-size:clamp(12px,2.15vw,16px);line-height:1.25;overflow-wrap:anywhere}
-  body.box-mobile-split .content-page{min-width:0;width:100%;padding:0}
-  body.box-mobile-split .content-card{--card-pad-x:12px;min-width:0;width:100%;padding:20px var(--card-pad-x) 0;border-radius:0}
-  body.box-mobile-split .content-card h1{font-size:clamp(22px,5vw,32px);margin-bottom:18px}
-  body.box-mobile-split .content-card h2{font-size:clamp(17px,3.7vw,22px)}
-  body.box-mobile-split .content-card p,body.box-mobile-split .content-card li{font-size:clamp(14px,2.8vw,17px);line-height:1.55;overflow-wrap:anywhere}
+/* Petrova grana: zaglavlje, obiteljski podaci i upute iznad dijagrama. */
+.branch-heading{
+  text-align:center;
+  margin:0 0 24px;
+}
+.branch-heading .branch-flag{
+  display:block;
+  width:46px;
+  height:auto;
+  margin:0 auto 10px;
+}
+.branch-heading h1{
+  margin:0;
+  text-transform:uppercase;
+}
+.branch-summary,
+.diagram-instructions{
+  margin:0 0 26px;
+}
+.branch-summary h2,
+.diagram-instructions h2{
+  margin:0 0 12px;
+}
+.branch-summary p{
+  margin:0 0 12px;
+}
+.family-data{
+  line-height:1.65;
+}
+.diagram-instructions ol{
+  margin:0;
+  padding-left:24px;
+}
+.diagram-instructions li{
+  margin:0 0 9px;
 }
 @media (max-width:480px){
-  body.box-mobile-split .layout{grid-template-columns:minmax(128px,42vw) minmax(0,1fr)}
-  body.box-mobile-split .heritage-menu{padding:0 6px}
-  body.box-mobile-split .heritage-menu li{gap:3px;padding:8px 1px}
-  body.box-mobile-split .heritage-menu a{font-size:12px}
-  body.box-mobile-split .content-card{--card-pad-x:9px;padding:16px var(--card-pad-x) 0}
-  body.box-mobile-split .content-card p,body.box-mobile-split .content-card li{font-size:14px}
-}
-
-.branch-heading{text-align:center;margin:0 0 24px}
-.branch-heading .branch-flag{display:block;width:46px;height:auto;margin:0 auto 10px}
-.branch-heading h1{margin:0;text-transform:uppercase}
-.branch-summary,.diagram-instructions{margin:0 auto 26px;max-width:1280px}
-.branch-summary h2,.diagram-instructions h2{margin:0 0 12px}
-.branch-summary p{margin:0 0 13px}
-.family-data{line-height:1.65}
-.diagram-instructions ol{margin:0;padding-left:24px}
-.diagram-instructions li{margin:0 0 9px}
-.family-dates{font-weight:700;white-space:nowrap}
-@media(max-width:480px){.branch-heading .branch-flag{width:38px}.family-dates{white-space:normal}.diagram-instructions ol{padding-left:20px}}
-
-/* Interaktivni dijagram — isti tehnički sustav kao na dovršenim granama. */
-.jure-diagram{
-  --green:#174f39;--green-dark:#0d3425;--paper:#fbfaf6;--ink:#22302a;--muted:#68736d;--line:#d9ddd9;
-  width:calc(100% + var(--card-pad-x) + var(--card-pad-x));height:850px;min-height:590px;margin:30px calc(0px - var(--card-pad-x)) 0;
-  display:flex;flex-direction:column;overflow:hidden;background:var(--paper);border-top:1px solid #d8ddd8;border-bottom:1px solid #d8ddd8;
-  box-shadow:0 6px 24px rgba(0,0,0,.08);font-family:Arial,Helvetica,sans-serif;color:var(--ink)
-}
-.jure-diagram *{box-sizing:border-box}
-.jure-diagram button,.jure-diagram input,.jure-diagram a{font:inherit}
-.jure-diagram button,.jure-diagram input,.jure-diagram .diagram-header-btn{border:1px solid #c9cec9;border-radius:8px;background:#fff;color:#26342e;padding:9px 11px;font-size:13px}
-.jure-diagram button,.jure-diagram .diagram-header-btn{cursor:pointer;white-space:nowrap}
-.jure-diagram button:hover,.jure-diagram .diagram-header-btn:hover{background:#f0f4f1}
-.jure-diagram button:focus-visible,.jure-diagram input:focus-visible,.jure-diagram a:focus-visible,.jure-diagram .node:focus-visible,.jure-diagram .family-action:focus-visible{outline:3px solid #d7a629;outline-offset:2px}
-.jure-diagram button.primary{background:var(--green);color:#fff;border-color:var(--green)}
-.jure-diagram .diagram-header{flex:0 0 auto;display:grid;grid-template-columns:minmax(260px,max-content) max-content minmax(0,1fr);align-items:center;gap:8px 12px;padding:8px 14px;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 2px 10px rgba(0,0,0,.05);z-index:20}
-.jure-diagram .diagram-title{min-width:0;max-width:420px}
-.jure-diagram .diagram-title h2{margin:0 0 2px;color:var(--green);font-size:21px;white-space:nowrap}
-.jure-diagram .diagram-subtitle{font-size:12px;color:var(--muted);line-height:1.3;white-space:nowrap}
-.jure-diagram .diagram-actions{display:flex;align-items:center;justify-content:flex-end;gap:6px;flex-wrap:nowrap}
-.jure-diagram .diagram-header-btn{text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:6px;line-height:1.2}
-.jure-diagram .diagram-home-button{padding:0;border:0;background:transparent;border-radius:50%}
-.jure-diagram .diagram-home-circle{width:54px;height:54px;background:#c9a46d;border-radius:50%;border:2px solid transparent;box-shadow:0 0 4px rgba(0,0,0,.30);display:flex;align-items:center;justify-content:center;transition:all .15s ease}
-.jure-diagram .diagram-home-button:hover .diagram-home-circle{border-color:#d4af37;background:#d3b07a}
-.jure-diagram .diagram-home-svg{width:26px;height:26px}
-.jure-diagram .lang-icon{width:42px;height:34px;padding:5px!important}
-.jure-diagram .lang-icon.active{border-color:var(--green);box-shadow:inset 0 0 0 1px var(--green);background:#f0f6f2}
-.jure-diagram .lang-icon img{display:block;width:27px;height:18px;object-fit:cover;border-radius:2px}
-.jure-diagram #printDiagram{width:50px;height:42px;padding:2px 4px;display:inline-flex;align-items:center;justify-content:center}
-.jure-diagram #printDiagram img{display:block;width:40px;height:auto;max-height:36px;object-fit:contain}
-.jure-diagram .diagram-tools{min-width:0}
-.jure-diagram .toolbar-scroll{min-width:0;overflow-x:auto;padding:1px 2px 3px;scrollbar-width:thin}
-.jure-diagram .diagram-toolbar{display:flex;align-items:center;gap:6px;width:max-content;min-width:max-content}
-.jure-diagram .search-wrap{display:flex;gap:6px;position:relative;margin-left:2px}
-.jure-diagram #treeSearch{width:245px}
-.jure-diagram .search-results{position:fixed;left:10px;top:80px;width:min(550px,calc(100vw - 20px));max-height:min(420px,65vh);overflow:auto;background:#fff;border:1px solid #c9cec9;border-radius:11px;box-shadow:0 14px 36px rgba(0,0,0,.22);z-index:1000}
-.jure-diagram .search-results[hidden]{display:none}
-.jure-diagram .search-results-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;background:#f5f7f5;border-bottom:1px solid #e0e3e0;font-size:13px;font-weight:700;position:sticky;top:0;z-index:1}
-.jure-diagram .search-results-close{border:0!important;background:transparent!important;padding:2px 7px!important;font-size:20px!important;line-height:1}
-.jure-diagram .search-result-item{display:block;width:100%;margin:0;padding:10px 12px!important;text-align:left;border:0!important;border-bottom:1px solid #eceeec!important;border-radius:0!important;background:#fff!important;white-space:normal}
-.jure-diagram .search-result-item:last-child{border-bottom:0!important}
-.jure-diagram .search-result-item:hover,.jure-diagram .search-result-item:focus-visible{background:#f0f5f1!important}
-.jure-diagram .search-result-label{display:block;color:var(--green);font-size:13px;font-weight:700;line-height:1.35}
-.jure-diagram .search-result-meta,.jure-diagram .search-result-family{display:block;margin-top:3px;font-size:12px;line-height:1.35}
-.jure-diagram .search-result-meta{color:var(--muted)}
-.jure-diagram .search-result-family{color:#7a6551}
-.jure-diagram .workspace{position:relative;flex:1 1 auto;width:100%;max-width:none;min-height:0;overflow:hidden;background:linear-gradient(180deg,#fbfaf6,#f5f3ec)}
-.jure-diagram #treeSvg{width:100%;height:100%;display:block;cursor:grab;user-select:none;touch-action:none}
-.jure-diagram #treeSvg.dragging{cursor:grabbing}
-.jure-diagram .connector{fill:none;stroke:#a9ada8;stroke-width:2}
-.jure-diagram .marriage-line,.jure-diagram .daughter-line{fill:none;stroke:#9b8a8e;stroke-width:1.8}
-.jure-diagram .node,.jure-diagram .family-action{cursor:pointer}
-.jure-diagram .node rect,.jure-diagram .family-action rect{stroke-width:2;filter:drop-shadow(0 2px 2px rgba(0,0,0,.07));transition:stroke-width .15s,filter .15s}
-.jure-diagram .node:hover rect,.jure-diagram .node:focus-visible rect,.jure-diagram .family-action:hover rect,.jure-diagram .family-action:focus-visible rect{stroke-width:3;filter:drop-shadow(0 3px 4px rgba(0,0,0,.14))}
-.jure-diagram .node text,.jure-diagram .family-action text{pointer-events:none}
-.jure-diagram .node .code{font-size:12px;font-weight:700;letter-spacing:.35px}
-.jure-diagram .node .label{font-size:14px;font-weight:600}
-.jure-diagram .node .hint{font-size:12px}
-.jure-diagram .node.selected rect{stroke:#c63030!important;stroke-width:4}
-.jure-diagram .node.match rect{stroke:#be8b00!important;stroke-width:4}
-.jure-diagram .spouse-node rect{fill:#fff3f4;stroke:#a45c68}
-.jure-diagram .daughter-node rect{fill:#f4effa;stroke:#8064a0}
-.jure-diagram .family-title,.jure-diagram .daughter-title{font-size:12px;font-weight:700;fill:#4d3540}
-.jure-diagram .family-meta,.jure-diagram .daughter-meta{font-size:10px;fill:#65545a}
-.jure-diagram .marriage-label{font-size:9px;text-transform:uppercase;letter-spacing:.4px;fill:#8a5f68}
-.jure-diagram .details{position:absolute;top:12px;right:12px;width:min(410px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto;background:rgba(255,255,255,.97);border:1px solid #c9cec9;border-radius:12px;box-shadow:0 12px 32px rgba(0,0,0,.18);padding:17px;transform:translateX(calc(100% + 28px));transition:transform .22s ease;z-index:10}
-.jure-diagram .details.open{transform:translateX(0)}
-.jure-diagram .details h3{margin:0 28px 4px 0;color:var(--green);font-size:20px}
-.jure-diagram .detail-code{color:var(--muted);font-size:12px;margin-bottom:10px}
-.jure-diagram .details p{margin:0!important;font-size:14px!important;line-height:1.5!important;text-align:left!important;white-space:pre-line}
-.jure-diagram .close-details{position:absolute;top:7px;right:7px;border:0!important;background:transparent!important;font-size:22px!important;padding:3px 8px!important}
-.jure-diagram .legend{position:absolute;left:12px;bottom:11px;display:flex;gap:12px;flex-wrap:wrap;padding:7px 10px;background:rgba(255,255,255,.90);border:1px solid #d8ddd8;border-radius:9px;font-size:11px;color:#56615c;max-width:calc(100% - 24px);z-index:3}
-.jure-diagram .legend span{display:flex;align-items:center;gap:5px}
-.jure-diagram .swatch{width:13px;height:13px;border:2px solid;border-radius:3px;display:inline-block}
-.jure-diagram .help{position:absolute;right:12px;bottom:11px;padding:6px 9px;background:rgba(255,255,255,.88);border:1px solid #d8ddd8;border-radius:8px;font-size:11px;color:#68736d;z-index:3}
-.jure-diagram .live-status{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
-
-.jure-diagram:fullscreen{width:100%;height:100dvh;min-height:0;margin:0;border:0;box-shadow:none;background:var(--paper)}
-.jure-diagram:fullscreen .workspace{min-height:0}
-
-@media(max-width:1080px){
-  .jure-diagram .diagram-header{display:flex;flex-direction:column;align-items:stretch;gap:7px;padding:8px 10px}
-  .jure-diagram .diagram-title{width:100%;max-width:none}
-  .jure-diagram .diagram-title h2{font-size:19px;white-space:normal}
-  .jure-diagram .diagram-subtitle{font-size:12px;white-space:normal}
-  .jure-diagram .diagram-actions{justify-content:flex-start;flex-wrap:wrap}
-}
-@media(max-width:600px){
-  .jure-diagram{height:720px;min-height:520px}
-  .jure-diagram .diagram-home-circle{width:44px;height:44px}
-  .jure-diagram .diagram-home-svg{width:22px;height:22px}
-  .jure-diagram button,.jure-diagram input,.jure-diagram .diagram-header-btn{font-size:12px;padding:7px 8px}
-  .jure-diagram #treeSearch{width:190px}
-  .jure-diagram .help{display:none}
-  .jure-diagram .legend{font-size:9px;gap:7px}
-}
-
-@media print{
-  @page{size:landscape;margin:8mm}
-  body{background:#fff!important}
-  .left-menu,.branch-heading,.branch-summary,.diagram-instructions{display:none!important}
-  .layout,.content-page,.content-card{display:block!important;width:100%!important;max-width:none!important;margin:0!important;padding:0!important;border:0!important;box-shadow:none!important}
-  .jure-diagram{width:100%!important;height:185mm!important;min-height:0!important;margin:0!important;border:0!important;box-shadow:none!important}
-  .jure-diagram .diagram-actions,.jure-diagram .diagram-tools,.jure-diagram .details,.jure-diagram .search-results,.jure-diagram .help{display:none!important}
-}
-</style>
-<style data-inline-source="assets/css/common/tandara-search-focus.css">
-@keyframes tandaraSearchFocusPulse{
-  0%,100%{filter:drop-shadow(0 0 0 rgba(185,133,0,0))}
-  35%{filter:drop-shadow(0 0 12px rgba(185,133,0,.95))}
-  70%{filter:drop-shadow(0 0 6px rgba(185,133,0,.65))}
-}
-.tandara-search-focus rect{
-  stroke:#b98500!important;
-  stroke-width:5!important;
-  animation:tandaraSearchFocusPulse 1.15s ease-in-out 2;
-}
-@media (prefers-reduced-motion:reduce){
-  .tandara-search-focus rect{animation:none;filter:drop-shadow(0 0 8px rgba(185,133,0,.75))}
+  .branch-heading .branch-flag{
+    width:38px;
+  }
+  .diagram-instructions ol{
+    padding-left:20px;
+  }
 }
 
 </style>
-<link rel="stylesheet" href="assets/css/common/complete-family-diagram.css?v=20260820">
 </head>
-
 <body class="hr box-mobile-split">
 <div class="layout">
 <aside class="left-menu">
-<a class="home-button" href="index.html" aria-label="Početna">
-  <div class="home-circle">
-    <svg class="home-svg" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5L12 3l9 7.5"></path><path d="M5 10v10h14V10"></path><path d="M10 20v-6h4v6"></path></svg>
-  </div>
+<!-- HOME -->
+<a aria-label="Početna" class="home-button" href="index.html">
+<div class="home-circle">
+<svg aria-hidden="true" class="home-svg" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<path d="M3 10.5L12 3l9 7.5"></path>
+<path d="M5 10v10h14V10"></path>
+<path d="M10 20v-6h4v6"></path>
+</svg>
+</div>
 </a>
+<!-- HR / EN -->
 <div class="lang-switch">
-  <a class="lang-btn flag-btn" href="box2a.html" aria-current="page"><img alt="HR" src="flag-hr.png"/></a>
-  <a class="lang-btn flag-btn" href="box2a-en.html"><img alt="EN" src="flag-uk.png"/></a>
+<a class="lang-btn flag-btn" href="box2a.html">
+<img alt="HR" src="flag-hr.png"/>
+</a>
+<a class="lang-btn flag-btn" href="box2a-en.html">
+<img alt="EN" src="flag-uk.png"/>
+</a>
 </div>
 <h2>TANDARA-PREZIME</h2>
 <ul class="heritage-menu">
-  <li><span>🌳</span><a href="./autor-hr.html">O autoru i projektu</a></li>
-  <li><span>🌳</span><a href="./podrijetlo-hr.html">Podrijetlo prezimena</a></li>
-  <li><span>🌳</span><a href="./rodoslovlje-hr.html">Rodoslovlje roda</a></li>
-  <li><span>🌳</span><a href="./migracije-hr.html">Migracije i rasprostranjenost</a></li>
-  <li><span>🌳</span><a href="./zanimljivosti.html">Zanimljivosti</a></li>
-  <li><span>🌳</span><a href="./kontakti.html">Kontakt i suradnja</a></li>
-  <li><span>🌳</span><a href="./knjiga-poruka.html">Knjiga poruka</a></li>
-  <li><span>🌳</span><a href="./privatnost.html">Politika privatnosti</a></li>
+<li><span>🌳</span><a href="./autor-hr.html">O autoru i projektu</a></li>
+<li><span>🌳</span><a href="./podrijetlo-hr.html">Podrijetlo prezimena</a></li>
+<li><span>🌳</span><a href="./rodoslovlje-hr.html">Rodoslovlje roda</a></li>
+<li><span>🌳</span><a href="./migracije-hr.html">Migracije i rasprostranjenost</a></li>
+<li><span>🌳</span><a href="./zanimljivosti.html">Zanimljivosti</a></li>
+<li><span>🌳</span><a href="./kontakti.html">Kontakt i suradnja</a></li>
+<li><span>🌳</span><a href="./knjiga-poruka.html">Knjiga poruka</a></li>
+<li><span>🌳</span><a href="./privatnost.html">Politika privatnosti</a></li>
 </ul>
-<div class="author-photo"><a href="./autor-hr.html"><img alt="Jure Tandara" src="./jure.png"/></a></div>
-
+<div class="author-photo">
+<a href="./autor-hr.html">
+<img alt="Jure Tandara" src="./jure.png"/>
+</a>
+</div>
 </aside>
-
 <main class="content-page">
 <article class="content-card">
-<header class="branch-heading">
-  <img class="branch-flag" src="flag-hr.png" alt="Hrvatska zastava"/>
-  <h1>JURINA GRANA</h1>
-</header>
-
-<section class="branch-summary" aria-labelledby="jure-matija">
-  <h2 id="jure-matija">Jure Tandara i Matija rođ. Lekić</h2>
-  <p class="family-data"><strong>Jure Tandara:</strong> <span class="family-dates">★ oko 1725. &nbsp;–&nbsp; ✝ nepoznato</span></p>
-  <p class="family-data"><strong>Supruga Matija rođ. Lekić:</strong> <span class="family-dates">★ nepoznato &nbsp;–&nbsp; ✝ nepoznato</span></p>
-  <p>Jure Tandara, rođen oko 1725. godine, bio je najstariji sin Ivana Tandare. Jurina grana najstarija je grana roda Tandara.</p>
-  <p>Jure i Matija imali su sina <strong>Franu</strong> te kćeri <strong>Anđu i Anu</strong>. Frane je bio oženjen <strong>Božom rođ. Ćosić</strong>, a njihov sin <strong>Nikola</strong> rođen je 1792. godine.</p>
-  <p>Nijedan član Jurine obitelji nije zabilježen u popisu stanovništva Ričica iz 1806. godine. Budući da nedostaju podaci o ovoj grani, moguće je da se obitelj odselila iz Ričica, nakon čega se izgubio svaki trag njezinih članova i potomaka.</p>
-  <p>Bilo bi vrijedno kada bi se jednoga dana javio potomak ove grane i potvrdio pripadnost Jurinoj lozi.</p>
-</section>
-
-<section class="diagram-instructions" aria-labelledby="diagram-instructions">
-  <h2 id="diagram-instructions">Upute za korištenje dijagrama</h2>
-  <ol>
-    <li>U polje za pretraživanje upišite ime, suprugu, kćer, šifru ili drugi poznati podatak, a zatim pritisnite <strong>Pronađi</strong>.</li>
-    <li>Gumb <strong>Raširi sve</strong> prikazuje sve unesene članove Jurine grane.</li>
-    <li>Gumb <strong>Sažmi</strong> zatvara proširene dijelove dijagrama.</li>
-    <li>Gumb <strong>Do 3. koljena</strong> prikazuje prva tri koljena obiteljske grane.</li>
-    <li>Gumb <strong>Uklopi</strong> prilagođava cijeli dijagram dostupnom prostoru.</li>
-    <li>Ružičasti okvir prikazuje suprugu, a ljubičasti okvir kćeri bračnog para. Klikom na bilo koji okvir otvaraju se podaci.</li>
-    <li>Gumb <strong>Cijeli ekran</strong> proširuje dijagram preko cijelog zaslona, a ikona pisača priprema dijagram za ispis.</li>
-  
-<li>Zbog velikog broja osoba s istim imenima, za precizan pronalazak upišite <strong>ime osobe, očevo ime i majčino ime</strong>. Prezime <strong>Tandara</strong> možete dodati, ali samo ime i prezime često nisu dovoljni za jednoznačan rezultat; pretraga obuhvaća podatke o oba roditelja.</li>
-</ol>
-</section>
-
-<section class="jure-diagram" id="jureDiagram" aria-labelledby="diagramTitle">
-  <header class="diagram-header">
-    <div class="diagram-title">
-      <h2 id="diagramTitle">Rodoslovni dijagram Jurine grane</h2>
-      <div class="diagram-subtitle"><strong>3</strong> numerirane osobe · <strong>2</strong> supruge · <strong>2</strong> kćeri · <strong>3</strong> generacije</div>
-    </div>
-    <div class="diagram-actions" aria-label="Navigacija i prikaz dijagrama">
-      <a class="diagram-header-btn diagram-home-button" href="index.html" title="Početna" aria-label="Početna">
-        <span class="diagram-home-circle"><svg class="diagram-home-svg" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5L12 3l9 7.5"></path><path d="M5 10v10h14V10"></path><path d="M10 20v-6h4v6"></path></svg></span>
-      </a>
-      <a class="diagram-header-btn lang-icon active" href="box2a.html" aria-current="page" title="Hrvatski"><img src="flag-hr.png" alt="HR"/></a>
-      <a class="diagram-header-btn lang-icon" href="box2a-en.html" title="English"><img src="flag-uk.png" alt="EN"/></a>
-      <button id="printDiagram" type="button" title="Ispis dijagrama" aria-label="Ispis dijagrama"><img src="Print.png" alt="" aria-hidden="true"/></button>
-      <button id="fullscreenDiagram" type="button" aria-label="Prikaži dijagram preko cijelog ekrana" title="Cijeli ekran"><span aria-hidden="true">⛶</span> <span id="fullscreenLabel">Cijeli ekran</span></button>
-    </div>
-    <div class="diagram-tools">
-      <div class="toolbar-scroll">
-        <div class="diagram-toolbar">
-          <button class="primary" id="expandAll" type="button">Raširi sve</button>
-          <button id="collapse" type="button">Sažmi</button>
-          <button id="threeLevels" type="button">Do 3. koljena</button>
-          <button id="fit" type="button">Uklopi</button>
-          <button id="zoomIn" type="button" aria-label="Povećaj prikaz">＋</button>
-          <button id="zoomOut" type="button" aria-label="Smanji prikaz">−</button>
-          <div class="search-wrap">
-            <input id="treeSearch" type="search" placeholder="Ime osobe + otac + majka" autocomplete="off" aria-controls="searchResults" aria-expanded="false" aria-label="Pretraži osobe u rodoslovnom stablu"/>
-            <button id="findBtn" type="button">Pronađi</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <div class="workspace" id="workspace">
-    <svg id="treeSvg" aria-label="Interaktivno rodoslovno stablo Jurine grane"><g id="viewport"><g id="links"></g><g id="nodes"></g></g></svg>
-    <aside class="search-results" id="searchResults" hidden>
-      <div class="search-results-head"><span id="searchResultsTitle">Rezultati pretrage</span><button class="search-results-close" id="searchResultsClose" type="button" aria-label="Zatvori rezultate">×</button></div>
-      <div id="searchResultItems"></div>
-    </aside>
-    <aside class="details" id="details">
-      <button class="close-details" id="closeDetails" type="button" aria-label="Zatvori">×</button>
-      <h3 id="detailTitle"></h3><div class="detail-code" id="detailCode"></div><p id="detailText"></p>
-    </aside>
-    <div class="legend">
-      <span><i class="swatch" style="background:#174f39;border-color:#0d3425"></i>Jure, Ivanov sin</span>
-      <span><i class="swatch" style="background:#e8f2fb;border-color:#4d82aa"></i>Frane, Jurin sin</span>
-      <span><i class="swatch" style="background:#fff1df;border-color:#bb8144"></i>Nikola, Franin sin</span>
-      <span><i class="swatch" style="background:#fff3f4;border-color:#a45c68"></i>Supruga</span>
-      <span><i class="swatch" style="background:#f4effa;border-color:#8064a0"></i>Kćeri bračnog para</span>
-    </div>
-    <div class="help">Kotačić: povećanje · povlačenje: pomicanje · klik na okvir: podaci i grananje</div>
-    <div class="live-status" id="liveStatus" aria-live="polite"></div>
-  </div>
-</section>
+<!-- POČETAK SADRŽAJA / START OF CONTENT -->
+<header class="branch-heading"><img alt="Hrvatska zastava" class="branch-flag" src="flag-hr.png"/><h1>JURINA GRANA</h1></header>
+<section aria-labelledby="jure-matija" class="branch-summary"><h2 id="jure-matija">Jure Tandara i Matija rođ. Lekić</h2>
+<p class="family-data"><strong>Jure Tandara:</strong> ★ oko 1725.  –  ✝ nepoznato</p>
+<p class="family-data"><strong>Supruga Matija rođ. Lekić:</strong> ★ nepoznato  –  ✝ nepoznato</p>
+<p>Imali su sina <strong>Franu</strong> te kćeri <strong>Anđu i Anu</strong>. Frane i Boža rođ. Ćosić imali su sina Nikolu, rođenog 1792. godine. U dijagramu ispod prikazani su svi šifrirani članovi ove grane.</p></section>
+<section aria-labelledby="upute-dijagram" class="diagram-instructions"><h2 id="upute-dijagram">Upute za korištenje dijagrama</h2><ol>
+<li>Upišite ime osobe ili šifru i pritisnite <strong>Pronađi</strong>.</li>
+<li>Veliki znak <strong>+</strong> pojavljuje se samo gdje postoji nastavak linije prezimena; završne osobe nemaju oznaku +/−.</li>
+<li>Supruge i kćeri prikazane su okomito ispod nositelja prezimena, a sinovi vodoravno desno.</li>
+<li>Pretraga zumira pronađenu osobu i zadržava spojenu vezu s ocem.</li>
+</ol></section>
+<div class="family-diagram-embed"><iframe allow="fullscreen 'self'; geolocation 'none'; microphone 'none'; camera 'none'; payment 'none'; usb 'none'" allowfullscreen="" class="family-diagram-frame" loading="lazy" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-modals" src="box2a-jurina-grana.html?v=20260820-unified2" title="Cijela Jurina grana – interaktivno rodoslovno stablo"></iframe></div>
+<!-- KRAJ SADRŽAJA / END OF CONTENT -->
 </article>
 </main>
 </div>
-
-<script>
-const DATA={
-  code:'1.0',
-  label:'Jure Tandara – Ivanov sin (★ oko 1725. – ✝ nepoznato)',
-  detail:'Jure Tandara, rođen oko 1725. godine, bio je najstariji sin Ivana Tandare. Jurina grana najstarija je grana roda Tandara. Jure je bio oženjen Matijom rođ. Lekić. Imali su sina Franu te dvije kćeri, Anđu i Anu.\n\nNijedan član Jurine obitelji nije zabilježen u popisu stanovništva Ričica iz 1806. godine. Budući da nedostaju podaci o ovoj grani, moguće je da se obitelj odselila iz Ričica, nakon čega se izgubio svaki trag njezinih članova i potomaka.',
-  children:[{
-    code:'1.1',
-    label:'Frane, Jurin sin (★ nepoznato – ✝ nepoznato)',
-    detail:'Frane, Jurin sin, bio je oženjen Božom rođ. Ćosić. Njihov sin Nikola rođen je 1792. godine.',
-    children:[{
-      code:'1.1-S1',
-      label:'Nikola, Franin sin (★ 1792. – ✝ nepoznato)',
-      detail:'Nikola, Franin sin, bio je jedino dijete Frane i Bože Ćosić. Nije poznato je li se oženio niti je li imao djece.',
-      children:[]
-    }]
-  }]
-};
-
-const FAMILY_META={
-  '1.0':[{spouse:'Matija rođ. Lekić',total:3,sons:['Frane'],daughters:['Anđa','Ana']}],
-  '1.1':[{spouse:'Boža rođ. Ćosić',total:1,sons:['Nikola (★ 1792.)'],daughters:[]}]
-};
-
-const SEARCH_ENTRIES=[
-  {type:'spouse',label:'Matija rođ. Lekić',personCode:'1.0-SP-1',hostCode:'1.0',familyIndex:0,extra:'supruga Jure Tandare'},
-  {type:'daughter',label:'Anđa Jurina',personCode:'1.0-K1',hostCode:'1.0',familyIndex:0,extra:'kći Jure Tandare i Matije Lekić'},
-  {type:'daughter',label:'Ana Jurina',personCode:'1.0-K2',hostCode:'1.0',familyIndex:0,extra:'kći Jure Tandare i Matije Lekić'},
-  {type:'spouse',label:'Boža rođ. Ćosić',personCode:'1.1-SP-1',hostCode:'1.1',familyIndex:0,extra:'supruga Frane Jurina'},
-  {type:'son',label:'Nikola',hostCode:'1.1-S1',extra:'sin Frane Jurina i Bože Ćosić'}
-];
-
-const PERSON_SEARCH_CONTEXT={
-  '1.0':{father:'Ivan Tandara',mother:''},
-  '1.1':{father:'Jure Tandara',mother:'Matija rođ. Lekić'},
-  '1.1-S1':{father:'Frane, Jurin sin',mother:'Boža rođ. Ćosić'}
-};
-
-const UI={notFound:'Nije pronađeno: ',codeLabel:'Šifra'};
-const diagram=document.getElementById('jureDiagram');
-const svg=document.getElementById('treeSvg');
-const viewport=document.getElementById('viewport');
-const linksLayer=document.getElementById('links');
-const nodesLayer=document.getElementById('nodes');
-const details=document.getElementById('details');
-const searchInput=document.getElementById('treeSearch');
-const searchPanel=document.getElementById('searchResults');
-const liveStatus=document.getElementById('liveStatus');
-
-const BOX_W=250,BOX_H=80,X_STEP=340,MARGIN=62,COUPLE_GAP=14,SPOUSE_H=66,FAMILY_GAP=10,DAUGHTERS_H=68,FAMILY_BLOCK_H=SPOUSE_H+FAMILY_GAP+DAUGHTERS_H+14;
-let scale=1,panX=0,panY=0,bounds={width:1000,height:390},selectedCode='',matchCode='',dragging=false,dragStart=null;
-DATA.expanded=true;
-
-function announce(text){liveStatus.textContent='';requestAnimationFrame(()=>{liveStatus.textContent=text;});}
-function esc(value){return String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));}
-function walk(node,fn,parent=null,depth=0){fn(node,parent,depth);(node.children||[]).forEach(child=>walk(child,fn,node,depth+1));}
-function findNode(code){let found=null;walk(DATA,node=>{if(node.code===code)found=node;});return found;}
-function setExpandedToDepth(maxDepth){walk(DATA,(node,parent,depth)=>{node.expanded=depth<maxDepth-1;});DATA.expanded=true;}
-function visibleNodes(){const out=[];function visit(node,parent=null,depth=0){out.push({node,parent,depth});if(node.expanded)(node.children||[]).forEach(child=>visit(child,node,depth+1));}visit(DATA);return out;}
-function colors(code){if(code==='1.0')return{fill:'#174f39',stroke:'#0d3425',text:'#fff'};if(code==='1.1')return{fill:'#e8f2fb',stroke:'#4d82aa',text:'#17384f'};return{fill:'#fff1df',stroke:'#bb8144',text:'#5b3b1d'};}
-function wrapText(text,max=30){const words=String(text).split(/\s+/),lines=[];let line='';for(const word of words){const test=line?line+' '+word:word;if(test.length>max&&line){lines.push(line);line=word;}else line=test;}if(line)lines.push(line);return lines.slice(0,3);}
-function compactNames(names,max=38){if(!names.length)return['Nema zabilježenih kćeri'];const lines=[];let line='';names.forEach(name=>{const next=line?line+', '+name:name;if(next.length>max&&line){lines.push(line);line=name;}else line=next;});if(line)lines.push(line);return lines.slice(0,3);}
-function applyTransform(){viewport.setAttribute('transform',`translate(${panX},${panY}) scale(${scale})`);}
-
-function render(){
-  const visible=visibleNodes(),positions=new Map(),mainY=MARGIN;
-  visible.forEach(item=>positions.set(item.node.code,{x:MARGIN+item.depth*X_STEP,y:mainY}));
-  const maxDepth=Math.max(...visible.map(item=>item.depth),0);
-  const maxFamilies=Math.max(...visible.map(item=>(FAMILY_META[item.node.code]||[]).length),0);
-  bounds.width=MARGIN*2+maxDepth*X_STEP+BOX_W;
-  bounds.height=MARGIN*2+BOX_H+(maxFamilies?COUPLE_GAP+maxFamilies*FAMILY_BLOCK_H:0)+82;
-
-  let links='';
-  visible.forEach(({node,parent})=>{
-    if(!parent||!positions.has(parent.code))return;
-    const p=positions.get(parent.code),c=positions.get(node.code),x1=p.x+BOX_W,y1=p.y+BOX_H/2,x2=c.x,y2=c.y+BOX_H/2,elbow=x1+(x2-x1)/2;
-    links+=`<path class="connector" d="M${x1},${y1} H${elbow} V${y2} H${x2}"/>`;
-  });
-  visible.forEach(({node})=>{
-    const p=positions.get(node.code),families=FAMILY_META[node.code]||[];
-    families.forEach((family,index)=>{
-      const fy=p.y+BOX_H+COUPLE_GAP+index*FAMILY_BLOCK_H;
-      links+=`<path class="marriage-line" d="M${p.x+BOX_W/2},${p.y+BOX_H} V${fy}"/>`;
-      links+=`<path class="daughter-line" d="M${p.x+BOX_W/2},${fy+SPOUSE_H} V${fy+SPOUSE_H+FAMILY_GAP}"/>`;
-    });
-  });
-  linksLayer.innerHTML=links;
-
-  let markup='';
-  visible.forEach(({node})=>{
-    const p=positions.get(node.code),color=colors(node.code),lines=wrapText(node.label,31),hasChildren=(node.children||[]).length>0,indicator=hasChildren?(node.expanded?'−':'+'):'',classes=['node'];
-    if(node.code===selectedCode)classes.push('selected');if(node.code===matchCode)classes.push('match');
-    markup+=`<g class="${classes.join(' ')}" data-code="${esc(node.code)}" transform="translate(${p.x},${p.y})" role="button" tabindex="0" aria-label="${esc(node.label)}"><rect width="${BOX_W}" height="${BOX_H}" rx="9" fill="${color.fill}" stroke="${color.stroke}"></rect><text class="code" x="13" y="19" fill="${color.text}">${esc(node.code)}</text>${lines.map((line,index)=>`<text class="label" x="13" y="${41+index*16}" fill="${color.text}">${esc(line)}</text>`).join('')}${hasChildren?`<circle cx="${BOX_W-18}" cy="18" r="11" fill="rgba(255,255,255,.75)" stroke="${color.stroke}"></circle><text class="hint" x="${BOX_W-18}" y="22" text-anchor="middle" fill="${color.stroke}">${indicator}</text>`:''}</g>`;
-
-    (FAMILY_META[node.code]||[]).forEach((family,index)=>{
-      const fy=p.y+BOX_H+COUPLE_GAP+index*FAMILY_BLOCK_H,spouseLines=wrapText('Supruga: '+family.spouse,34),daughterLines=compactNames(family.daughters,36),marriageLabel=(FAMILY_META[node.code]||[]).length>1?`${index+1}. brak`:'Bračni par';
-      markup+=`<g class="family-action spouse-node" data-family-code="${esc(node.code)}" data-family-index="${index}" transform="translate(${p.x},${fy})" role="button" tabindex="0" aria-label="${esc('Supruga '+family.spouse)}"><rect width="${BOX_W}" height="${SPOUSE_H}" rx="7"></rect><text class="family-meta marriage-label" x="11" y="14">${esc(marriageLabel)}</text>${spouseLines.map((line,lineIndex)=>`<text class="${lineIndex===0?'family-title':'family-meta'}" x="11" y="${29+lineIndex*13}">${esc(line)}</text>`).join('')}<text class="family-meta" x="11" y="58">Djeca ${family.total} · S ${family.sons.length} · K ${family.daughters.length}</text></g>`;
-      markup+=`<g class="family-action daughter-node" data-daughter-code="${esc(node.code)}" data-daughter-index="${index}" transform="translate(${p.x},${fy+SPOUSE_H+FAMILY_GAP})" role="button" tabindex="0" aria-label="${esc('Kćeri bračnog para '+node.label+' i '+family.spouse)}"><rect width="${BOX_W}" height="${DAUGHTERS_H}" rx="8"></rect><text class="daughter-title" x="11" y="17">Kćeri (${family.daughters.length})</text>${daughterLines.map((line,lineIndex)=>`<text class="daughter-meta" x="11" y="${34+lineIndex*13}">${esc(line)}</text>`).join('')}</g>`;
-    });
-  });
-  nodesLayer.innerHTML=markup;
-
-  nodesLayer.querySelectorAll('.node').forEach(group=>{
-    const activate=()=>{const node=findNode(group.dataset.code);selectedCode=node.code;showDetails(node);if((node.children||[]).length)node.expanded=!node.expanded;render();requestAnimationFrame(fitTree);};
-    group.addEventListener('click',event=>{event.stopPropagation();activate();});
-    group.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();activate();}});
-  });
-  nodesLayer.querySelectorAll('.spouse-node').forEach(group=>{
-    const activate=()=>showMarriageDetails(group.dataset.familyCode,Number(group.dataset.familyIndex));
-    group.addEventListener('click',event=>{event.stopPropagation();activate();});
-    group.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();activate();}});
-  });
-  nodesLayer.querySelectorAll('.daughter-node').forEach(group=>{
-    const activate=()=>showDaughtersDetails(group.dataset.daughterCode,Number(group.dataset.daughterIndex));
-    group.addEventListener('click',event=>{event.stopPropagation();activate();});
-    group.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();activate();}});
-  });
-  applyTransform();
-}
-
-function showDetails(node){
-  document.getElementById('detailTitle').textContent=node.label;
-  document.getElementById('detailCode').textContent=UI.codeLabel+' '+node.code;
-  document.getElementById('detailText').textContent=node.detail||'Nema dodatnih podataka.';
-  details.classList.add('open');
-}
-function showMarriageDetails(code,index){
-  const node=findNode(code),family=(FAMILY_META[code]||[])[index];if(!node||!family)return;
-  document.getElementById('detailTitle').textContent='Supruga: '+family.spouse;
-  document.getElementById('detailCode').textContent='Bračni par · obiteljski zapis '+code;
-  document.getElementById('detailText').textContent='Nositelj prezimena: '+node.label+'\nSupruga: '+family.spouse+'\nUkupno djece: '+family.total+'\n\nSinovi ('+family.sons.length+'):\n• '+(family.sons.length?family.sons.join('\n• '):'nema zabilježenih')+'\n\nKćeri ('+family.daughters.length+'):\n• '+(family.daughters.length?family.daughters.join('\n• '):'nema zabilježenih');
-  details.classList.add('open');
-}
-function showDaughtersDetails(code,index){
-  const node=findNode(code),family=(FAMILY_META[code]||[])[index];if(!node||!family)return;
-  document.getElementById('detailTitle').textContent='Kćeri bračnog para';
-  document.getElementById('detailCode').textContent=node.label+' + '+family.spouse;
-  document.getElementById('detailText').textContent='Ukupno djece: '+family.total+'\nBroj kćeri: '+family.daughters.length+'\n\n'+(family.daughters.length?'• '+family.daughters.join('\n• '):'Nema zabilježenih kćeri u ovom braku.');
-  details.classList.add('open');
-}
-
-function fitTree(){
-  const rect=svg.getBoundingClientRect();if(!rect.width||!rect.height)return;
-  scale=Math.max(.14,Math.min((rect.width-42)/bounds.width,(rect.height-80)/bounds.height,1.15));
-  panX=(rect.width-bounds.width*scale)/2;panY=(rect.height-bounds.height*scale)/2-18;applyTransform();announce('Dijagram je uklopljen u zaslon.');
-}
-function zoomAt(factor,cx,cy){const old=scale;scale=Math.max(.14,Math.min(3.5,scale*factor));panX=cx-(cx-panX)*(scale/old);panY=cy-(cy-panY)*(scale/old);applyTransform();}
-function expandAncestors(code){const parts=code.split('.');DATA.expanded=true;for(let i=2;i<parts.length;i++){const node=findNode(parts.slice(0,i).join('.'));if(node)node.expanded=true;}}
-function centerNode(code){
-  requestAnimationFrame(()=>{
-const target = Array.from(
-  nodesLayer.querySelectorAll('[data-code]')
-).find(function (node) {
-  return node.getAttribute('data-code') === String(code);
-});    
-    if(!target)return;
-    
-    const currentRect=target.getBoundingClientRect();
-    const desiredWidth=svg.clientWidth<700?190:250;
-    if(currentRect.width>0){scale=Math.max(.16,Math.min(3,scale*desiredWidth/currentRect.width));}
-    applyTransform();
-    requestAnimationFrame(()=>{
-      const nodeRect=target.getBoundingClientRect(),svgRect=svg.getBoundingClientRect(),rootMatrix=svg.getScreenCTM();
-      const unitX=rootMatrix?Math.max(.001,Math.hypot(rootMatrix.a,rootMatrix.b)):1;
-      const unitY=rootMatrix?Math.max(.001,Math.hypot(rootMatrix.c,rootMatrix.d)):1;
-      panX+=(svgRect.left+svgRect.width/2-(nodeRect.left+nodeRect.width/2))/unitX;
-      panY+=(svgRect.top+svgRect.height/2-(nodeRect.top+nodeRect.height/2))/unitY;
-      applyTransform();
-      target.classList.remove('tandara-search-focus');
-      void target.getBBox();
-      target.classList.add('tandara-search-focus');
-      window.setTimeout(()=>target.classList.remove('tandara-search-focus'),2400);
-    });
-  });
-}
-
-function normalize(value){return String(value||'').toLocaleLowerCase('hr').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/[^a-z0-9]+/g,' ').trim();}
-function levenshtein(a,b){const matrix=Array.from({length:b.length+1},(_,i)=>[i]);for(let j=0;j<=a.length;j++)matrix[0][j]=j;for(let i=1;i<=b.length;i++)for(let j=1;j<=a.length;j++)matrix[i][j]=b[i-1]===a[j-1]?matrix[i-1][j-1]:Math.min(matrix[i-1][j-1]+1,matrix[i][j-1]+1,matrix[i-1][j]+1);return matrix[b.length][a.length];}
-function searchScore(query,text){const q=normalize(query),t=normalize(text);if(!q||!t)return Infinity;if(q===t)return 0;if(t.startsWith(q))return .2;if(t.includes(q))return .4;const qWords=q.split(' '),tWords=t.split(' ');if(qWords.every(word=>tWords.some(candidate=>candidate===word||candidate.startsWith(word))))return 1;let best=Infinity;for(const candidate of tWords){const distance=levenshtein(q,candidate);if(distance<=Math.max(1,Math.floor(Math.max(q.length,candidate.length)*.28)))best=Math.min(best,2+distance);}return best;}
-function nodeEntries(){const entries=[];walk(DATA,node=>{const context=PERSON_SEARCH_CONTEXT[node.code]||{};entries.push({type:'node',label:node.label,hostCode:node.code,extra:[node.detail,context.father,context.mother].filter(Boolean).join(' '),father:context.father||'',mother:context.mother||''});});return entries;}
-function collectResults(query){return [...nodeEntries(),...SEARCH_ENTRIES].map(entry=>({...entry,score:searchScore(query,[entry.label,entry.extra,entry.personCode].filter(Boolean).join(' '))})).filter(entry=>Number.isFinite(entry.score)).sort((a,b)=>a.score-b.score||a.label.localeCompare(b.label,'hr')).slice(0,20);}
-function closeSearchResults(){searchPanel.hidden=true;document.getElementById('searchResultItems').innerHTML='';searchInput.setAttribute('aria-expanded','false');}
-function focusResult(result){
-  closeSearchResults();const node=findNode(result.hostCode);if(!node)return;expandAncestors(node.code);selectedCode=node.code;matchCode=node.code;render();centerNode(node.code);
-  if(result.type==='spouse')showMarriageDetails(result.hostCode,result.familyIndex);
-  else if(result.type==='daughter')showDaughtersDetails(result.hostCode,result.familyIndex);
-  else showDetails(node);
-  announce('Pronađeno: '+result.label);
-}
-function positionSearchResults(){if(searchPanel.hidden)return;const margin=10,width=Math.min(550,window.innerWidth-margin*2),rect=searchInput.getBoundingClientRect();let left=Math.max(margin,Math.min(rect.right-width,window.innerWidth-width-margin)),top=rect.bottom+8,maxHeight=Math.min(420,window.innerHeight-top-margin);if(maxHeight<180&&rect.top>210){top=margin;maxHeight=Math.max(180,rect.top-margin);}searchPanel.style.left=left+'px';searchPanel.style.top=top+'px';searchPanel.style.width=width+'px';searchPanel.style.maxHeight=maxHeight+'px';}
-function showSearchResults(results,query){
-  const items=document.getElementById('searchResultItems');document.getElementById('searchResultsTitle').textContent=results.length?'Odaberite rezultat · pronađeno '+results.length:'Nema rezultata';
-  items.innerHTML=results.length?results.map((result,index)=>`<button class="search-result-item" type="button" data-result-index="${index}"><span class="search-result-label">${esc(result.label)}</span><span class="search-result-meta">${result.type==='node'?'Numerirana osoba · šifra '+esc(result.hostCode):esc(result.extra)+' · šifra '+esc(result.personCode||result.hostCode)}</span>${result.type!=='node'?`<span class="search-result-family">Obiteljski zapis ${esc(result.hostCode)}</span>`:''}</button>`).join(''):`<div class="search-result-item"><span class="search-result-meta">Nije pronađeno: ${esc(query)}. Pokušajte upisati dio imena, prezimena ili šifru.</span></div>`;
-  searchPanel.hidden=false;searchInput.setAttribute('aria-expanded','true');positionSearchResults();items.querySelectorAll('[data-result-index]').forEach(button=>button.addEventListener('click',()=>focusResult(results[Number(button.dataset.resultIndex)])));
-}
-function searchTree(){const raw=searchInput.value.trim();closeSearchResults();if(!raw)return;const query=raw.split(/\s+/).filter(part=>normalize(part)!=='tandara').join(' ');if(!query){showSearchResults([],raw);return;}const exact=findNode(query);if(exact){focusResult({type:'node',label:exact.label,hostCode:exact.code});return;}showSearchResults(collectResults(query),raw);}
-
-function toggleFullscreen(){
-  if(!document.fullscreenElement){diagram.requestFullscreen().catch(()=>{});}else document.exitFullscreen();
-}
-function syncFullscreenLabel(){const active=document.fullscreenElement===diagram;document.getElementById('fullscreenLabel').textContent=active?'Izađi iz cijelog ekrana':'Cijeli ekran';document.getElementById('fullscreenDiagram').setAttribute('aria-label',active?'Izađi iz prikaza preko cijelog ekrana':'Prikaži dijagram preko cijelog ekrana');requestAnimationFrame(fitTree);}
-
-function handleResize(){positionSearchResults();requestAnimationFrame(fitTree);}
-document.getElementById('expandAll').onclick=()=>{walk(DATA,node=>node.expanded=true);render();fitTree();announce('Prikazana je cijela Jurina grana.');};
-document.getElementById('collapse').onclick=()=>{walk(DATA,node=>node.expanded=false);DATA.expanded=true;render();fitTree();announce('Dijagram je sažet.');};
-document.getElementById('threeLevels').onclick=()=>{setExpandedToDepth(3);render();fitTree();announce('Prikazana su prva tri koljena.');};
-document.getElementById('fit').onclick=fitTree;
-document.getElementById('zoomIn').onclick=()=>zoomAt(1.22,svg.clientWidth/2,svg.clientHeight/2);
-document.getElementById('zoomOut').onclick=()=>zoomAt(.82,svg.clientWidth/2,svg.clientHeight/2);
-document.getElementById('findBtn').onclick=searchTree;
-searchInput.addEventListener('keydown',event=>{if(event.key==='Enter')searchTree();if(event.key==='Escape')closeSearchResults();});
-document.getElementById('searchResultsClose').onclick=closeSearchResults;
-document.getElementById('closeDetails').onclick=()=>details.classList.remove('open');
-document.getElementById('printDiagram').onclick=()=>window.print();
-document.getElementById('fullscreenDiagram').onclick=toggleFullscreen;
-document.addEventListener('fullscreenchange',syncFullscreenLabel);
-document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeSearchResults();details.classList.remove('open');}});
-document.addEventListener('click',event=>{if(!event.target.closest('.search-wrap')&&!event.target.closest('#searchResults'))closeSearchResults();});
-
-svg.addEventListener('wheel',event=>{event.preventDefault();const rect=svg.getBoundingClientRect();zoomAt(event.deltaY<0?1.12:.89,event.clientX-rect.left,event.clientY-rect.top);},{passive:false});
-const pointers=new Map();let pinchStart=null;
-function pointerPoint(event){const rect=svg.getBoundingClientRect();return{x:event.clientX-rect.left,y:event.clientY-rect.top};}
-svg.addEventListener('pointerdown',event=>{if(event.target.closest&&event.target.closest('.node,.family-action'))return;try{svg.setPointerCapture(event.pointerId);}catch(error){}pointers.set(event.pointerId,pointerPoint(event));if(pointers.size===1){const p=[...pointers.values()][0];dragStart={x:p.x,y:p.y,panX,panY};dragging=true;svg.classList.add('dragging');}else if(pointers.size===2){const [a,b]=[...pointers.values()];pinchStart={distance:Math.hypot(b.x-a.x,b.y-a.y),scale,panX,panY,cx:(a.x+b.x)/2,cy:(a.y+b.y)/2};dragging=false;svg.classList.remove('dragging');}});
-svg.addEventListener('pointermove',event=>{if(!pointers.has(event.pointerId))return;pointers.set(event.pointerId,pointerPoint(event));if(pointers.size===1&&dragging&&dragStart){const p=[...pointers.values()][0];panX=dragStart.panX+(p.x-dragStart.x);panY=dragStart.panY+(p.y-dragStart.y);applyTransform();}else if(pointers.size===2&&pinchStart){const [a,b]=[...pointers.values()],distance=Math.hypot(b.x-a.x,b.y-a.y),cx=(a.x+b.x)/2,cy=(a.y+b.y)/2,newScale=Math.max(.14,Math.min(3.5,pinchStart.scale*(distance/pinchStart.distance))),ratio=newScale/pinchStart.scale;scale=newScale;panX=cx-(pinchStart.cx-pinchStart.panX)*ratio;panY=cy-(pinchStart.cy-pinchStart.panY)*ratio;applyTransform();}});
-function endPointer(event){pointers.delete(event.pointerId);if(pointers.size<2)pinchStart=null;if(pointers.size===1){const p=[...pointers.values()][0];dragStart={x:p.x,y:p.y,panX,panY};dragging=true;}else if(!pointers.size){dragging=false;dragStart=null;svg.classList.remove('dragging');}}
-svg.addEventListener('pointerup',endPointer);svg.addEventListener('pointercancel',endPointer);
-window.addEventListener('resize',handleResize);
-
-setExpandedToDepth(2);render();requestAnimationFrame(fitTree);
-</script>
-<script id="completeFamilyData" type="application/json">{"persons":[{"code":"1.0","name":"Jure Tandara – Ivanov sin","qualifier":"★ oko 1725. – ✝ nepoznato","father":"Ivan Tandara","fatherCode":"0.0","mother":"","spouses":["Matija Lekić","Matija rođ. Lekić"],"spouseCodes":["1.0-SP-1"],"relation":"početni nositelj grane","note":"Najstariji Ivanov sin; nositelj Jurine grane.","kind":"node","hostCode":"1.0","branch":"Početna hijerarhija","source":"dijagramivan.html?v=20260814-standalone","inferred":[],"maritalStatus":"oženjen/udana","years":["1725"],"parentCodes":["0.0"],"childCodes":["1.1","1.0-K1","1.0-K2"]},{"code":"1.0-SP-1","name":"Matija rođ. Lekić","qualifier":"★ nepoznato – ✝ nepoznato","father":"","fatherCode":"","mother":"","spouses":[],"spouseCodes":["1.0"],"relation":"supruga Jure Tandare","note":"Supruga Jure Tandare; majka Frane, Anđe i Ane.","kind":"spouse","hostCode":"1.0","branch":"Jurina grana","source":"box2a.html","inferred":[],"maritalStatus":"oženjen/udana","years":[],"parentCodes":[],"childCodes":["1.1","1.0-K1","1.0-K2"]},{"code":"1.0-K1","name":"Anđa Jurina","qualifier":"★ nepoznato – ✝ nepoznato","father":"Jure Tandara – Ivanov sin","fatherCode":"1.0","mother":"Matija rođ. Lekić","spouses":[],"spouseCodes":[],"relation":"kći Jure Tandare i Matije Lekić","note":"Kći Jure Tandare i Matije rođ. Lekić.","kind":"virtual","hostCode":"1.0","branch":"Jurina grana","source":"box2a.html","inferred":[],"maritalStatus":"podatak nije dostupan","years":[],"parentCodes":["1.0","1.0-SP-1"],"childCodes":[]},{"code":"1.0-K2","name":"Ana Jurina","qualifier":"★ nepoznato – ✝ nepoznato","father":"Jure Tandara – Ivanov sin","fatherCode":"1.0","mother":"Matija rođ. Lekić","spouses":[],"spouseCodes":[],"relation":"kći Jure Tandare i Matije Lekić","note":"Kći Jure Tandare i Matije rođ. Lekić.","kind":"virtual","hostCode":"1.0","branch":"Jurina grana","source":"box2a.html","inferred":[],"maritalStatus":"podatak nije dostupan","years":[],"parentCodes":["1.0","1.0-SP-1"],"childCodes":[]},{"code":"1.1","name":"Frane, Jurin sin","qualifier":"★ nepoznato – ✝ nepoznato","father":"Jure Tandara – Ivanov sin","fatherCode":"1.0","mother":"Matija rođ. Lekić","spouses":["Boža rođ. Ćosić"],"spouseCodes":["1.1-SP-1"],"relation":"sin Jure Tandare i Matije Lekić; nositelj prezimena u dijagramu","note":"Frane, Jurin sin, bio je oženjen Božom rođ. Ćosić. Njihov sin Nikola rođen je 1792. godine.","kind":"node","hostCode":"1.1","branch":"Jurina grana","source":"box3a.html","inferred":[],"maritalStatus":"oženjen/udana","years":["1792"],"parentCodes":["1.0","1.0-SP-1"],"childCodes":["1.1-S1"]},{"code":"1.1-S1","name":"Nikola, Franin sin","qualifier":"★ 1792. – ✝ nepoznato","father":"Frane, Jurin sin","fatherCode":"1.1","mother":"Boža rođ. Ćosić","spouses":[],"spouseCodes":[],"relation":"sin Frane i Bože Ćosić; nositelj prezimena u dijagramu","note":"Nikola, Franin sin, bio je jedino dijete Frane i Bože Ćosić. Nije poznato je li se oženio niti je li imao djece.","kind":"node","hostCode":"1.1-S1","branch":"Jurina grana","source":"box3a.html","inferred":[],"maritalStatus":"nije poznato","years":["1792"],"parentCodes":["1.1","1.1-SP-1"],"childCodes":[]},{"code":"1.1-SP-1","name":"Boža rođ. Ćosić","qualifier":"","father":"","fatherCode":"","mother":"","spouses":[],"spouseCodes":["1.1"],"relation":"supruga nositelja zapisa 1.1","note":"Ukupno djece: 1.","kind":"spouse","hostCode":"1.1","branch":"Jurina grana","source":"box3a.html","inferred":[],"maritalStatus":"oženjen/udana","years":[],"parentCodes":[],"childCodes":["1.1-S1"]}]}</script>
-<script src="assets/js/common/complete-family-diagram.js?v=20260820"></script>
 </body>
 </html>
