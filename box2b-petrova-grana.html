@@ -102,22 +102,28 @@ function nodeEl(id){const n=N[id],p=positions[id],g=document.createElementNS('ht
  if(isPrimary&&hasAnyChildren(id)){const c=document.createElementNS('http://www.w3.org/2000/svg','circle');c.setAttribute('cx',String(W-8));c.setAttribute('cy',String(H/2));c.setAttribute('r','18');c.setAttribute('class','plus-circle');if(collapsed.has(id))c.dataset.expand=id;g.appendChild(c);const t=document.createElementNS('http://www.w3.org/2000/svg','text');t.setAttribute('x',String(W-8));t.setAttribute('y',String(H/2+8));t.setAttribute('text-anchor','middle');t.setAttribute('class','plus-text');t.textContent='+';g.appendChild(t)}
  if(isPrimary&&hasAnyChildren(id)&&!collapsed.has(id)&&id!=='2.0'){const mc=document.createElementNS('http://www.w3.org/2000/svg','circle');mc.setAttribute('cx',String(W-48));mc.setAttribute('cy',String(H/2));mc.setAttribute('r','14');mc.setAttribute('class','minus-circle');mc.dataset.collapse=id;g.appendChild(mc);const mt=document.createElementNS('http://www.w3.org/2000/svg','text');mt.setAttribute('x',String(W-48));mt.setAttribute('y',String(H/2+7));mt.setAttribute('text-anchor','middle');mt.setAttribute('class','minus-text');mt.textContent='−';g.appendChild(mt)}
  g.addEventListener('click',e=>{if(e.target.dataset.expand){e.stopPropagation();collapsed.delete(e.target.dataset.expand);render();return}if(e.target.dataset.collapse){e.stopPropagation();collapsed.add(e.target.dataset.collapse);render();return}if(isPrimary&&hasAnyChildren(id)&&collapsed.has(id)){collapsed.delete(id);render()}openDetails(id)});g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openDetails(id)}});return g}
+let lastSyncedFrameHeight=0;
 function syncParentFrameHeight(){
  if(window.self===window.top)return;
  try{
   const frame=window.frameElement;if(!frame)return;
   const shell=document.getElementById('diagramShell');
   const total=Math.max(720,Math.ceil(shell.scrollHeight+2));
-  frame.style.height=`${total}px`;frame.style.minHeight=`${total}px`;frame.setAttribute('height',String(total));
-  const wrap=frame.parentElement;if(wrap){wrap.style.height='auto';wrap.style.minHeight=`${total}px`;wrap.style.overflow='visible'}
-  const card=frame.closest('.content-card')||window.parent.document.querySelector('.content-card');if(card){card.style.height='auto';card.style.minHeight='0';card.style.overflow='visible'}
-  const contentPage=frame.closest('.content-page')||window.parent.document.querySelector('.content-page');if(contentPage){contentPage.style.height='auto';contentPage.style.minHeight='0';contentPage.style.overflow='visible'}
+  if(Math.abs(total-lastSyncedFrameHeight)<6)return;
+  lastSyncedFrameHeight=total;
+  frame.style.setProperty('height',`${total}px`,'important');
+  frame.style.setProperty('min-height',`${total}px`,'important');
+  frame.style.setProperty('max-height','none','important');
+  frame.setAttribute('height',String(total));
+  const wrap=frame.parentElement;if(wrap){wrap.style.minHeight=`${total}px`;wrap.style.overflow='visible'}
+  const card=frame.closest('.content-card')||window.parent.document.querySelector('.content-card');if(card){card.style.minHeight='0';card.style.overflow='visible'}
+  const contentPage=frame.closest('.content-page')||window.parent.document.querySelector('.content-page');if(contentPage){contentPage.style.minHeight='0';contentPage.style.overflow='visible'}
  }catch(error){/* Samostalni prikaz ostaje funkcionalan. */}
 }
 function syncVerticalSize(bounds){
  const header=document.querySelector('header');
  const headerH=header?header.offsetHeight:0;
- const minWorkspace=Math.max(720,Math.min(920,window.innerHeight-headerH));
+ const minWorkspace=720;
  const contentScale=Math.min(Math.max(scale,.16),1.6);
  const wanted=Math.max(minWorkspace,Math.ceil((bounds?.height||0)*contentScale+90));
  workspace.style.height=`${wanted}px`;workspace.style.minHeight=`${wanted}px`;
@@ -181,11 +187,11 @@ function expandEmbeddedDiagramArea(){
     wrap.style.width=`${Math.max(320,parentWin.innerWidth-targetLeft)}px`;
     wrap.style.overflow='visible';
   }
-  frame.style.display='block';frame.style.width='100%';frame.style.maxWidth='none';frame.style.height='auto';frame.style.maxHeight='none';frame.style.margin='0';frame.style.border='0';frame.style.borderRadius='0';
+  frame.style.display='block';frame.style.width='100%';frame.style.maxWidth='none';frame.style.maxHeight='none';frame.style.margin='0';frame.style.border='0';frame.style.borderRadius='0';
  }catch(error){/* Samostalni prikaz ostaje funkcionalan. */}
 }
 function audit(){const labels=Object.values(N).map(n=>normalize(base(n.label))),missing=DATA.mustHave.filter(x=>!labels.includes(normalize(x))),wr=workspace.getBoundingClientRect(),sh=document.getElementById('diagramShell').getBoundingClientRect(),fullscreen=!!document.fullscreenElement,expected=innerWidth,widthOk=Math.abs(sh.width-expected)<4&&Math.abs(wr.width-sh.width)<4;const msg=`${tr('numberedCount')}: ${Object.keys(P).length}<br>${tr('nodeCount')}: ${Object.keys(N).length}<br>${tr('lastgen')}: ${missing.length?'NEDOSTAJE '+missing.join(', '):tr('present')}<br>${tr('fullwidth')}: ${widthOk?tr('yes'):tr('no')} (${Math.round(wr.width)} px)`;const auditBox=document.getElementById('auditStatus');if(auditBox)auditBox.innerHTML='<strong>'+tr('check')+':</strong><br>'+msg;workspace.dataset.fullWidth=widthOk?'yes':'no';workspace.dataset.mustHaveMissing=String(missing.length);workspace.dataset.nodeCount=String(Object.keys(N).length);workspace.dataset.primaryCount=String(Object.keys(P).length)}
-document.addEventListener('fullscreenchange',()=>setTimeout(()=>{expandEmbeddedDiagramArea();audit();requestAnimationFrame(fit)},80));expandEmbeddedDiagramArea();render();fit();setLang('hr');audit();addEventListener('resize',()=>{expandEmbeddedDiagramArea();audit();requestAnimationFrame(fit)});
+let lastViewportWidth=window.innerWidth;document.addEventListener('fullscreenchange',()=>setTimeout(()=>{expandEmbeddedDiagramArea();audit();requestAnimationFrame(fit)},80));expandEmbeddedDiagramArea();render();fit();setLang('hr');audit();addEventListener('resize',()=>{const w=window.innerWidth;if(Math.abs(w-lastViewportWidth)>3){lastViewportWidth=w;expandEmbeddedDiagramArea();audit();requestAnimationFrame(fit)}});
 })();
 </script>
 </body></html>
