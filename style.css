@@ -1423,3 +1423,24 @@ img, video, iframe{
         grid-template-columns:1fr;
     }
 }
+
+/* Filipov dijagram: poravnanje s razdjelnicom lijevog stupca i desnim rubom. */
+@media (min-width:1101px){
+    body.hr .filip-tree-embed,
+    body.en .filip-tree-embed{
+        width:auto !important;
+        max-width:none !important;
+        margin-left:-68px !important;
+        margin-right:-52px !important;
+    }
+}
+
+@media (min-width:901px) and (max-width:1100px){
+    body.hr .filip-tree-embed,
+    body.en .filip-tree-embed{
+        width:auto !important;
+        max-width:none !important;
+        margin-left:-60px !important;
+        margin-right:-52px !important;
+    }
+}
