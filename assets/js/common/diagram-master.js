@@ -31,14 +31,21 @@
   const searchPerson = document.getElementById('searchPerson');
   const searchFather = document.getElementById('searchFather');
   const searchMother = document.getElementById('searchMother');
+  const detailsBox = document.getElementById('personDetails');
+  const detailsClose = document.getElementById('personDetailsClose');
+  const detailsName = document.getElementById('personDetailsName');
+  const detailsCode = document.getElementById('personDetailsCode');
+  const detailsDates = document.getElementById('personDetailsDates');
+  const detailsParents = document.getElementById('personDetailsParents');
+  const detailsText = document.getElementById('personDetailsText');
 
-  const MIN_SCALE = 0.04;
+  const MIN_SCALE = 0.015;
 
   // MASTER-0 geometry: father on the left, next generation on the right.
   const MAIN_W = 284;
-  const MAIN_H = 72;
+  const MAIN_H = 94;
   const SIDE_W = 270;
-  const SIDE_H = 51;
+  const SIDE_H = 72;
   const SIDE_GAP = 7;
   const SIDE_TOP = 12;
   const X_STEP = 390;
@@ -105,6 +112,52 @@
     }
     if (line) lines.push(line);
     return lines.slice(0, 2);
+  }
+
+  function personName(label) {
+    return String(label || '')
+      .replace(/\s*\((?:\d{4}\.)?–(?:\d{4}\.)?\)\s*$/, '')
+      .replace(/\s*\(nema podataka za godine\)\s*$/i, '')
+      .trim();
+  }
+
+  function dateText(rec) {
+    const birth = rec && rec.birth ? `${rec.birth}.` : 'G.N.';
+    const death = rec && rec.death ? `${rec.death}.` : 'G.N.';
+    return `★ ${birth}   ✝ ${death}`;
+  }
+
+  function dateSvg(rec, kind = 'node') {
+    const isSide = kind === 'side';
+    const cls = isSide ? 'side-dates' : 'node-dates';
+    const y = isSide ? 63 : 80;
+    const birthSymbolX = isSide ? 10 : 13;
+    const birthValueX = isSide ? 24 : 28;
+    const deathSymbolX = isSide ? 103 : 116;
+    const deathValueX = isSide ? 118 : 131;
+    const badgeW = isSide ? 29 : 31;
+    const badgeH = isSide ? 15 : 16;
+    const badgeY = y - (isSide ? 12 : 13);
+
+    const value = (year, valueX) => {
+      if (year) return `<text class="${cls}" x="${valueX}" y="${y}">${esc(`${year}.`)}</text>`;
+      return `<g class="date-unknown"><rect class="date-unknown-box" x="${valueX - 2}" y="${badgeY}" width="${badgeW}" height="${badgeH}" rx="3"></rect><text class="${cls} date-unknown-text" x="${valueX + badgeW / 2 - 2}" y="${y}" text-anchor="middle">G.N.</text></g>`;
+    };
+
+    return `<text class="${cls}" x="${birthSymbolX}" y="${y}">★</text>${value(rec && rec.birth, birthValueX)}<text class="${cls}" x="${deathSymbolX}" y="${y}">✝</text>${value(rec && rec.death, deathValueX)}`;
+  }
+
+  function showPersonDetails(code) {
+    if (!detailsBox || !nodes[code]) return;
+    const rec = nodes[code];
+    detailsName.textContent = personName(rec.label);
+    detailsCode.textContent = `Šifra: ${code}`;
+    detailsDates.textContent = dateText(rec);
+    detailsParents.textContent = `Otac: ${rec.father || 'podatak nije naveden'} · Majka: ${rec.mother || 'podatak nije naveden'}`;
+    const detail = String(rec.detail || '').trim();
+    detailsText.textContent = detail;
+    detailsText.hidden = !detail;
+    detailsBox.hidden = false;
   }
 
   function showStatus(message) {
@@ -307,13 +360,14 @@
       const classes = ['node', isRoot ? 'root' : terminal ? 'terminal' : 'primary'];
       if (selectedCode === item.code) classes.push('selected');
       if (searchFocus === item.code) classes.push('search-focus');
-      const lines = labelLines(rec.label, 34);
+      const lines = labelLines(personName(rec.label), 34);
 
       html += `<g class="${classes.join(' ')}" data-code="${esc(item.code)}" transform="translate(${pos.x},${pos.y})" role="button" tabindex="0" aria-label="${esc(`${item.code} ${rec.label}`)}">`;
-      html += `<title>${esc(rec.label)}</title>`;
+      html += `<title>${esc(`${personName(rec.label)} · ${dateText(rec)}`)}</title>`;
       html += `<rect width="${MAIN_W}" height="${MAIN_H}" rx="10"/>`;
       html += `<text class="node-code" x="13" y="19">${esc(item.code)}</text>`;
       html += lines.map((line, index) => `<text class="node-label" x="13" y="${40 + index * 16}">${esc(line)}</text>`).join('');
+      html += dateSvg(rec, 'node');
       if (family) {
         html += `<g class="toggle-hit" data-toggle="${esc(item.code)}" transform="translate(${MAIN_W - 18},18)" role="button" aria-label="${expanded.has(item.code) ? 'Zatvori' : 'Otvori'} obitelj">`;
         html += `<circle class="toggle-circle" r="15"></circle>`;
@@ -334,12 +388,13 @@
         const sideClasses = ['side-node', type];
         if (selectedCode === extraCode) sideClasses.push('selected');
         if (searchFocus === extraCode) sideClasses.push('search-focus');
-        const sideLines = labelLines(sideRec.label, 33);
+        const sideLines = labelLines(personName(sideRec.label), 33);
         html += `<g class="${sideClasses.join(' ')}" data-code="${esc(extraCode)}" transform="translate(${side.x},${side.y})" role="button" tabindex="0" aria-label="${esc(`${extraCode} ${sideRec.label}`)}">`;
-        html += `<title>${esc(sideRec.label)}</title>`;
+        html += `<title>${esc(`${personName(sideRec.label)} · ${dateText(sideRec)}`)}</title>`;
         html += `<rect width="${SIDE_W}" height="${SIDE_H}" rx="8"/>`;
         html += `<text class="side-code" x="10" y="16">${esc(extraCode)}</text>`;
         html += sideLines.map((line, index) => `<text class="side-label" x="10" y="${34 + index * 13}">${esc(line)}</text>`).join('');
+        html += dateSvg(sideRec, 'side');
         html += '</g>';
       }
     }
@@ -457,7 +512,8 @@
     searchFocus = code;
     render();
     requestAnimationFrame(() => center(code, withZoom));
-    showStatus(`${nodes[code].label} · ${code}`);
+    showPersonDetails(code);
+    showStatus(`${personName(nodes[code].label)} · ${code}`);
   }
 
   function clearExpandedBelow(code) {
@@ -493,7 +549,7 @@
       panY = anchor.y - afterPos.cy * scale;
       applyTransform();
     }
-    showStatus(`${expanded.has(code) ? 'Otvorena' : 'Zatvorena'} grana: ${nodes[code].label}`);
+    showStatus(`${expanded.has(code) ? 'Otvorena' : 'Zatvorena'} grana: ${personName(nodes[code].label)}`);
   }
 
   function structuralDepthMap() {
@@ -568,7 +624,7 @@
 
     resultsTitle.textContent = `Pronađeno: ${found.length}`;
     resultItems.innerHTML = found.slice(0, 80).map(rec =>
-      `<button class="search-result" type="button" data-result="${esc(rec.code)}"><strong>${esc(rec.code)}</strong>${esc(rec.label)}<small>Otac: ${esc(rec.father || '—')} · Majka: ${esc(rec.mother || '—')}</small></button>`
+      `<button class="search-result" type="button" data-result="${esc(rec.code)}"><strong>${esc(rec.code)}</strong>${esc(personName(rec.label))}<small>${esc(dateText(rec))} · Otac: ${esc(rec.father || '—')} · Majka: ${esc(rec.mother || '—')}</small></button>`
     ).join('');
     resultsBox.hidden = false;
     resultItems.querySelectorAll('[data-result]').forEach(button => {
@@ -659,6 +715,13 @@
   }
   svg.addEventListener('pointerup', endDrag);
   svg.addEventListener('pointercancel', endDrag);
+
+  if (detailsClose) {
+    detailsClose.addEventListener('click', event => {
+      event.stopPropagation();
+      if (detailsBox) detailsBox.hidden = true;
+    });
+  }
 
   window.addEventListener('resize', () => {
     render();
