@@ -134,8 +134,44 @@ function render(){const bounds=layout();links.replaceChildren();nodesLayer.repla
 function applyTransform(){viewport.setAttribute('transform',`translate(${tx},${ty}) scale(${scale})`)}function fit(){const b=layout(),rw=workspace.clientWidth;scale=Math.max(.16,Math.min(1,(rw-55)/b.width));tx=28;ty=28;applyTransform();syncVerticalSize(b)}function zoom(f,cx=workspace.clientWidth/2,cy=workspace.clientHeight/2){const old=scale;scale=Math.max(.14,Math.min(3.2,scale*f));tx=cx-(cx-tx)*(scale/old);ty=cy-(cy-ty)*(scale/old);applyTransform();syncVerticalSize(layout())}function toggle(code){collapsed.has(code)?collapsed.delete(code):collapsed.add(code);render()}
 function expandAncestors(id){let p=parentForNode(id);while(p){collapsed.delete(p);p=P[p]?.parent}}
 function openDetails(id){selected=id;const n=N[id];document.getElementById('detailTitle').textContent=label(n);document.getElementById('detailCode').textContent=n.code?tr('code')+': '+n.code:(n.sonIndex?'S'+n.sonIndex:relation(n)||'');document.getElementById('detailParents').textContent=`${tr('father')}: ${n.father||'—'} · ${tr('mother')}: ${n.mother||'—'}`;document.getElementById('detailText').textContent=detail(n)||'';document.getElementById('details').classList.add('open');render()}
-function focusNode(id){expandAncestors(id);selected=id;render();const p=positions[id],pid=parentForNode(id),pp=pid?positions[pid]:null;if(!p)return;const targetX=pp?(p.x+pp.x+W)/2:p.x+W/2,targetY=pp?(p.y+pp.y+H)/2:p.y+H/2;scale=1.55;tx=workspace.clientWidth/2-targetX*scale;ty=workspace.clientHeight/2-targetY*scale;applyTransform();openDetails(id);document.getElementById('liveStatus').textContent=(currentLang==='en'?'Found ':'Pronađena osoba ')+label(N[id])}
-function matchesField(value,query){const q=normalize(query);if(!q)return true;const hay=normalize(value);return q.split(' ').filter(Boolean).every(term=>hay.includes(term))}
+function focusNode(id){
+ expandAncestors(id);
+ selected=id;
+ render();
+ const p=positions[id];
+ if(!p)return;
+ const n=N[id],nodeH=n.type==='primary'?H:SIDE_H;
+ const targetX=p.x+W/2,targetY=p.y+nodeH/2;
+ scale=1.8;
+ tx=workspace.clientWidth/2-targetX*scale;
+ ty=workspace.clientHeight/2-targetY*scale;
+ applyTransform();
+ openDetails(id);
+ requestAnimationFrame(()=>{const q=positions[id];if(!q)return;const h=N[id].type==='primary'?H:SIDE_H;tx=workspace.clientWidth/2-(q.x+W/2)*scale;ty=workspace.clientHeight/2-(q.y+h/2)*scale;applyTransform()});
+ document.getElementById('liveStatus').textContent=(currentLang==='en'?'Found ':'Pronađena osoba ')+label(N[id])
+}
+function stemToken(t){
+ t=String(t||'');
+ if(t.length>=5&&/(ova|eva|ina)$/.test(t))return t.slice(0,-1);
+ if(t.length>=4&&/[aeuio]$/.test(t))return t.slice(0,-1);
+ if(t.length>=6&&/(og|om|em|im|oj)$/.test(t))return t.slice(0,-2);
+ return t
+}
+function nameTokens(value){return normalize(base(value)).split(' ').filter(Boolean).map(stemToken)}
+function nameMatch(value,query){
+ const q=nameTokens(query),h=nameTokens(value);if(!q.length)return true;
+ return q.every(term=>h.some(x=>x===term||x.startsWith(term)||term.startsWith(x)))
+}
+function fieldMatch(value,query){const q=normalize(base(query));if(!q)return true;const h=normalize(base(value));return h===q||nameMatch(value,query)||q.split(' ').filter(Boolean).every(term=>h.includes(term))}
+function nameScore(value,query){
+ const h=normalize(base(value)),q=normalize(base(query));if(!q)return 0;
+ if(h===q)return -1200;
+ const ht=nameTokens(value),qt=nameTokens(query);
+ if(ht.length===qt.length&&qt.every((t,i)=>t===ht[i]))return -1100;
+ if(qt.every(t=>ht.includes(t)))return -850;
+ if(nameMatch(value,query))return -650;
+ return 0
+}
 function searchFields(){
  const code=document.getElementById('searchCode').value.trim();
  const person=document.getElementById('searchPerson').value.trim();
@@ -144,22 +180,29 @@ function searchFields(){
  if(!code&&!person&&!father&&!mother)return[];
  const rows=[];
  for(const [id,n] of Object.entries(N)){
-   if(code && !matchesField(n.code,code))continue;
-   if(person && !matchesField([n.label,n.labelEn].join(' '),person))continue;
-   if(father && !matchesField(n.father,father))continue;
-   if(mother && !matchesField(n.mother,mother))continue;
+   if(code){const c=normalize(n.code),q=normalize(code);if(!(c===q||c.startsWith(q)))continue}
+   if(person&&!fieldMatch([n.label,n.labelEn].join(' '),person))continue;
+   if(father&&!fieldMatch(n.father,father))continue;
+   if(mother&&!fieldMatch(n.mother,mother))continue;
    let score=0;
-   if(code){const c=normalize(n.code),q=normalize(code);score+=c===q?-100:(c.startsWith(q)?-50:0)}
-   if(person){const l=normalize(label(n)),q=normalize(person);score+=l===q?-80:(l.startsWith(q)?-40:0)}
-   if(father){const f=normalize(n.father),q=normalize(father);score+=f===q?-30:0}
-   if(mother){const m=normalize(n.mother),q=normalize(mother);score+=m===q?-30:0}
+   if(code){const c=normalize(n.code),q=normalize(code);score+=c===q?-2000:-1000}
+   if(person)score+=Math.min(nameScore(n.label,person),nameScore(n.labelEn,person));
+   if(father)score+=nameScore(n.father,father)/4;
+   if(mother)score+=nameScore(n.mother,mother)/4;
    rows.push({id,score});
  }
  rows.sort((a,b)=>a.score-b.score||label(N[a.id]).localeCompare(label(N[b.id]),currentLang==='en'?'en':'hr'));
  return rows.slice(0,40)
 }
-function showResults(rows){const box=document.getElementById('searchResults'),items=document.getElementById('searchResultItems');items.innerHTML='';for(const rr of rows){const n=N[rr.id],b=document.createElement('button');b.type='button';b.className='search-result';b.innerHTML=`<b>${esc(label(n))}</b><span>${n.code?tr('code')+' '+esc(n.code)+' · ':''}${tr('father')}: ${esc(n.father||'—')} · ${tr('mother')}: ${esc(n.mother||'—')}</span>`;b.onclick=()=>{box.hidden=true;focusNode(rr.id)};items.appendChild(b)}box.hidden=!rows.length;const anchor=document.getElementById('searchPerson').getBoundingClientRect();box.style.left=Math.max(10,Math.min(anchor.left,innerWidth-box.offsetWidth-10))+'px';box.style.top=(anchor.bottom+7)+'px'}
-function doSearch(){const rows=searchFields();if(!rows.length){showResults([]);return}focusNode(rows[0].id);if(rows.length>1)showResults(rows)}
+function showResults(rows){const box=document.getElementById('searchResults'),items=document.getElementById('searchResultItems');items.innerHTML='';for(const rr of rows){const n=N[rr.id],b=document.createElement('button');b.type='button';b.className='search-result';b.innerHTML=`<b>${esc(label(n))}</b><span>${n.code?tr('code')+' '+esc(n.code)+' · ':''}${tr('father')}: ${esc(n.father||'—')} · ${tr('mother')}: ${esc(n.mother||'—')}</span>`;b.onclick=()=>{box.hidden=true;focusNode(rr.id)};items.appendChild(b)}box.hidden=!rows.length;if(!rows.length)return;const anchor=document.getElementById('searchPerson').getBoundingClientRect();box.style.left=Math.max(10,Math.min(anchor.left,innerWidth-box.offsetWidth-10))+'px';box.style.top=(anchor.bottom+7)+'px'}
+function doSearch(){
+ const rows=searchFields();
+ if(!rows.length){showResults([]);document.getElementById('liveStatus').textContent=currentLang==='en'?'No matching person found.':'Nije pronađena osoba s tim podacima.';return}
+ const uniqueBest=rows.length===1||rows[0].score<rows[1].score;
+ if(uniqueBest){showResults([]);focusNode(rows[0].id);return}
+ showResults(rows);
+ document.getElementById('liveStatus').textContent=currentLang==='en'?'More than one person matches. Add father or mother, or choose the correct result.':'Pronađeno je više osoba. Upišite oca ili majku ili odaberite točan rezultat.'
+}
 function setLang(lang){currentLang=lang;document.documentElement.lang=lang;document.querySelectorAll('[data-i18n]').forEach(el=>el.textContent=tr(el.dataset.i18n));document.getElementById('searchCode').placeholder=tr('codePlaceholder');document.getElementById('searchPerson').placeholder=tr('personPlaceholder');document.getElementById('searchFather').placeholder=tr('fatherPlaceholder');document.getElementById('searchMother').placeholder=tr('motherPlaceholder');document.getElementById('langHr').classList.toggle('active',lang==='hr');document.getElementById('langEn').classList.toggle('active',lang==='en');document.getElementById('homeBtn').title=lang==='en'?'Home':'Početna';document.getElementById('printDiagram').title=lang==='en'?'Print':'Ispis';render();if(selected)openDetails(selected);audit()}
 document.getElementById('langHr').onclick=()=>setLang('hr');document.getElementById('langEn').onclick=()=>setLang('en');document.getElementById('findBtn').onclick=doSearch;['searchCode','searchPerson','searchFather','searchMother'].forEach(id=>document.getElementById(id).addEventListener('keydown',e=>{if(e.key==='Enter')doSearch()}));document.getElementById('expandAll').onclick=()=>{collapsed.clear();render();fit()};document.getElementById('collapse').onclick=()=>{collapsed=new Set(Object.keys(P).filter(c=>c!=='2.0'&&hasAnyChildren(c)));render();fit()};document.getElementById('threeLevels').onclick=()=>{collapsed.clear();for(const c of Object.keys(P)){if(c.split('.').length>4&&hasAnyChildren(c))collapsed.add(c)}render();fit()};document.getElementById('fit').onclick=fit;document.getElementById('zoomIn').onclick=()=>zoom(1.25);document.getElementById('zoomOut').onclick=()=>zoom(.8);document.getElementById('closeDetails').onclick=()=>document.getElementById('details').classList.remove('open');document.getElementById('printDiagram').onclick=()=>window.print();document.getElementById('fullscreenDiagram').onclick=()=>{const el=document.getElementById('diagramShell');if(!document.fullscreenElement)el.requestFullscreen?.();else document.exitFullscreen?.()};
 document.getElementById('homeBtn').addEventListener('click',async e=>{if(document.fullscreenElement){e.preventDefault();try{await document.exitFullscreen()}catch(_){}location.href='index.html'}});
