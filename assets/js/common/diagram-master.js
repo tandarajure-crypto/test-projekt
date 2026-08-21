@@ -43,9 +43,9 @@
 
   // MASTER-0 geometry: father on the left, next generation on the right.
   const MAIN_W = 284;
-  const MAIN_H = 94;
+  const MAIN_H = 72;
   const SIDE_W = 270;
-  const SIDE_H = 72;
+  const SIDE_H = 51;
   const SIDE_GAP = 7;
   const SIDE_TOP = 12;
   const X_STEP = 390;
@@ -116,8 +116,10 @@
 
   function personName(label) {
     return String(label || '')
-      .replace(/\s*\((?:\d{4}\.)?–(?:\d{4}\.)?\)\s*$/, '')
-      .replace(/\s*\(nema podataka za godine\)\s*$/i, '')
+      .replace(/\s*\((?:\d{4}\.)?–(?:\d{4}\.)?\)\s*/g, ' ')
+      .replace(/\s*\(nema podataka za godine\)\s*/ig, ' ')
+      .replace(/\s+–\s+nadimak potomaka:\s*/i, ' – ')
+      .replace(/\s+/g, ' ')
       .trim();
   }
 
@@ -127,24 +129,36 @@
     return `★ ${birth}   ✝ ${death}`;
   }
 
-  function dateSvg(rec, kind = 'node') {
+
+  function inlineDateSvg(rec, kind = 'node') {
     const isSide = kind === 'side';
     const cls = isSide ? 'side-dates' : 'node-dates';
-    const y = isSide ? 63 : 80;
-    const birthSymbolX = isSide ? 10 : 13;
-    const birthValueX = isSide ? 24 : 28;
-    const deathSymbolX = isSide ? 103 : 116;
-    const deathValueX = isSide ? 118 : 131;
-    const badgeW = isSide ? 29 : 31;
-    const badgeH = isSide ? 15 : 16;
-    const badgeY = y - (isSide ? 12 : 13);
+    const y = isSide ? 36 : 46;
+    const birthSymbolX = isSide ? 160 : 174;
+    const birthValueX = isSide ? 173 : 187;
+    const deathSymbolX = isSide ? 210 : 224;
+    const deathValueX = isSide ? 223 : 237;
+    const badgeW = isSide ? 28 : 29;
+    const badgeH = isSide ? 14 : 15;
+    const badgeY = y - (isSide ? 11 : 12);
 
     const value = (year, valueX) => {
       if (year) return `<text class="${cls}" x="${valueX}" y="${y}">${esc(`${year}.`)}</text>`;
       return `<g class="date-unknown"><rect class="date-unknown-box" x="${valueX - 2}" y="${badgeY}" width="${badgeW}" height="${badgeH}" rx="3"></rect><text class="${cls} date-unknown-text" x="${valueX + badgeW / 2 - 2}" y="${y}" text-anchor="middle">G.N.</text></g>`;
     };
 
-    return `<text class="${cls}" x="${birthSymbolX}" y="${y}">★</text>${value(rec && rec.birth, birthValueX)}<text class="${cls}" x="${deathSymbolX}" y="${y}">✝</text>${value(rec && rec.death, deathValueX)}`;
+    return `<g class="date-inline"><text class="${cls}" x="${birthSymbolX}" y="${y}">★</text>${value(rec && rec.birth, birthValueX)}<text class="${cls}" x="${deathSymbolX}" y="${y}">✝</text>${value(rec && rec.death, deathValueX)}</g>`;
+  }
+
+  function inlineNameSvg(name, kind = 'node') {
+    const isSide = kind === 'side';
+    const x = isSide ? 10 : 13;
+    const y = isSide ? 36 : 46;
+    const maxWidth = isSide ? 142 : 153;
+    const className = isSide ? 'side-label' : 'node-label';
+    const approxWidth = String(name || '').length * (isSide ? 6.15 : 6.85);
+    const fit = approxWidth > maxWidth ? ` textLength="${maxWidth}" lengthAdjust="spacingAndGlyphs"` : '';
+    return `<text class="${className}" x="${x}" y="${y}"${fit}>${esc(name)}</text>`;
   }
 
   function showPersonDetails(code) {
@@ -360,21 +374,21 @@
       const classes = ['node', isRoot ? 'root' : terminal ? 'terminal' : 'primary'];
       if (selectedCode === item.code) classes.push('selected');
       if (searchFocus === item.code) classes.push('search-focus');
-      const lines = labelLines(personName(rec.label), 34);
+      const displayName = personName(rec.label);
 
       html += `<g class="${classes.join(' ')}" data-code="${esc(item.code)}" transform="translate(${pos.x},${pos.y})" role="button" tabindex="0" aria-label="${esc(`${item.code} ${rec.label}`)}">`;
       html += `<title>${esc(`${personName(rec.label)} · ${dateText(rec)}`)}</title>`;
       html += `<rect width="${MAIN_W}" height="${MAIN_H}" rx="10"/>`;
       html += `<text class="node-code" x="13" y="19">${esc(item.code)}</text>`;
-      html += lines.map((line, index) => `<text class="node-label" x="13" y="${40 + index * 16}">${esc(line)}</text>`).join('');
-      html += dateSvg(rec, 'node');
+      html += inlineNameSvg(displayName, 'node');
+      html += inlineDateSvg(rec, 'node');
       if (family) {
         html += `<g class="toggle-hit" data-toggle="${esc(item.code)}" transform="translate(${MAIN_W - 18},18)" role="button" aria-label="${expanded.has(item.code) ? 'Zatvori' : 'Otvori'} obitelj">`;
         html += `<circle class="toggle-circle" r="15"></circle>`;
         html += `<text class="toggle-symbol" text-anchor="middle" y="9">${expanded.has(item.code) ? '−' : '+'}</text></g>`;
       }
       if (targets[item.code]) {
-        html += `<g class="branch-link-hit" data-target-code="${esc(item.code)}" transform="translate(${MAIN_W - 20},${MAIN_H - 18})" role="link" aria-label="Otvori podgranu">`;
+        html += `<g class="branch-link-hit" data-target-code="${esc(item.code)}" transform="translate(${MAIN_W - 52},18)" role="link" aria-label="Otvori podgranu">`;
         html += `<circle class="branch-link-circle" r="11"></circle><text class="branch-link-symbol" text-anchor="middle" y="5">↗</text></g>`;
       }
       html += '</g>';
@@ -388,13 +402,13 @@
         const sideClasses = ['side-node', type];
         if (selectedCode === extraCode) sideClasses.push('selected');
         if (searchFocus === extraCode) sideClasses.push('search-focus');
-        const sideLines = labelLines(personName(sideRec.label), 33);
+        const sideName = personName(sideRec.label);
         html += `<g class="${sideClasses.join(' ')}" data-code="${esc(extraCode)}" transform="translate(${side.x},${side.y})" role="button" tabindex="0" aria-label="${esc(`${extraCode} ${sideRec.label}`)}">`;
         html += `<title>${esc(`${personName(sideRec.label)} · ${dateText(sideRec)}`)}</title>`;
         html += `<rect width="${SIDE_W}" height="${SIDE_H}" rx="8"/>`;
         html += `<text class="side-code" x="10" y="16">${esc(extraCode)}</text>`;
-        html += sideLines.map((line, index) => `<text class="side-label" x="10" y="${34 + index * 13}">${esc(line)}</text>`).join('');
-        html += dateSvg(sideRec, 'side');
+        html += inlineNameSvg(sideName, 'side');
+        html += inlineDateSvg(sideRec, 'side');
         html += '</g>';
       }
     }
