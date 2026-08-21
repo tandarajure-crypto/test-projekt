@@ -18,6 +18,33 @@
   const targets = DATA.targets || {};
   const rootCode = (DATA.meta && DATA.meta.rootCode) || document.body.dataset.rootCode || '2.0';
 
+  const LANG = document.body.dataset.lang === 'en' ? 'en' : 'hr';
+  const TXT = LANG === 'en' ? {
+    missingRoot: 'Missing root person', code: 'Code', father: 'Father', mother: 'Mother', missing: 'not provided',
+    opened: 'Opened', closed: 'Closed', branch: 'branch', enterSearch: 'Enter at least one search value.',
+    noResults: 'No results for the entered data.', found: 'Found', fullOn: 'Full screen enabled.',
+    fullDenied: 'The browser did not allow full screen.', openFamily: 'Open family', closeFamily: 'Close family',
+    openSubbranch: 'Open sub-branch', privateDates: 'Dates are available only on the private website.',
+    privateParents: 'Family details are available only on the private website.'
+  } : {
+    missingRoot: 'Nedostaje početna osoba', code: 'Šifra', father: 'Otac', mother: 'Majka', missing: 'podatak nije naveden',
+    opened: 'Otvorena', closed: 'Zatvorena', branch: 'grana', enterSearch: 'Upišite barem jedan podatak za pretragu.',
+    noResults: 'Nema rezultata za zadane podatke.', found: 'Pronađeno', fullOn: 'Cijeli ekran uključen.',
+    fullDenied: 'Preglednik nije dopustio cijeli ekran.', openFamily: 'Otvori obitelj', closeFamily: 'Zatvori obitelj',
+    openSubbranch: 'Otvori podgranu', privateDates: 'Godine su dostupne samo na privatnoj web-stranici.',
+    privateParents: 'Obiteljski podaci dostupni su samo na privatnoj web-stranici.'
+  };
+
+  function localized(rec, key) {
+    if (!rec) return '';
+    if (LANG === 'en' && rec[`${key}En`] != null) return rec[`${key}En`];
+    return rec[key] == null ? '' : rec[key];
+  }
+  function recLabel(rec) { return localized(rec, 'label'); }
+  function recFather(rec) { return localized(rec, 'father'); }
+  function recMother(rec) { return localized(rec, 'mother'); }
+  function recDetail(rec) { return localized(rec, 'detail'); }
+
   const svg = document.getElementById('treeSvg');
   const viewport = document.getElementById('viewport');
   const linksLayer = document.getElementById('links');
@@ -67,7 +94,7 @@
   let statusTimer = 0;
 
   if (!primary[rootCode]) {
-    showStatus(`Nedostaje početna osoba ${rootCode}`);
+    showStatus(`${TXT.missingRoot} ${rootCode}`);
     return;
   }
 
@@ -117,13 +144,14 @@
   function personName(label) {
     return String(label || '')
       .replace(/\s*\((?:\d{4}\.)?–(?:\d{4}\.)?\)\s*/g, ' ')
-      .replace(/\s*\(nema podataka za godine\)\s*/ig, ' ')
+      .replace(/\s*\((?:nema podataka za godine|dates unknown)\)\s*/ig, ' ')
       .replace(/\s+–\s+nadimak potomaka:\s*/i, ' – ')
       .replace(/\s+/g, ' ')
       .trim();
   }
 
   function dateText(rec) {
+    if (rec && rec.protected) return TXT.privateDates;
     const birth = rec && rec.birth ? `${rec.birth}.` : 'G.N.';
     const death = rec && rec.death ? `${rec.death}.` : 'G.N.';
     return `★ ${birth}   ✝ ${death}`;
@@ -131,6 +159,7 @@
 
 
   function inlineDateSvg(rec, kind = 'node') {
+    if (rec && rec.protected) return '';
     const isSide = kind === 'side';
     const cls = isSide ? 'side-dates' : 'node-dates';
     const y = isSide ? 36 : 46;
@@ -164,11 +193,11 @@
   function showPersonDetails(code) {
     if (!detailsBox || !nodes[code]) return;
     const rec = nodes[code];
-    detailsName.textContent = personName(rec.label);
-    detailsCode.textContent = `Šifra: ${code}`;
+    detailsName.textContent = personName(recLabel(rec));
+    detailsCode.textContent = `${TXT.code}: ${code}`;
     detailsDates.textContent = dateText(rec);
-    detailsParents.textContent = `Otac: ${rec.father || 'podatak nije naveden'} · Majka: ${rec.mother || 'podatak nije naveden'}`;
-    const detail = String(rec.detail || '').trim();
+    detailsParents.textContent = rec.protected ? TXT.privateParents : `${TXT.father}: ${recFather(rec) || TXT.missing} · ${TXT.mother}: ${recMother(rec) || TXT.missing}`;
+    const detail = String(recDetail(rec) || '').trim();
     detailsText.textContent = detail;
     detailsText.hidden = !detail;
     detailsBox.hidden = false;
@@ -372,23 +401,24 @@
       const terminal = isTerminalSonCode(item.code);
       const family = hasFamily(item.code);
       const classes = ['node', isRoot ? 'root' : terminal ? 'terminal' : 'primary'];
+      if (rec.protected) classes.push('protected');
       if (selectedCode === item.code) classes.push('selected');
       if (searchFocus === item.code) classes.push('search-focus');
-      const displayName = personName(rec.label);
+      const displayName = personName(recLabel(rec));
 
-      html += `<g class="${classes.join(' ')}" data-code="${esc(item.code)}" transform="translate(${pos.x},${pos.y})" role="button" tabindex="0" aria-label="${esc(`${item.code} ${rec.label}`)}">`;
-      html += `<title>${esc(`${personName(rec.label)} · ${dateText(rec)}`)}</title>`;
+      html += `<g class="${classes.join(' ')}" data-code="${esc(item.code)}" transform="translate(${pos.x},${pos.y})" role="button" tabindex="0" aria-label="${esc(`${item.code} ${recLabel(rec)}`)}">`;
+      html += `<title>${esc(`${personName(recLabel(rec))} · ${dateText(rec)}`)}</title>`;
       html += `<rect width="${MAIN_W}" height="${MAIN_H}" rx="10"/>`;
       html += `<text class="node-code" x="13" y="19">${esc(item.code)}</text>`;
       html += inlineNameSvg(displayName, 'node');
       html += inlineDateSvg(rec, 'node');
       if (family) {
-        html += `<g class="toggle-hit" data-toggle="${esc(item.code)}" transform="translate(${MAIN_W - 18},18)" role="button" aria-label="${expanded.has(item.code) ? 'Zatvori' : 'Otvori'} obitelj">`;
+        html += `<g class="toggle-hit" data-toggle="${esc(item.code)}" transform="translate(${MAIN_W - 18},18)" role="button" aria-label="${expanded.has(item.code) ? TXT.closeFamily : TXT.openFamily}">`;
         html += `<circle class="toggle-circle" r="15"></circle>`;
         html += `<text class="toggle-symbol" text-anchor="middle" y="9">${expanded.has(item.code) ? '−' : '+'}</text></g>`;
       }
       if (targets[item.code]) {
-        html += `<g class="branch-link-hit" data-target-code="${esc(item.code)}" transform="translate(${MAIN_W - 52},18)" role="link" aria-label="Otvori podgranu">`;
+        html += `<g class="branch-link-hit" data-target-code="${esc(item.code)}" transform="translate(${MAIN_W - 52},18)" role="link" aria-label="${TXT.openSubbranch}">`;
         html += `<circle class="branch-link-circle" r="11"></circle><text class="branch-link-symbol" text-anchor="middle" y="5">↗</text></g>`;
       }
       html += '</g>';
@@ -400,11 +430,12 @@
         if (!side || !sideRec) continue;
         const type = sideRec.type === 'spouse' ? 'spouse' : 'daughter';
         const sideClasses = ['side-node', type];
+        if (sideRec.protected) sideClasses.push('protected');
         if (selectedCode === extraCode) sideClasses.push('selected');
         if (searchFocus === extraCode) sideClasses.push('search-focus');
-        const sideName = personName(sideRec.label);
-        html += `<g class="${sideClasses.join(' ')}" data-code="${esc(extraCode)}" transform="translate(${side.x},${side.y})" role="button" tabindex="0" aria-label="${esc(`${extraCode} ${sideRec.label}`)}">`;
-        html += `<title>${esc(`${personName(sideRec.label)} · ${dateText(sideRec)}`)}</title>`;
+        const sideName = personName(recLabel(sideRec));
+        html += `<g class="${sideClasses.join(' ')}" data-code="${esc(extraCode)}" transform="translate(${side.x},${side.y})" role="button" tabindex="0" aria-label="${esc(`${extraCode} ${recLabel(sideRec)}`)}">`;
+        html += `<title>${esc(`${personName(recLabel(sideRec))} · ${dateText(sideRec)}`)}</title>`;
         html += `<rect width="${SIDE_W}" height="${SIDE_H}" rx="8"/>`;
         html += `<text class="side-code" x="10" y="16">${esc(extraCode)}</text>`;
         html += inlineNameSvg(sideName, 'side');
@@ -527,7 +558,7 @@
     render();
     requestAnimationFrame(() => center(code, withZoom));
     showPersonDetails(code);
-    showStatus(`${personName(nodes[code].label)} · ${code}`);
+    showStatus(`${personName(recLabel(nodes[code]))} · ${code}`);
   }
 
   function clearExpandedBelow(code) {
@@ -563,7 +594,7 @@
       panY = anchor.y - afterPos.cy * scale;
       applyTransform();
     }
-    showStatus(`${expanded.has(code) ? 'Otvorena' : 'Zatvorena'} grana: ${personName(nodes[code].label)}`);
+    showStatus(`${expanded.has(code) ? TXT.opened : TXT.closed} ${TXT.branch}: ${personName(recLabel(nodes[code]))}`);
   }
 
   function structuralDepthMap() {
@@ -607,15 +638,15 @@
     const qMother = searchMother.value.trim();
 
     if (!qCode && !qPerson && !qFather && !qMother) {
-      showStatus('Upišite barem jedan podatak za pretragu.');
+      showStatus(TXT.enterSearch);
       return;
     }
 
     const found = Object.values(nodes).filter(rec =>
       matchField(rec.code, qCode)
-      && matchField(rec.label, qPerson)
-      && matchField(rec.father, qFather)
-      && matchField(rec.mother, qMother)
+      && matchField(recLabel(rec), qPerson)
+      && matchField(recFather(rec), qFather)
+      && matchField(recMother(rec), qMother)
     );
 
     found.sort((a, b) => {
@@ -627,7 +658,7 @@
 
     if (!found.length) {
       closeResults();
-      showStatus('Nema rezultata za zadane podatke.');
+      showStatus(TXT.noResults);
       return;
     }
     if (found.length === 1) {
@@ -636,9 +667,9 @@
       return;
     }
 
-    resultsTitle.textContent = `Pronađeno: ${found.length}`;
+    resultsTitle.textContent = `${TXT.found}: ${found.length}`;
     resultItems.innerHTML = found.slice(0, 80).map(rec =>
-      `<button class="search-result" type="button" data-result="${esc(rec.code)}"><strong>${esc(rec.code)}</strong>${esc(personName(rec.label))}<small>${esc(dateText(rec))} · Otac: ${esc(rec.father || '—')} · Majka: ${esc(rec.mother || '—')}</small></button>`
+      `<button class="search-result" type="button" data-result="${esc(rec.code)}"><strong>${esc(rec.code)}</strong>${esc(personName(recLabel(rec)))}<small>${esc(dateText(rec))}${rec.protected ? '' : ` · ${TXT.father}: ${esc(recFather(rec) || '—')} · ${TXT.mother}: ${esc(recMother(rec) || '—')}`}</small></button>`
     ).join('');
     resultsBox.hidden = false;
     resultItems.querySelectorAll('[data-result]').forEach(button => {
@@ -686,12 +717,12 @@
     try {
       if (!document.fullscreenElement) {
         await document.documentElement.requestFullscreen();
-        showStatus('Cijeli ekran uključen.');
+        showStatus(TXT.fullOn);
       } else {
         await document.exitFullscreen();
       }
     } catch (_error) {
-      showStatus('Preglednik nije dopustio cijeli ekran.');
+      showStatus(TXT.fullDenied);
     }
   });
   document.getElementById('printDiagram').addEventListener('click', () => window.print());
