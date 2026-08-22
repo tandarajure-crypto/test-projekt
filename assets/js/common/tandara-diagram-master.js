@@ -4,7 +4,7 @@
   Osnova: Petrov DIJAGRAM-MASTER + usvojene Matina korekcije.
   Funkcije: +/− grane, više brakova i djeca po majci, 4-poljska pretraga,
   zoom/pan, fullscreen, print, detalji osobe, (★ rođenje - ✝ smrt), N.G.
-  kvadrat, HR/EN te obavezni jezični flagovi (s automatskim fallbackom).
+  kvadrat. Jezični flagovi pripadaju vanjskoj stranici ispod slike autora, ne motoru.
 */
 (() => {
   'use strict';
@@ -76,52 +76,7 @@
   const detailsParents = document.getElementById('personDetailsParents');
   const detailsText = document.getElementById('personDetailsText');
 
-  // MASTER rule: every interactive diagram must expose both HR and EN flags.
-  // Existing explicit links are preserved. If a converted page accidentally
-  // omits them, the master inserts a safe fallback pair automatically.
-  function ensureLanguageFlags() {
-    const topbar = document.querySelector('.topbar');
-    if (!topbar) return;
-    const existing = topbar.querySelectorAll('.flag-btn');
-    if (existing.length >= 2) return;
-
-    const file = (window.location.pathname.split('/').pop() || 'index.html');
-    const isEnglishFile = /-en\.html$/i.test(file);
-    const hrFallback = isEnglishFile ? file.replace(/-en\.html$/i, '.html') : file;
-    const enFallback = isEnglishFile ? file : file.replace(/\.html$/i, '-en.html');
-    const hrHref = document.body.dataset.hrHref || hrFallback;
-    const enHref = document.body.dataset.enHref || enFallback;
-    const flagBase = document.body.dataset.flagBase || '';
-
-    const makeFlag = (lang, href, src, title, active) => {
-      const a = document.createElement('a');
-      a.className = `icon-btn flag-btn${active ? ' active' : ''}`;
-      a.href = href;
-      a.target = '_top';
-      a.lang = lang;
-      a.hreflang = lang;
-      a.title = title;
-      if (active) a.setAttribute('aria-current', 'page');
-      const img = document.createElement('img');
-      img.src = `${flagBase}${src}`;
-      img.alt = lang === 'hr' ? 'HR' : 'EN';
-      a.appendChild(img);
-      return a;
-    };
-
-    existing.forEach(node => node.remove());
-    const home = topbar.querySelector('.home-btn');
-    const hr = makeFlag('hr', hrHref, 'flag-hr.png', LANG === 'hr' ? 'Hrvatski' : 'Croatian', LANG === 'hr');
-    const en = makeFlag('en', enHref, 'flag-uk.png', 'English', LANG === 'en');
-    if (home) {
-      home.insertAdjacentElement('afterend', en);
-      home.insertAdjacentElement('afterend', hr);
-    } else {
-      topbar.prepend(en);
-      topbar.prepend(hr);
-    }
-  }
-  ensureLanguageFlags();
+  // Jezični flagovi namjerno nisu dio motora; nalaze se u lijevom stupcu vanjske stranice.
 
   const MIN_SCALE = 0.015;
 
