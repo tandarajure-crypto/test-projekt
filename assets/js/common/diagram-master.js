@@ -661,6 +661,19 @@
       showStatus(TXT.noResults);
       return;
     }
+
+    // If the user entered a complete existing code, open that exact person
+    // immediately instead of treating descendants with the same prefix as
+    // additional matches (e.g. 2.2.1.1 also matches 2.2.1.1.1, ...).
+    const exactCodeMatch = qCode
+      ? found.find(rec => normalize(rec.code) === normalize(qCode))
+      : null;
+    if (exactCodeMatch) {
+      closeResults();
+      focusCode(exactCodeMatch.code, true);
+      return;
+    }
+
     if (found.length === 1) {
       closeResults();
       focusCode(found[0].code, true);
