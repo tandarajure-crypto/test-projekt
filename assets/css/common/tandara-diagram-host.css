@@ -2,6 +2,12 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden}body.diagram-master-ho
 /* TANDARA FINAL BOX2 HOST */
 .family-diagram-frame{width:100%;max-width:none}
 
-/* TANDARA FLAG LOCATION: language switch is below author photo, never inside diagram. */
-.diagram-master-host .author-photo + .lang-switch{display:flex;justify-content:center;align-items:center;gap:10px;margin:10px auto 8px;width:100%}
-.diagram-master-host .author-photo + .lang-switch .lang-btn{display:inline-flex;align-items:center;justify-content:center}
+
+/* TANDARA HOST FULLSCREEN, 2026-08-22 */
+/* Kod samostalnih dijagrama fullscreen skriva jedini vanjski lijevi stupac. */
+html:fullscreen body.diagram-master-host .layout,
+:fullscreen body.diagram-master-host .layout{grid-template-columns:minmax(0,1fr);}
+html:fullscreen body.diagram-master-host .left-menu,
+:fullscreen body.diagram-master-host .left-menu{display:none!important;}
+html:fullscreen body.diagram-master-host .diagram-main,
+:fullscreen body.diagram-master-host .diagram-main{width:100vw;height:100vh;}
