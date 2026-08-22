@@ -158,56 +158,68 @@
 
   function dateText(rec) {
     if (rec && rec.protected) return TXT.privateDates;
-    return `(★ ${yearText(rec && rec.birth)}) (✝ ${yearText(rec && rec.death)})`;
+    return `(★ ${yearText(rec && rec.birth)} - ✝ ${yearText(rec && rec.death)})`;
   }
 
   function dateHtml(rec) {
     if (rec && rec.protected) return esc(TXT.privateDates);
-    const one = (symbol, year) => year
-      ? `<span class="life-date">(${symbol} ${esc(yearText(year))})</span>`
-      : `<span class="life-date">(${symbol} <span class="date-ng">N.G.</span>)</span>`;
-    return `${one('★', rec && rec.birth)} ${one('✝', rec && rec.death)}`;
+    const value = year => year
+      ? esc(yearText(year))
+      : `<span class="date-ng">N.G.</span>`;
+    return `<span class="life-date">(★ ${value(rec && rec.birth)} - ✝ ${value(rec && rec.death)})</span>`;
   }
 
   function formatDetailHtml(text) {
     let out = esc(String(text || ''));
-    const piece = (symbol, year) => year
-      ? `<span class="life-date">(${symbol} ${esc(yearText(year))})</span>`
-      : `<span class="life-date">(${symbol} <span class="date-ng">N.G.</span>)</span>`;
-    // HR legacy: (1953.- ), (1932.-1936.); EN legacy: (1953– ), (1932–1936).
-    out = out.replace(/\((\d{4})\.?\s*(?:\.\s*)?(?:-|–|—)\s*(\d{4})?\.?\s*\)/g, (_, b, d) => `${piece('★', b)} ${piece('✝', d || '')}`);
+    const value = year => year
+      ? esc(yearText(year))
+      : `<span class="date-ng">N.G.</span>`;
+    const pair = (birth, death) => `<span class="life-date">(★ ${value(birth)} - ✝ ${value(death)})</span>`;
     // Already-symbolized date pairs, if any occur in descriptive text.
-    out = out.replace(/\(?\s*★\s*(N\.G\.|oko\s+\d{4}\.?|\d{4}\.?)\s*(?:[–—-]\s*)?✝\s*(N\.G\.|\d{4}\.?)\s*\)?/gi, (_, b, d) => `${piece('★', /^N\.G\./i.test(b) ? '' : b)} ${piece('✝', /^N\.G\./i.test(d) ? '' : d)}`);
+    out = out.replace(/\(?\s*★\s*(N\.G\.|oko\s+\d{4}\.?|\d{4}\.?)\s*(?:[–—-]\s*)?✝\s*(N\.G\.|\d{4}\.?)\s*\)?/gi, (_, b, d) => pair(/^N\.G\./i.test(b) ? '' : b, /^N\.G\./i.test(d) ? '' : d));
+    // HR legacy: (1953.- ), (1932.-1936.); EN legacy: (1953– ), (1932–1936).
+    out = out.replace(/\((\d{4})\.?\s*(?:\.\s*)?(?:-|–|—)\s*(\d{4})?\.?\s*\)/g, (_, b, d) => pair(b, d || ''));
     return out;
   }
 
-  function inlineDateSvg(rec, kind = 'node') {
+  function inlineDateSvg(rec, kind = 'node', opts = {}) {
     if (rec && rec.protected) return '';
     const isSide = kind === 'side';
     const cls = isSide ? 'side-dates' : 'node-dates';
-    const y = isSide ? 36 : 46;
-    const birthOpenX = isSide ? 148 : 165;
-    const birthSymbolX = isSide ? 154 : 171;
-    const birthValueX = isSide ? 166 : 183;
-    const birthCloseX = isSide ? 197 : 216;
-    const deathOpenX = isSide ? 201 : 220;
-    const deathSymbolX = isSide ? 207 : 226;
-    const deathValueX = isSide ? 219 : 238;
-    const deathCloseX = isSide ? 252 : 272;
+    const y = opts.y || (isSide ? 36 : 46);
+    const openX = opts.openX || (isSide ? 148 : 165);
+    const starX = openX + 6;
+    const birthX = openX + 18;
+    const dashX = openX + 50;
+    const deathSymbolX = openX + 61;
+    const deathX = openX + 74;
+    const closeX = openX + 108;
     const badgeW = 23;
     const badgeH = 12;
     const badgeY = y - 10;
+    const fontSize = opts.fontSize ? ` font-size="${opts.fontSize}"` : '';
 
-    const value = (year, valueX) => {
+    const value = (year, valueX, maxW = 30) => {
       if (year) {
         const txt = yearText(year);
-        const fit = txt.length > 6 ? ` textLength="${isSide ? 29 : 31}" lengthAdjust="spacingAndGlyphs"` : '';
-        return `<text class="${cls}" x="${valueX}" y="${y}"${fit}>${esc(txt)}</text>`;
+        const fit = txt.length > 6 ? ` textLength="${maxW}" lengthAdjust="spacingAndGlyphs"` : '';
+        return `<text class="${cls}" x="${valueX}" y="${y}"${fontSize}${fit}>${esc(txt)}</text>`;
       }
       return `<g class="date-unknown"><rect class="date-unknown-box" x="${valueX - 1}" y="${badgeY}" width="${badgeW}" height="${badgeH}" rx="0"></rect><text class="${cls} date-unknown-text" x="${valueX + badgeW / 2 - 1}" y="${y - 1}" text-anchor="middle" font-size="8">N.G.</text></g>`;
     };
 
-    return `<g class="date-inline"><text class="${cls}" x="${birthOpenX}" y="${y}">(</text><text class="${cls}" x="${birthSymbolX}" y="${y}">★</text>${value(rec && rec.birth, birthValueX)}<text class="${cls}" x="${birthCloseX}" y="${y}">)</text><text class="${cls}" x="${deathOpenX}" y="${y}">(</text><text class="${cls}" x="${deathSymbolX}" y="${y}">✝</text>${value(rec && rec.death, deathValueX)}<text class="${cls}" x="${deathCloseX}" y="${y}">)</text></g>`;
+    return `<g class="date-inline"><text class="${cls}" x="${openX}" y="${y}"${fontSize}>(</text><text class="${cls}" x="${starX}" y="${y}"${fontSize}>★</text>${value(rec && rec.birth, birthX, opts.birthW || 30)}<text class="${cls}" x="${dashX}" y="${y}"${fontSize}>-</text><text class="${cls}" x="${deathSymbolX}" y="${y}"${fontSize}>✝</text>${value(rec && rec.death, deathX, opts.deathW || 30)}<text class="${cls}" x="${closeX}" y="${y}"${fontSize}>)</text></g>`;
+  }
+
+  function rootNameAndDatesSvg(displayName, rec) {
+    const parts = String(displayName || '').split(/\s+[–—-]\s+/);
+    const main = parts.shift() || displayName;
+    const sub = parts.join(' – ');
+    const mainFit = main.length > 13 ? ' textLength="78" lengthAdjust="spacingAndGlyphs"' : '';
+    let out = `<text class="node-label" x="13" y="43"${mainFit}>${esc(main)}</text>`;
+    out += inlineDateSvg(rec, 'node', { y: 43, openX: 98, fontSize: 9.4, birthW: 30, deathW: 28 });
+    if (sub) out += `<text class="node-label" x="13" y="62" font-size="11.5">${esc(sub)}</text>`;
+    return out;
   }
 
   function inlineNameSvg(name, kind = 'node') {
@@ -441,8 +453,12 @@
       html += `<title>${esc(`${personName(recLabel(rec))} · ${dateText(rec)}`)}</title>`;
       html += `<rect width="${MAIN_W}" height="${MAIN_H}" rx="10"/>`;
       html += `<text class="node-code" x="13" y="19">${esc(item.code)}</text>`;
-      html += inlineNameSvg(displayName, 'node');
-      html += inlineDateSvg(rec, 'node');
+      if (isRoot && /\s+[–—-]\s+/.test(displayName)) {
+        html += rootNameAndDatesSvg(displayName, rec);
+      } else {
+        html += inlineNameSvg(displayName, 'node');
+        html += inlineDateSvg(rec, 'node');
+      }
       if (family) {
         html += `<g class="toggle-hit" data-toggle="${esc(item.code)}" transform="translate(${MAIN_W - 18},18)" role="button" aria-label="${expanded.has(item.code) ? TXT.closeFamily : TXT.openFamily}">`;
         html += `<circle class="toggle-circle" r="15"></circle>`;
