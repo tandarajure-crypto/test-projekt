@@ -31,3 +31,27 @@
   vector-effect:non-scaling-stroke;
   opacity:.92
 }
+
+
+/* R6: Matina sadržaj — puna širina završnog dijalog-boxa i sigurno prelamanje dugih šifri */
+.branch-diagram-link{
+  width:100%!important;
+  max-width:none!important;
+  box-sizing:border-box!important;
+}
+.family-code-list{
+  width:100%!important;
+  max-width:100%!important;
+  box-sizing:border-box!important;
+  overflow-wrap:anywhere!important;
+  word-break:normal!important;
+}
+.family-code-list strong{
+  overflow-wrap:anywhere!important;
+  word-break:break-word!important;
+}
+h3[data-person-code]{
+  max-width:100%!important;
+  overflow-wrap:anywhere!important;
+  word-break:normal!important;
+}
