@@ -1444,3 +1444,32 @@ img, video, iframe{
         margin-right:-52px !important;
     }
 }
+
+
+/* TANDARA FLAGS: HR — HOME — UK, 2026-08-22 */
+/* Jezične zastave ostaju u jedinom lijevom stupcu, u istom retku s HOME tipkom. */
+.left-menu{position:relative;}
+.left-menu > .lang-switch{
+    position:absolute;
+    top:33px;
+    left:50%;
+    width:0;
+    height:28px;
+    margin:0;
+    padding:0;
+    display:block;
+    z-index:12;
+    pointer-events:none;
+}
+.left-menu > .lang-switch .lang-btn{
+    position:absolute;
+    top:0;
+    margin:0;
+    pointer-events:auto;
+}
+.left-menu > .lang-switch .lang-btn:first-child{right:45px;}
+.left-menu > .lang-switch .lang-btn:last-child{left:45px;}
+/* Na mobilnom ostaje postojeća mobilna gornja traka. */
+@media (max-width:768px){
+  body.box-mobile-split .left-menu > .lang-switch{display:none;}
+}
