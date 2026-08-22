@@ -13,3 +13,5 @@ Jedan tehnički temelj za JAVNI Tandara i PRIVATNI test-projekt.
 - više brakova: 1./2./3. brak; supruga i sva pripadajuća djeca povezana po majci, uključujući K/S zapise
 - JAVNI: šifre ostaju; imena zaštićenih živih osoba zamijenjena dogovorenom napomenom
 - PRIVATNI: puna imena i podaci ostaju
+
+KOREKCIJA FLAGOVA: HR/EN zastave nisu u motoru. Nalaze se u lijevom stupcu odmah ispod slike autora.
