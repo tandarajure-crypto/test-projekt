@@ -1,4 +1,4 @@
 .life-date{white-space:nowrap}
-.date-ng{display:inline-flex;align-items:center;justify-content:center;min-width:2.05em;height:1.22em;padding:0 .18em;border:1px solid currentColor;border-radius:0;background:#fff;font-size:.72em;font-weight:700;line-height:1;vertical-align:.08em}
+.date-ng{display:inline-flex;align-items:center;justify-content:center;min-width:2.05em;height:1.22em;padding:0 .18em;border:1px solid currentColor;border-radius:0;background:transparent;font-size:.72em;font-weight:700;line-height:1;vertical-align:.08em}
 .gn-mini{border-radius:0!important;font-size:8px!important;min-width:25px!important;height:15px!important;padding:0 3px!important}
 .person-details-dates .date-ng,.search-result .date-ng{font-size:.72em;min-width:2.05em;height:1.22em}
