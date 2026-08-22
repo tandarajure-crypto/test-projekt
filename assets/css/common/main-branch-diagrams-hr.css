@@ -1,0 +1,228 @@
+/* Četiri glavna hrvatska dijagrama: zajednička platforma i troredni naslov. */
+body.main-branch-diagram-hr,
+body.main-branch-diagram-hr *{
+  box-sizing:border-box;
+}
+
+body.main-branch-diagram-hr > header,
+body.main-branch-jure-host #jureDiagram .diagram-header{
+  background:#fff;
+  border-bottom:1px solid #d9ddd9;
+  box-shadow:0 2px 10px rgba(0,0,0,.05);
+  padding:10px 14px;
+}
+
+body.main-branch-diagram-hr > header{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  grid-template-rows:auto auto;
+  gap:9px;
+}
+
+body.main-branch-diagram-hr .header-top{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  grid-template-areas:
+    "title"
+    "actions";
+  align-items:stretch;
+  gap:7px;
+}
+
+body.main-branch-diagram-hr .title-wrap{grid-area:title}
+body.main-branch-diagram-hr .header-actions{grid-area:actions}
+
+body.main-branch-jure-host #jureDiagram .diagram-header{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  grid-template-areas:
+    "title"
+    "actions"
+    "tools";
+  align-items:stretch;
+  gap:7px;
+}
+
+body.main-branch-jure-host #jureDiagram .diagram-title{grid-area:title}
+body.main-branch-jure-host #jureDiagram .diagram-actions{grid-area:actions}
+body.main-branch-jure-host #jureDiagram .diagram-tools{grid-area:tools}
+
+body.main-branch-diagram-hr .unified-branch-title,
+body.main-branch-jure-host #jureDiagram .unified-branch-title{
+  display:grid;
+  grid-template-rows:auto auto auto;
+  align-content:center;
+  gap:2px;
+  min-width:0;
+  width:100%;
+  max-width:none;
+}
+
+.unified-branch-kicker{
+  color:#68736d;
+  font:700 11px/1.15 Arial,Helvetica,sans-serif;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+}
+
+body.main-branch-diagram-hr .unified-branch-title h1,
+body.main-branch-jure-host #jureDiagram .unified-branch-title h2{
+  margin:0;
+  color:#174f39;
+  font:800 21px/1.16 Arial,Helvetica,sans-serif;
+  letter-spacing:.015em;
+  white-space:normal;
+}
+
+body.main-branch-diagram-hr .unified-branch-title .subtitle,
+body.main-branch-jure-host #jureDiagram .unified-branch-title .diagram-subtitle{
+  margin:0;
+  color:#68736d;
+  font:400 12px/1.3 Arial,Helvetica,sans-serif;
+  white-space:normal;
+}
+
+body.main-branch-diagram-hr .header-actions,
+body.main-branch-jure-host #jureDiagram .diagram-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:6px;
+  flex-wrap:nowrap;
+}
+
+body.main-branch-diagram-hr .header-tools,
+body.main-branch-jure-host #jureDiagram .diagram-tools{
+  min-width:0;
+  border-top:1px solid #edf0ed;
+  padding-top:8px;
+}
+
+body.main-branch-diagram-hr .toolbar-scroll,
+body.main-branch-jure-host #jureDiagram .toolbar-scroll{
+  min-width:0;
+  overflow-x:auto;
+  padding:1px 2px 3px;
+  scrollbar-width:thin;
+}
+
+body.main-branch-diagram-hr .toolbar,
+body.main-branch-jure-host #jureDiagram .diagram-toolbar{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  width:max-content;
+  min-width:max-content;
+}
+
+body.main-branch-diagram-hr .diagram-home-circle,
+body.main-branch-jure-host #jureDiagram .diagram-home-circle{
+  width:52px;
+  height:52px;
+}
+
+body.main-branch-diagram-hr .lang-icon,
+body.main-branch-jure-host #jureDiagram .lang-icon{
+  width:42px;
+  height:36px;
+}
+
+body.main-branch-diagram-hr #fullscreenDiagram,
+body.main-branch-diagram-hr #printDiagram,
+body.main-branch-jure-host #jureDiagram #fullscreenDiagram,
+body.main-branch-jure-host #jureDiagram #printDiagram{
+  min-height:42px;
+}
+
+/* Nosač svakog dijagrama ide od razdjelnice lijevog stupca do desnog ruba sadržaja. */
+body.main-branch-host .content-card{
+  --main-branch-card-pad-x:54px;
+}
+
+body.main-branch-jure-host .content-card{
+  --main-branch-card-pad-x:42px;
+}
+
+body.main-branch-host .main-branch-diagram-surface{
+  width:calc(100% + var(--main-branch-card-pad-x) + var(--main-branch-card-pad-x))!important;
+  max-width:none!important;
+  margin-left:calc(0px - var(--main-branch-card-pad-x))!important;
+  margin-right:calc(0px - var(--main-branch-card-pad-x))!important;
+}
+
+body.main-branch-host #jureDiagram,
+body.main-branch-host .family-diagram-frame{
+  height:clamp(720px,82vh,850px)!important;
+  min-height:0!important;
+}
+
+body.main-branch-host .family-diagram-frame{
+  width:100%!important;
+  box-sizing:border-box;
+}
+
+body.main-branch-host #jureDiagram:fullscreen{
+  width:100%!important;
+  height:100dvh!important;
+  margin:0!important;
+}
+
+@media(min-width:901px){
+  body.main-branch-diagram-hr .unified-branch-title .subtitle,
+  body.main-branch-jure-host #jureDiagram .unified-branch-title .diagram-subtitle{
+    white-space:nowrap;
+  }
+}
+
+@media(max-width:900px){
+  body.main-branch-host .content-card{
+    --main-branch-card-pad-x:12px;
+  }
+
+  body.main-branch-diagram-hr .header-top{
+    grid-template-columns:minmax(0,1fr);
+    grid-template-areas:
+      "title"
+      "actions";
+    align-items:stretch;
+  }
+
+  body.main-branch-jure-host #jureDiagram .diagram-header{
+    grid-template-columns:minmax(0,1fr);
+    grid-template-areas:
+      "title"
+      "actions"
+      "tools";
+    align-items:stretch;
+  }
+
+  body.main-branch-diagram-hr .header-actions,
+  body.main-branch-jure-host #jureDiagram .diagram-actions{
+    justify-content:flex-start;
+    overflow-x:auto;
+    padding-bottom:2px;
+  }
+}
+
+@media(max-width:480px){
+  body.main-branch-host .content-card{
+    --main-branch-card-pad-x:9px;
+  }
+
+  body.main-branch-diagram-hr .unified-branch-title h1,
+  body.main-branch-jure-host #jureDiagram .unified-branch-title h2{
+    font-size:18px;
+  }
+
+  body.main-branch-host #jureDiagram,
+  body.main-branch-host .family-diagram-frame{
+    height:clamp(600px,76vh,720px)!important;
+  }
+}
+
+@media print{
+  body.main-branch-host .main-branch-diagram-surface{
+    width:100%!important;
+    margin:0!important;
+  }
+}
