@@ -25,14 +25,16 @@
     noResults: 'No results for the entered data.', found: 'Found', fullOn: 'Full screen enabled.',
     fullDenied: 'The browser did not allow full screen.', openFamily: 'Open family', closeFamily: 'Close family',
     openSubbranch: 'Open sub-branch', privateDates: 'Dates are available only on the private website.',
-    privateParents: 'Family details are available only on the private website.'
+    privateParents: 'Family details are available only on the private website.',
+    marriageWord: 'marriage'
   } : {
     missingRoot: 'Nedostaje početna osoba', code: 'Šifra', father: 'Otac', mother: 'Majka', missing: 'podatak nije naveden',
     opened: 'Otvorena', closed: 'Zatvorena', branch: 'grana', enterSearch: 'Upišite barem jedan podatak za pretragu.',
     noResults: 'Nema rezultata za zadane podatke.', found: 'Pronađeno', fullOn: 'Cijeli ekran uključen.',
     fullDenied: 'Preglednik nije dopustio cijeli ekran.', openFamily: 'Otvori obitelj', closeFamily: 'Zatvori obitelj',
     openSubbranch: 'Otvori podgranu', privateDates: 'Godine su dostupne samo na privatnoj web-stranici.',
-    privateParents: 'Obiteljski podaci dostupni su samo na privatnoj web-stranici.'
+    privateParents: 'Obiteljski podaci dostupni su samo na privatnoj web-stranici.',
+    marriageWord: 'brak'
   };
 
   function localized(rec, key) {
@@ -75,6 +77,7 @@
   const SIDE_H = 51;
   const SIDE_GAP = 7;
   const SIDE_TOP = 12;
+  const MARRIAGE_LABEL_GAP = 18;
   const X_STEP = 390;
   const ROW_GAP = 34;
   const MARGIN_X = 76;
@@ -187,22 +190,23 @@
     const isSide = kind === 'side';
     const cls = isSide ? 'side-dates' : 'node-dates';
     const y = opts.y || (isSide ? 36 : 46);
-    const openX = opts.openX || (isSide ? 148 : 165);
-    const starX = openX + 6;
-    const birthX = openX + 18;
-    const dashX = openX + 50;
-    const deathSymbolX = openX + 61;
-    const deathX = openX + 74;
-    const closeX = openX + 108;
+    const openX = opts.openX ?? (isSide ? 148 : 165);
+    const starX = opts.starX ?? (openX + 6);
+    const birthX = opts.birthX ?? (openX + 18);
+    const dashX = opts.dashX ?? (openX + 50);
+    const deathSymbolX = opts.deathSymbolX ?? (openX + 61);
+    const deathX = opts.deathX ?? (openX + 74);
+    const closeX = opts.closeX ?? (openX + 108);
     const badgeW = 23;
     const badgeH = 12;
     const badgeY = y - 10;
     const fontSize = opts.fontSize ? ` font-size="${opts.fontSize}"` : '';
+    const naturalWidth = Boolean(opts.naturalWidth);
 
     const value = (year, valueX, maxW = 30) => {
       if (year) {
         const txt = yearText(year);
-        const fit = txt.length > 6 ? ` textLength="${maxW}" lengthAdjust="spacingAndGlyphs"` : '';
+        const fit = !naturalWidth && txt.length > 6 ? ` textLength="${maxW}" lengthAdjust="spacingAndGlyphs"` : '';
         return `<text class="${cls}" x="${valueX}" y="${y}"${fontSize}${fit}>${esc(txt)}</text>`;
       }
       return `<g class="date-unknown"><rect class="date-unknown-box" x="${valueX - 1}" y="${badgeY}" width="${badgeW}" height="${badgeH}" rx="0"></rect><text class="${cls} date-unknown-text" x="${valueX + badgeW / 2 - 1}" y="${y - 1}" text-anchor="middle" font-size="8">N.G.</text></g>`;
@@ -217,7 +221,11 @@
     const sub = parts.join(' – ');
     const mainFit = main.length > 13 ? ' textLength="78" lengthAdjust="spacingAndGlyphs"' : '';
     let out = `<text class="node-label" x="13" y="43"${mainFit}>${esc(main)}</text>`;
-    out += inlineDateSvg(rec, 'node', { y: 43, openX: 98, fontSize: 9.4, birthW: 30, deathW: 28 });
+    out += inlineDateSvg(rec, 'node', {
+      y: 43, openX: 100, starX: 107, birthX: 120, dashX: 171,
+      deathSymbolX: 183, deathX: 197, closeX: 230, fontSize: 11,
+      naturalWidth: true
+    });
     if (sub) out += `<text class="node-label" x="13" y="62" font-size="11.5">${esc(sub)}</text>`;
     return out;
   }
@@ -277,6 +285,98 @@
     return (sideByHost[code] || []).filter(member => nodes[member]?.type !== 'son');
   }
 
+  function spouseCodes(code) {
+    return familyExtras(code).filter(member => nodes[member]?.type === 'spouse');
+  }
+
+  function isMultiMarriage(code) {
+    return spouseCodes(code).length > 1;
+  }
+
+  function samePersonName(a, b) {
+    const na = normalize(a);
+    const nb = normalize(b);
+    return Boolean(na && nb && na === nb);
+  }
+
+  function marriageGroups(code) {
+    const spouses = spouseCodes(code);
+    if (spouses.length < 2) return [];
+    const children = primary[code]?.children || [];
+    return spouses.map((spouseCode, index) => {
+      const spouse = nodes[spouseCode] || {};
+      const childCodes = children.filter(childCode => {
+        const child = nodes[childCode] || primary[childCode] || {};
+        return [child.mother, child.motherEn].some(mother =>
+          [spouse.label, spouse.labelEn].some(name => samePersonName(mother, name))
+        );
+      });
+      return { index: index + 1, spouseCode, childCodes };
+    });
+  }
+
+  function marriageIndexForChild(hostCode, childCode) {
+    const group = marriageGroups(hostCode).find(item => item.childCodes.includes(childCode));
+    return group ? group.index : 0;
+  }
+
+  function marriageIndexForMember(hostCode, memberCode) {
+    const groups = marriageGroups(hostCode);
+    const spouseGroup = groups.find(item => item.spouseCode === memberCode);
+    if (spouseGroup) return spouseGroup.index;
+    return marriageIndexForChild(hostCode, memberCode);
+  }
+
+  function marriageLabel(index) {
+    if (!index) return '';
+    if (LANG === 'en') {
+      if (index === 1) return '1st marriage';
+      if (index === 2) return '2nd marriage';
+      if (index === 3) return '3rd marriage';
+      return `${index}th marriage`;
+    }
+    return `${index}. brak`;
+  }
+
+  function orderedFamilyExtras(code) {
+    const extras = familyExtras(code);
+    if (!isMultiMarriage(code)) return extras;
+    const groups = marriageGroups(code);
+    const used = new Set();
+    const ordered = [];
+    for (const group of groups) {
+      if (extras.includes(group.spouseCode)) {
+        ordered.push(group.spouseCode);
+        used.add(group.spouseCode);
+      }
+      for (const extraCode of extras) {
+        if (used.has(extraCode) || nodes[extraCode]?.type === 'spouse') continue;
+        if (group.childCodes.includes(extraCode)) {
+          ordered.push(extraCode);
+          used.add(extraCode);
+        }
+      }
+    }
+    for (const extraCode of extras) {
+      if (!used.has(extraCode)) ordered.push(extraCode);
+    }
+    return ordered;
+  }
+
+  function familyExtraLayout(code) {
+    const extras = orderedFamilyExtras(code);
+    if (!extras.length) return { items: [], totalHeight: 0 };
+    const multi = isMultiMarriage(code);
+    const items = [];
+    let offset = SIDE_TOP;
+    for (const extraCode of extras) {
+      if (multi && nodes[extraCode]?.type === 'spouse') offset += MARRIAGE_LABEL_GAP;
+      items.push({ code: extraCode, offset });
+      offset += SIDE_H + SIDE_GAP;
+    }
+    return { items, totalHeight: offset - SIDE_GAP };
+  }
+
   function structuralParent(code) {
     if (primary[code]) return primary[code].parent || '';
     if (nodes[code]?.type === 'son') return nodes[code].host || '';
@@ -301,8 +401,8 @@
         subtreeHeight: 0
       };
       list.push(item);
-      const extras = expanded.has(code) ? familyExtras(code) : [];
-      item.height = MAIN_H + (extras.length ? SIDE_TOP + extras.length * SIDE_H + (extras.length - 1) * SIDE_GAP : 0);
+      const extraLayout = expanded.has(code) ? familyExtraLayout(code) : { items: [], totalHeight: 0 };
+      item.height = MAIN_H + extraLayout.totalHeight;
       if (expanded.has(code)) {
         item.children = structuralChildren(code).map(child => visit(child, code, depth + 1));
       }
@@ -366,10 +466,11 @@
       maxY = Math.max(maxY, item.y + MAIN_H);
 
       if (expanded.has(item.code)) {
-        const extras = familyExtras(item.code);
-        extras.forEach((code, index) => {
+        const extras = familyExtraLayout(item.code).items;
+        extras.forEach(entry => {
+          const code = entry.code;
           const sx = item.x + (MAIN_W - SIDE_W) / 2;
-          const sy = item.y + MAIN_H + SIDE_TOP + index * (SIDE_H + SIDE_GAP);
+          const sy = item.y + MAIN_H + entry.offset;
           positions.set(code, {
             code,
             type: 'side',
@@ -427,10 +528,31 @@
     for (const item of visible) {
       if (!expanded.has(item.code)) continue;
       const host = positions.get(item.code);
-      const extras = familyExtras(item.code);
+      const extras = orderedFamilyExtras(item.code);
       if (!host || !extras.length) continue;
       const last = positions.get(extras[extras.length - 1]);
-      links += `<path class="side-link" d="M${host.cx},${host.y + host.h} V${last.y}"/>`;
+      if (last) links += `<path class="side-link" d="M${host.cx},${host.y + host.h} V${last.y}"/>`;
+
+      for (const group of marriageGroups(item.code)) {
+        const spousePos = positions.get(group.spouseCode);
+        if (!spousePos) continue;
+        for (const childCode of group.childCodes) {
+          const childPos = positions.get(childCode);
+          if (!childPos) continue;
+          let d = '';
+          if (childPos.type === 'side') {
+            d = `M${spousePos.cx},${spousePos.y + spousePos.h} V${childPos.y}`;
+          } else {
+            const x1 = spousePos.x + spousePos.w;
+            const y1 = spousePos.cy;
+            const x2 = childPos.x;
+            const y2 = childPos.cy;
+            const elbow = x1 + Math.max(24, (x2 - x1) / 2);
+            d = `M${x1},${y1} H${elbow} V${y2} H${x2}`;
+          }
+          links += `<path class="marriage-link" d="${d}"/>`;
+        }
+      }
     }
 
     linksLayer.innerHTML = links;
@@ -451,6 +573,10 @@
 
       html += `<g class="${classes.join(' ')}" data-code="${esc(item.code)}" transform="translate(${pos.x},${pos.y})" role="button" tabindex="0" aria-label="${esc(`${item.code} ${recLabel(rec)}`)}">`;
       html += `<title>${esc(`${personName(recLabel(rec))} · ${dateText(rec)}`)}</title>`;
+      const structuralMarriage = item.parent ? marriageIndexForChild(item.parent, item.code) : 0;
+      if (structuralMarriage) {
+        html += `<text class="marriage-label marriage-child-label" x="${MAIN_W / 2}" y="-8" text-anchor="middle">${esc(marriageLabel(structuralMarriage))}</text>`;
+      }
       html += `<rect width="${MAIN_W}" height="${MAIN_H}" rx="10"/>`;
       html += `<text class="node-code" x="13" y="19">${esc(item.code)}</text>`;
       if (isRoot && /\s+[–—-]\s+/.test(displayName)) {
@@ -471,7 +597,7 @@
       html += '</g>';
 
       if (!expanded.has(item.code)) continue;
-      for (const extraCode of familyExtras(item.code)) {
+      for (const extraCode of orderedFamilyExtras(item.code)) {
         const side = positions.get(extraCode);
         const sideRec = nodes[extraCode];
         if (!side || !sideRec) continue;
@@ -483,6 +609,10 @@
         const sideName = personName(recLabel(sideRec));
         html += `<g class="${sideClasses.join(' ')}" data-code="${esc(extraCode)}" transform="translate(${side.x},${side.y})" role="button" tabindex="0" aria-label="${esc(`${extraCode} ${recLabel(sideRec)}`)}">`;
         html += `<title>${esc(`${personName(recLabel(sideRec))} · ${dateText(sideRec)}`)}</title>`;
+        const sideMarriage = marriageIndexForMember(item.code, extraCode);
+        if (sideMarriage) {
+          html += `<text class="marriage-label" x="${SIDE_W / 2}" y="-7" text-anchor="middle">${esc(marriageLabel(sideMarriage))}</text>`;
+        }
         html += `<rect width="${SIDE_W}" height="${SIDE_H}" rx="8"/>`;
         html += `<text class="side-code" x="10" y="16">${esc(extraCode)}</text>`;
         html += inlineNameSvg(sideName, 'side');
