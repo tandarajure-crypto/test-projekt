@@ -18,11 +18,3 @@
 .direct-flagcounter{flex:0 0 auto;display:flex;justify-content:flex-end;align-items:center;min-height:30px;padding:3px 10px 4px;border-top:1px solid rgba(117,94,62,.14);background:#fbf7f0}
 .direct-flagcounter a{display:inline-flex;align-items:center;max-width:190px}
 .direct-flagcounter img{display:block;max-width:190px;width:100%;height:auto;max-height:28px;object-fit:contain}
-
-/* TANDARA DIAGRAM FLAGS — FINAL: always visible beside HOME */
-.topbar{grid-template-columns:44px 42px 42px minmax(210px,1fr) auto 42px;}
-.topbar > .flag-btn{display:flex !important;}
-@media(max-width:820px){
-  .topbar{grid-template-columns:36px 34px 34px minmax(140px,1fr) auto 36px;}
-  .topbar > .flag-btn{display:flex !important;}
-}
