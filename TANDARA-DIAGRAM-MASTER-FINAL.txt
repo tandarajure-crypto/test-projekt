@@ -1,0 +1,15 @@
+TANDARA DIAGRAM MASTER — FINAL
+
+Jedan tehnički temelj za JAVNI Tandara i PRIVATNI test-projekt.
+- isti assets/js/common/tandara-diagram-master.js
+- isti assets/css/common/tandara-diagram-master.css
+- isti assets/css/common/tandara-diagram-host.css za box2 wrappere
+- HR i EN flag u svakom interaktivnom dijagramu i box2 wrapperu
+- Umami na svakom migriranom dijagramu i box2 wrapperu
+- FlagCounter: jedan po stvarno otvorenoj stranici — box2 wrapper ima brojač, box2 iframe ga ne duplicira; Ivan/Filip/box3 samostalni dijagrami imaju vlastiti brojač
+- +/−, Raširi sve, Sažmi, Do 3. koljena, Uklopi, zoom/pan, fullscreen, print
+- četiri pretrage: šifra / osoba / otac / majka
+- datum (★ rođenje - ✝ smrt); N.G. mali tanki kvadrat
+- više brakova: 1./2./3. brak; supruga i sva pripadajuća djeca povezana po majci, uključujući K/S zapise
+- JAVNI: šifre ostaju; imena zaštićenih živih osoba zamijenjena dogovorenom napomenom
+- PRIVATNI: puna imena i podaci ostaju
